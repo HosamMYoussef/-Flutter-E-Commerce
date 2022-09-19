@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../core/viewmodel/home_viewmodel.dart';
+import '../core/viewmodel/home_view_model.dart';
 import '../model/product_model.dart';
-import 'product_detail_view.dart';
-import 'widgets/custom_text.dart';
+
 import '../constants.dart';
+import '../widgets/custom_text.dart';
+import 'product_details_view.dart';
 
 class SearchView extends StatefulWidget {
   final String? searchValue;
@@ -39,9 +39,9 @@ class _SearchViewState extends State<SearchView> {
       body: Column(
         children: [
           Container(
-            height: 130.h,
+            height: 110,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 24.h, left: 16.w, right: 16.w),
+              padding: EdgeInsets.only(bottom: 24, left: 16, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -70,12 +70,12 @@ class _SearchViewState extends State<SearchView> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Container(
-              height: 49.h,
+              height: 49,
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(45.r),
+                borderRadius: BorderRadius.circular(45),
               ),
               child: TextFormField(
                 decoration: InputDecoration(
@@ -95,11 +95,11 @@ class _SearchViewState extends State<SearchView> {
             ),
           ),
           SizedBox(
-            height: 24.h,
+            height: 24,
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(right: 16.w, left: 16.w, bottom: 24.h),
+              padding: EdgeInsets.only(right: 16, left: 16, bottom: 24),
               child: GetBuilder<HomeViewModel>(
                 init: Get.find<HomeViewModel>(),
                 builder: (controller) => GridView.builder(
@@ -107,30 +107,31 @@ class _SearchViewState extends State<SearchView> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 16,
-                    crossAxisSpacing: 15,
-                    mainAxisExtent: 320,
+                    crossAxisSpacing: 30,
+                    mainAxisExtent: 300,
                   ),
                   itemCount: _searchProducts.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
                         Get.to(
-                          ProductDetailView(_searchProducts[index]),
+                          ProductDetailView(productModel:_searchProducts[index]),
                         );
                       },
                       child: Container(
-                        width: 164.w,
+                        width: 164,
+                        
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4.r),
+                                borderRadius: BorderRadius.circular(4),
                                 color: Colors.white,
                               ),
-                              height: 240.h,
-                              width: 164.w,
+                              height: 240,
+                              width: 164,
                               child: Image.network(
                                 _searchProducts[index].image,
                                 fit: BoxFit.cover,

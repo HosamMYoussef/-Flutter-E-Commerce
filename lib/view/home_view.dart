@@ -7,6 +7,7 @@ import 'package:myshopp/constants.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/view/auth/login_screen.dart';
 import 'package:myshopp/view/cart_view.dart';
+import 'package:myshopp/view/search_view.dart';
 
 import '../constants.dart';
 import '../constants.dart';
@@ -18,7 +19,6 @@ import 'category_products_view.dart';
 import 'product_details_view.dart';
 
 class HomeView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeViewModel>(
@@ -28,16 +28,19 @@ class HomeView extends StatelessWidget {
           : Scaffold(
               body: SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.only(top: 65, left: 16, right: 16,bottom: 14),
+                  padding:
+                      EdgeInsets.only(top: 65, left: 16, right: 16, bottom: 14),
                   child: Column(
                     children: [
                       _searchTextFormField(),
                       SizedBox(
                         height: 40,
                       ),
-                      CustomText(text: 'Categories',
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,),
+                      CustomText(
+                        text: 'Categories',
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -71,13 +74,9 @@ class HomeView extends StatelessWidget {
                         height: 30,
                       ),
                       _listViewProducts(),
-                      
-
-                      
                     ],
                   ),
                 ),
-                
               ),
             ),
     );
@@ -97,6 +96,9 @@ class HomeView extends StatelessWidget {
             color: Colors.black,
           ),
         ),
+        onFieldSubmitted: (value) {
+          Get.to(SearchView(value));
+        },
       ),
     );
   }
@@ -133,8 +135,8 @@ class HomeView extends StatelessWidget {
                           width: 60,
                           child: Padding(
                             padding: const EdgeInsets.all(14.0),
-                            child:
-                                Image.network(controller.categories[index].image),
+                            child: Image.network(
+                                controller.categories[index].image),
                           ),
                         ),
                       ),

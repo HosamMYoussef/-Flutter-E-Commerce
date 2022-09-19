@@ -84,7 +84,7 @@ class LoginView extends GetWidget<AuthViewModel> {
                         ),
                         CustomTextFormField(
                             title: 'Password',
-                            hintText: '***********',
+                            hintText: '********',
                             obscureText: true,
                             validatorFn: (value) {
                               if (value!.isEmpty)
