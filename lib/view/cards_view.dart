@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../widgets/custom_text.dart';
 
@@ -45,8 +46,7 @@ class CardsView extends StatelessWidget {
             child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/card.svg',
+                  Lottie.asset('assets/images/card.json',
                     width: 400,
                     height: 400,
                   ),
@@ -55,7 +55,7 @@ class CardsView extends StatelessWidget {
                   ),
                   CustomText(
                     text: "You Didn't Add Any Card Yet... ",
-                    fontSize: 20,
+                    fontSize: 26,
                     alignment: Alignment.topCenter,
                   )
                 ],

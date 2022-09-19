@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/view/control_view.dart';
 import 'package:myshopp/view/home_view.dart';
@@ -153,7 +154,7 @@ class CheckoutView extends StatelessWidget {
                               await controller.addCheckoutToFireStore();
                               Get.dialog(
                                 AlertDialog(
-                                   //insetPadding: EdgeInsets.zero,
+                                  //insetPadding: EdgeInsets.zero,
                                   content: SingleChildScrollView(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -163,9 +164,11 @@ class CheckoutView extends StatelessWidget {
                                         //   color: primaryColor,
                                         //   size: 200,
                                         // ),
-                                        SvgPicture.asset('assets/images/okk.svg',
-                                            width: 300,
-                                            height: 300,),
+                                        Image.asset(
+                                          'assets/images/order.gif',
+                                          width: 350,
+                                          height: 350,
+                                        ),
                                         CustomText(
                                           text: 'Order Submitted',
                                           fontSize: 24,

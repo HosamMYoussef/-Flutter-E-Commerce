@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/core/viewmodel/cart_view_model.dart';
 import 'package:myshopp/widgets/custom_button.dart';
@@ -23,8 +24,8 @@ class CartView extends StatelessWidget {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/caart.svg',
+                  Image.asset(
+                    'assets/images/empty.gif',
                     width: 350,
                     height: 350,
                   ),

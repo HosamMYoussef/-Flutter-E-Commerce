@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../widgets/custom_text.dart';
 
@@ -46,17 +47,13 @@ class NotificationsView extends StatelessWidget {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/not.svg',
-                    width: 400,
-                    height: 400,
-                  ),
+                 Image.asset('assets/images/cat.gif'),
                   SizedBox(
-                    height: 10,
+                    height: 40,
                   ),
                   CustomText(
                     text: "No New Notifications... ",
-                    fontSize: 20,
+                    fontSize: 28,
                     alignment: Alignment.topCenter,
                   )
                 ],

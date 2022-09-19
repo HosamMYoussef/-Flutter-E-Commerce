@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/core/viewmodel/checkoutview_model.dart';
 import 'package:myshopp/core/viewmodel/home_view_model.dart';
@@ -10,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:myshopp/view/control_view.dart';
+import 'package:myshopp/view/home_view.dart';
+import 'package:myshopp/widgets/custom_text.dart';
 import 'package:page_transition/page_transition.dart';
 import 'core/viewmodel/cart_view_model.dart';
 import 'firebase_options.dart';
@@ -42,25 +45,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       themeMode: ThemeMode.dark,
+      
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
-        duration: 2000,
-        splashTransition: SplashTransition.fadeTransition,
-        splashIconSize: 400,
         
-        splash:SvgPicture.asset(
-                    'assets/images/welcomeCat.svg',
-                    // width: 350,
-                    // height: 800,
-                  ),
-        nextScreen: ControlView(),
+        duration: 3000,
+        splashTransition: SplashTransition.decoratedBoxTransition,
+        splashIconSize: 800
+        ,
+        
+        splash:Lottie.asset('assets/images/open.json', ),
+        nextScreen:  ControlView(),
         //backgroundColor: primaryColor,
-        pageTransitionType: PageTransitionType.topToBottom as dynamic,
-        backgroundColor: Colors.grey.shade100,
+        pageTransitionType: PageTransitionType.bottomToTop ,
+        animationDuration: Duration(seconds: 3),
+        //backgroundColor: Colors.greenAccent
       ),
       theme: ThemeData(
         fontFamily: 'OpenSans',
+        backgroundColor: Colors.grey.shade100
       ),
     );
   }
