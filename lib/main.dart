@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         
-        duration: 3000,
+        duration: 4000,
         splashTransition: SplashTransition.decoratedBoxTransition,
         splashIconSize: 800
         ,
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         nextScreen:  ControlView(),
         //backgroundColor: primaryColor,
         pageTransitionType: PageTransitionType.bottomToTop ,
-        animationDuration: Duration(seconds: 3),
+        animationDuration: Duration(seconds: 4),
         //backgroundColor: Colors.greenAccent
       ),
       theme: ThemeData(

@@ -28,7 +28,7 @@ class OrderHistoryView extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     constraints: BoxConstraints(),
                     onPressed: () {
-                      Get.off(ControlView());
+                      Get.back();
                      // Get.put(CheckoutViewModel);
                     },
                     icon: Icon(
