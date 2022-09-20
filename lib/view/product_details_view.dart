@@ -153,21 +153,7 @@ class ProductDetailView extends StatelessWidget {
                           ),
                         )),
                   )
-                  // GetBuilder<CartViewModel>(
-                  //   builder: (controller) => Container(
-                  //     width: 146.w,
-                  //     child: CustomButton('ADD', () {
-                  //       controller.addProduct(
-                  //         CartModel(
-                  //           name: _productModel.name,
-                  //           image: _productModel.image,
-                  //           price: _productModel.price,
-                  //           productId: _productModel.productId,
-                  //         ),
-                  //       );
-                  //     }),
-                  //   ),
-                  // ),
+               
                 ],
               ),
             ),

@@ -125,7 +125,7 @@ class HomeView extends StatelessWidget {
                   child: Column(
                     children: [
                       Material(
-                        elevation: 1,
+                        elevation: 2,
                         borderRadius: BorderRadius.circular(50),
                         child: Container(
                           decoration: BoxDecoration(
@@ -159,66 +159,6 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  // Widget _listViewProducts() {
-  //   return GetBuilder<HomeViewModel>(
-  //     builder:(controller) =>  Container(
-  //       height: 350,
-  //       child: ListView.separated(
-  //         itemCount: controller.products.length,
-  //         scrollDirection: Axis.horizontal,
-  //         itemBuilder: (context, index) {
-  //           return Container(
-  //             width: MediaQuery.of(context).size.width * .4,
-  //             child: Column(
-  //               children: [
-  //                 Container(
-  //                   decoration: BoxDecoration(
-  //                       borderRadius: BorderRadius.circular(50),
-  //                       color: Colors.grey.shade50),
-  //                   child: Container(
-  //                       height: 220,
-  //                       width: MediaQuery.of(context).size.width * .4,
-  //                       child: Image.network(
-  //                         controller.products[index].image,
-  //                         fit: BoxFit.fill,
-  //                       )),
-  //                 ),
-  //                 SizedBox(
-  //                   height: 20,
-  //                 ),
-  //                 CustomText(
-  //                   text: controller.products[index].name,
-  //                   alignment: Alignment.bottomLeft,
-  //                 ),
-  //                 SizedBox(
-  //                   height: 5,
-  //                 ),
-  //                 Expanded(
-  //                   child: CustomText(
-  //                     text: controller.products[index].description,
-  //                     alignment: Alignment.bottomLeft,
-  //                     color: Colors.grey,
-  //                   ),
-  //                 ),
-  //                 SizedBox(
-  //                   height: 10,
-  //                 ),
-  //                 CustomText(
-  //                   text: controller.products[index].price + "\$",
-  //                   alignment: Alignment.bottomLeft,
-  //                   color: primaryColor,
-  //                 ),
-  //               ],
-  //             ),
-  //           );
-  //         },
-  //         separatorBuilder: (context, index) => SizedBox(
-  //           width: 20,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
   Widget _listViewProducts() {
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
