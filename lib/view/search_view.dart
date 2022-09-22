@@ -132,9 +132,12 @@ class _SearchViewState extends State<SearchView> {
                               ),
                               height: 240,
                               width: 164,
-                              child: Image.network(
-                                _searchProducts[index].image,
-                                fit: BoxFit.cover,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(25) ,
+                                child: Image.network(
+                                  _searchProducts[index].image,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             CustomText(

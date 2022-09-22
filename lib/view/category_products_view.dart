@@ -81,9 +81,12 @@ class CategoryProductsView extends StatelessWidget {
                             ),
                             height: 240,
                             width: 164,
-                            child: Image.network(
-                              products[index].image,
-                              fit: BoxFit.cover,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(
+                                products[index].image,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           CustomText(

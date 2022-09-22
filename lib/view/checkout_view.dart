@@ -232,9 +232,13 @@ class ListViewProducts extends StatelessWidget {
                         ),
                         height: 120,
                         width: 120,
-                        child: Image.network(
-                          controller.cartProductModel[index].image,
-                          fit: BoxFit.cover,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+
+                          child: Image.network(
+                            controller.cartProductModel[index].image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       CustomText(

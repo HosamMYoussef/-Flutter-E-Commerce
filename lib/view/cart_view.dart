@@ -77,9 +77,12 @@ class CartView extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(29)),
                                   width: 120,
                                   height: 120,
-                                  child: Image.network(
-                                    controller.cartProductModel[index].image,
-                                    fit: BoxFit.cover,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.network(
+                                      controller.cartProductModel[index].image,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -167,6 +170,7 @@ class CartView extends StatelessWidget {
                             ),
                           );
                         },
+                        
                         itemCount: controller.cartProductModel.length,
                       ),
                     ),

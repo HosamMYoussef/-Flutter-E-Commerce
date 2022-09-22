@@ -29,9 +29,12 @@ class ProductDetailView extends StatelessWidget {
                       Container(
                         height: 196,
                         width: double.infinity,
-                        child: Image.network(
-                          productModel.image,
-                          fit: BoxFit.cover,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(
+                            productModel.image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       IconButton(
@@ -105,6 +108,7 @@ class ProductDetailView extends StatelessWidget {
                   ),
                 ],
               ),
+              
             ),
           ),
           Material(

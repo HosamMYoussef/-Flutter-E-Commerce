@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      
       themeMode: ThemeMode.dark,
       
       initialBinding: Binding(),
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         //backgroundColor: Colors.greenAccent
       ),
       theme: ThemeData(
+        canvasColor: Colors.white,
         fontFamily: 'OpenSans',
         backgroundColor: Colors.grey.shade100
       ),

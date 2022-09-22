@@ -17,6 +17,7 @@ class OrderHistoryView extends StatelessWidget {
       body: Column(
         children: [
           Container(
+           
             height: 130,
             child: Padding(
               padding: EdgeInsets.only(bottom: 24, left: 16, right: 16),
@@ -76,9 +77,13 @@ class OrderHistoryView extends StatelessWidget {
                           padding:
                               EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                           child: Card(
+                            shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                            elevation: 7,
+                            
                             child: Padding(
                               padding: EdgeInsets.all(16),
                               child: Container(
+                                
                                 child: Column(
                                   children: [
                                     Row(
@@ -141,9 +146,8 @@ class OrderHistoryView extends StatelessWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (context, index) => Divider(
-                        thickness: 1,
-                        color: Colors.grey.shade200,
+                      separatorBuilder: (context, index) => SizedBox(height: 10,
+                       
                       ),
                       itemCount: controller.checkouts.length,
                     ),
