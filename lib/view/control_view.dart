@@ -21,10 +21,10 @@ class ControlView extends GetWidget<AuthViewModel> {
       return (Get.find<AuthViewModel>().user == null)
           ? LoginView()
           : GetBuilder<ControlViewModel>(
-            init: ControlViewModel(),
+              init: ControlViewModel(),
               builder: (controller) => Scaffold(
                 body: controller.currentScreen,
-                bottomNavigationBar: curvedNavigationBar(),
+                bottomNavigationBar: bottomNavigationBar(),
               ),
             );
     });
@@ -32,79 +32,44 @@ class ControlView extends GetWidget<AuthViewModel> {
 }
 
 Widget bottomNavigationBar() {
-  return SizedBox(
-    height: 84,
-    child: GetBuilder<ControlViewModel>(
-      init: ControlViewModel(),
-      builder: (controller) => BottomNavigationBar(
-        elevation: 0,
-        backgroundColor: Colors.grey.shade100,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: [
-          BottomNavigationBarItem(
-              activeIcon: CustomText(
-                text: "Explore",
-                fontSize: 14,
-                alignment: Alignment.center,
-              ),
-              label: "",
-              icon: Image.asset(
-                'assets/images/Icon_Explore.png',
-                fit: BoxFit.contain,
-                width: 20,
-                height: 20,
-              )),
-          BottomNavigationBarItem(
-              activeIcon: CustomText(
-                text: "Cart",
-                fontSize: 14,
-                alignment: Alignment.center,
-              ),
-              label: "",
-              icon: Image.asset(
-                'assets/images/Icon_Cart.png',
-                fit: BoxFit.contain,
-                width: 20,
-                height: 20,
-              )),
-          BottomNavigationBarItem(
-              activeIcon: CustomText(
-                text: "Account",
-                fontSize: 14,
-                alignment: Alignment.center,
-              ),
-              label: "",
-              icon: Image.asset(
-                'assets/images/Icon_User.png',
-                fit: BoxFit.contain,
-                width: 20,
-                height: 20,
-              )),
-          BottomNavigationBarItem(
-            activeIcon: CustomText(
-              text: "Sign Out",
-              fontSize: 14,
-              alignment: Alignment.center,
-            ),
-            label: "",
-            icon: Container(
-              child: Image.asset(
-                'assets/images/signout.png',
-                fit: BoxFit.contain,
-                width: 20,
-                height: 20,
-              ),
-            ),
-          ),
-        ],
-        currentIndex: controller.navigatorvalue,
-        onTap: (index) {
-          print(index);
-          controller.changeSelectedvalue(index);
-        },
-        selectedItemColor: Colors.black,
-      ),
+  return GetBuilder<ControlViewModel>(
+    init: ControlViewModel(),
+    builder: (controller) => BottomNavigationBar(
+      selectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
+      type: BottomNavigationBarType.fixed,
+      elevation: 0,
+      backgroundColor: Colors.white,
+      showUnselectedLabels: false,
+      items: [
+        BottomNavigationBarItem(
+          label: "Home",
+          icon: Icon(Icons.home_outlined,size: 30),
+          activeIcon: Icon(Icons.home,size: 30,),
+          
+        ),
+        BottomNavigationBarItem(
+          label: "Cart",
+          icon: Icon(Icons.shopping_bag_outlined,size: 30,),
+          activeIcon: Icon(Icons.shopping_bag_rounded,size: 30,),
+        ),
+        BottomNavigationBarItem(
+          label: "Favorites",
+          icon: Icon(Icons.star_border,size: 30,),
+          activeIcon: Icon(Icons.star,size: 30,),
+        ),
+        BottomNavigationBarItem(
+          label: "Profile",
+          icon: Icon(Icons.person_outline,size: 30,),
+          activeIcon: Icon(Icons.person,size: 30,),
+        ),
+      ],
+      currentIndex: controller.navigatorvalue,
+      onTap: (index) {
+        print(index);
+        controller.changeSelectedvalue(index);
+      },
+      selectedItemColor: Colors.black,
+      // unselectedItemColor: Color.fromRGBO(60, 183, 105, 1),
     ),
   );
 }
@@ -118,37 +83,29 @@ Widget curvedNavigationBar() {
         backgroundColor: Colors.white,
         color: Colors.grey.shade100,
         animationDuration: Duration(milliseconds: 500),
-        buttonBackgroundColor:Colors.grey.shade100,
-height: 60,
+        buttonBackgroundColor: Colors.grey.shade100,
+        height: 60,
         items: [
           Icon(
-            Icons.home_rounded,
-            color: Color.fromRGBO(60, 183, 105, 1),
-             size: 30,
-             
-          ),
-          Icon(
-            Icons.shopping_cart_rounded,
+            Icons.home_outlined,
             color: Color.fromRGBO(60, 183, 105, 1),
             size: 30,
-            
           ),
           Icon(
-            Icons.manage_accounts,
+            Icons.shopping_cart_outlined,
+            color: Color.fromRGBO(60, 183, 105, 1),
+            size: 30,
+          ),
+          Icon(
+            Icons.manage_accounts_outlined,
             size: 30,
             color: Color.fromRGBO(60, 183, 105, 1),
-             
-            
           ),
-         
-          
         ],
-        
         onTap: (index) {
           print(index);
           controller.changeSelectedvalue(index);
         },
-        
       ),
     ),
   );

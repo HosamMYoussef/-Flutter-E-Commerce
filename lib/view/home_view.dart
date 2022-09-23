@@ -89,13 +89,16 @@ class HomeView extends StatelessWidget {
         color: Colors.grey.shade200,
       ),
       child: TextFormField(
+        
         decoration: InputDecoration(
+          hintText: "What are you looking for?",
           border: InputBorder.none,
           prefixIcon: Icon(
             Icons.search,
-            color: Colors.black,
+            color: Colors.black54,
           ),
         ),
+       
         onFieldSubmitted: (value) {
           Get.to(SearchView(value));
         },

@@ -33,7 +33,7 @@ class ControlViewModel extends GetxController {
               }
             case 3:
               {
-                _currentScreen = LoginView();
+                _currentScreen = ProfileView();
                 break;
               }
           }
