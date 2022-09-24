@@ -54,6 +54,7 @@ dependencies:
   page_animation_transition: ^0.0.9
   firebase_database: ^9.1.4
   lottie: ^1.4.2
+  community_material_icon: ^5.9.55
 
  
 

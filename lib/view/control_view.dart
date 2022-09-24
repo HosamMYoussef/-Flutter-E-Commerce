@@ -1,3 +1,4 @@
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -43,24 +44,24 @@ Widget bottomNavigationBar() {
       items: [
         BottomNavigationBarItem(
           label: "Home",
-          icon: Icon(Icons.home_outlined,size: 30),
-          activeIcon: Icon(Icons.home,size: 30,),
+          icon: Container(width: 30,height: 30,child: Image.asset('assets/images/home2.png'  )),
+         activeIcon:  Container(width: 30,height: 30,child: Image.asset('assets/images/home1.png'  )),
           
         ),
         BottomNavigationBarItem(
           label: "Cart",
-          icon: Icon(Icons.shopping_bag_outlined,size: 30,),
-          activeIcon: Icon(Icons.shopping_bag_rounded,size: 30,),
+          icon:Container(width: 30,height: 30,child: Image.asset('assets/images/cart2.png'  )),
+         activeIcon:  Container(width: 30,height: 30,child: Image.asset('assets/images/cart1.png'  )),
         ),
         BottomNavigationBarItem(
           label: "Favorites",
-          icon: Icon(Icons.star_border,size: 30,),
-          activeIcon: Icon(Icons.star,size: 30,),
+          icon: Container(width: 30,height: 30,child: Image.asset('assets/images/heart1.png'  )),
+          activeIcon:Icon(CommunityMaterialIcons.heart,size: 30,),
         ),
         BottomNavigationBarItem(
           label: "Profile",
-          icon: Icon(Icons.person_outline,size: 30,),
-          activeIcon: Icon(Icons.person,size: 30,),
+           icon: Container(width: 30,height: 30,child: Image.asset('assets/images/user1.png'  )),
+         activeIcon:  Container(width: 30,height: 30,child: Image.asset('assets/images/user2.png'  )),
         ),
       ],
       currentIndex: controller.navigatorvalue,
