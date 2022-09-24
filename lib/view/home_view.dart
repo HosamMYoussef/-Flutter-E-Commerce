@@ -207,6 +207,7 @@ class HomeView extends StatelessWidget {
                       maxLines: 1,
                     ),
                     CustomText(
+                      fontWeight: FontWeight.bold,
                       text: '\$${controller.products[index].price}',
                       fontSize: 16,
                       color: primaryColor,
