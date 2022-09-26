@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myshopp/view/Favorites_view.dart';
 
 import '../../view/auth/login_screen.dart';
 import '../../view/cart_view.dart';
@@ -28,7 +29,7 @@ class ControlViewModel extends GetxController {
               }
             case 2:
               {
-                _currentScreen = ProfileView();
+                _currentScreen = FavoritesView();
                 break;
               }
             case 3:

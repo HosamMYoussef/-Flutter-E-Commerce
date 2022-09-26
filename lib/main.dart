@@ -49,20 +49,21 @@ class MyApp extends StatelessWidget {
       
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
-      home: AnimatedSplashScreen(
+      home: ControlView(),
+      // home: AnimatedSplashScreen(
         
-        duration: 2000,
-        splashTransition: SplashTransition.decoratedBoxTransition,
-        splashIconSize: 800
-        ,
+      //   duration: 2000,
+      //   splashTransition: SplashTransition.decoratedBoxTransition,
+      //   splashIconSize: 800
+      //   ,
         
-        splash:Lottie.asset('assets/images/open.json', ),
-        nextScreen:  ControlView(),
-        //backgroundColor: primaryColor,
-        pageTransitionType: PageTransitionType.bottomToTop ,
-        animationDuration: Duration(seconds: 2),
-        //backgroundColor: Colors.greenAccent
-      ),
+      //   splash:Lottie.asset('assets/images/open.json', ),
+      //   nextScreen:  ControlView(),
+      //   //backgroundColor: primaryColor,
+      //   pageTransitionType: PageTransitionType.bottomToTop ,
+      //   animationDuration: Duration(seconds: 2),
+      //   //backgroundColor: Colors.greenAccent
+      // ),
       theme: ThemeData(
         canvasColor: Colors.white,
         fontFamily: 'OpenSans',

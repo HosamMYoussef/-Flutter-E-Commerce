@@ -17,5 +17,6 @@ class FirestoreCheckout {
 
   addOrderToFirestore(CheckoutModel checkoutModel) async {
     await _ordersCollection.doc().set(checkoutModel.toJson());
+    
   }
 }

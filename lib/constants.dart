@@ -7,6 +7,13 @@ final String columnQuantity = 'quantity';
 final String columnPrice = 'price';
 final String columnproductId = 'productId';
 
+final String tableFavoritesProduct = 'favoritesProducts';
+final String columnFavoritesName = 'name';
+final String columnFavoritesImage = 'image';
+final String columnFavoritesQuantity = 'quantity';
+final String columnFavoritesPrice = 'price';
+final String columnFavoritesproductId = 'productId';
+
 const primaryColor = Color.fromRGBO(0, 197, 105, 1);
 // const primaryColor = Color.fromRGBO(60, 183, 105, 1);
 

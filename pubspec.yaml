@@ -55,6 +55,9 @@ dependencies:
   firebase_database: ^9.1.4
   lottie: ^1.4.2
   community_material_icon: ^5.9.55
+  google_nav_bar: ^5.0.6
+  line_icons: ^2.0.1
+  dot_navigation_bar: ^1.0.1+4
 
  
 

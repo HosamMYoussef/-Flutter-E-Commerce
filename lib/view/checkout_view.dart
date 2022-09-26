@@ -20,7 +20,7 @@ class CheckoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CheckoutViewModel>(
-      init: Get.find<CheckoutViewModel>(),
+      init: Get.put(CheckoutViewModel()),
       builder: (controller) => Scaffold(
         body: Column(
           children: [

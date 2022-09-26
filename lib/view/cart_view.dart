@@ -7,10 +7,12 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/core/viewmodel/cart_view_model.dart';
+import 'package:myshopp/view/product_details_view.dart';
 import 'package:myshopp/widgets/custom_button.dart';
 import 'package:myshopp/widgets/custom_text.dart';
 
 import '../core/viewmodel/checkoutview_model.dart';
+import '../core/viewmodel/home_view_model.dart';
 import 'checkout_view.dart';
 
 class CartView extends StatelessWidget {
@@ -47,7 +49,7 @@ class CartView extends StatelessWidget {
                       child: ListView.separated(
                         separatorBuilder: (context, index) {
                           return SizedBox(
-                            height: 16,
+                            height: 14,
                           );
                         },
                         itemBuilder: (context, index) {
@@ -70,107 +72,168 @@ class CartView extends StatelessWidget {
                                     .cartProductModel[index].productId);
                               }
                             },
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(29)),
-                                  width: 120,
-                                  height: 120,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Image.network(
-                                      controller.cartProductModel[index].image,
-                                      fit: BoxFit.cover,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 4,
+                              child: Row(
+                                children: [
+                                  GetBuilder<HomeViewModel>(
+                                    builder: (controller) => GestureDetector(
+                                      onTap: () {
+                                        Get.to(ProductDetailView(
+                                            productModel:
+                                                controller.products[index]));
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(29)),
+                                        width: 120,
+                                        height: 120,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(20),
+                                            bottomLeft: Radius.circular(20),
+                                          ),
+                                          child: Image.network(
+                                            controller
+                                                .products[index].image,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 15.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomText(
-                                        text: controller
-                                            .cartProductModel[index].name,
-                                        fontSize: 16,
-                                      ),
-                                      CustomText(
-                                        text:
-                                            '\$${controller.cartProductModel[index].price.toString()}',
-                                        color: primaryColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                      SizedBox(
-                                        height: 16,
-                                      ),
-                                      Container(
-                                        width: 95,
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                GestureDetector(
-                                                  child: Icon(
-                                                    Icons.add,
-                                                    color: Colors.black,
-                                                    size: 20,
-                                                  ),
-                                                  onTap: () {
-                                                    controller.increaseQuantity(
-                                                        index);
-                                                  },
-                                                ),
-                                                CustomText(
-                                                  text: controller
-                                                      .cartProductModel[index]
-                                                      .quantity
-                                                      .toString(),
-                                                  alignment: Alignment.center,
-                                                  fontSize: 16,
-                                                  color: Colors.black,
-                                                ),
-                                                Container(
-                                                  // padding: EdgeInsets.only(bottom: 20),
-                                                  child: GestureDetector(
-                                                    child: Icon(
-                                                      Icons.remove,
-                                                      color: Colors.black,
-                                                      size: 20,
-                                                    ),
-                                                    onTap: () {
-                                                      controller
-                                                        ..decreaseQuantity(
-                                                            index);
-                                                    },
-                                                  ),
-                                                ),
-                                              ]),
-                                        ),
-                                      ),
-                                    ],
+                                  SizedBox(
+                                    width: 30,
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 15.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          text: controller
+                                              .cartProductModel[index].name,
+                                          fontSize: 16,
+                                        ),
+                                        CustomText(
+                                          text:
+                                              '\$${controller.cartProductModel[index].price.toString()}',
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        Container(
+                                          width: 120,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            color: Colors.white,
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 0),
+                                            child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 40,
+                                                    height: 32,
+                                                    child: OutlinedButton(
+                                                      style: OutlinedButton
+                                                          .styleFrom(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(13),
+                                                        ),
+                                                      ),
+                                                      onPressed: () {
+                                                        controller
+                                                            .increaseQuantity(
+                                                                index);
+                                                      },
+                                                      child: Icon(
+                                                        Icons.add,
+                                                        size: 20,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 20 / 2),
+                                                    child: Text(
+                                                      // if our item is less  then 10 then  it shows 01 02 like that
+                                                      controller
+                                                          .cartProductModel[
+                                                              index]
+                                                          .quantity
+                                                          .toString()
+                                                          .padLeft(2, "0"),
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                  ),
+                                                  // CustomText(
+                                                  //   text: controller
+                                                  //       .cartProductModel[index]
+                                                  //       .quantity
+                                                  //       .toString(),
+                                                  //   alignment: Alignment.center,
+                                                  //   fontSize: 10,
+                                                  //   color: Colors.black,
+                                                  // ),
+                                                  SizedBox(
+                                                    width: 40,
+                                                    height: 32,
+                                                    child: OutlinedButton(
+                                                      style: OutlinedButton
+                                                          .styleFrom(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(13),
+                                                        ),
+                                                      ),
+                                                      onPressed: () {
+                                                        controller
+                                                            .decreaseQuantity(
+                                                                index);
+                                                      },
+                                                      child: Icon(
+                                                        Icons.remove,
+                                                        size: 20,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },
-                        
                         itemCount: controller.cartProductModel.length,
                       ),
                     ),
@@ -196,7 +259,7 @@ class CartView extends StatelessWidget {
                                 child: CustomText(
                                   text: 'TOTAL',
                                   color: Colors.grey,
-                                  fontSize: 12,
+                                  fontSize: 16,
                                 ),
                               ),
                               // SizedBox(
@@ -208,21 +271,31 @@ class CartView extends StatelessWidget {
                                   text: '\$${controller.totalPrice}',
                                   color: primaryColor,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                  fontSize: 20,
                                 ),
                               ),
                             ],
                           ),
-                          Container(
-                            width: 146,
+                          SizedBox(
                             height: 50,
-                            child: CustomButton(
-                              text: "CHECKOUT",
+                            width: 200,
+                            child: FlatButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18)),
+                              color: primaryColor,
                               onPressed: () {
                                 Get.to(CheckoutView());
                               },
+                              child: Text(
+                                "CheckOut".toUpperCase(),
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

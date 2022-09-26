@@ -6,7 +6,7 @@ class ProductModel {
   late String name, image, description, sized, price, productId, category;
   late String detalis = 'aa';
   late String detail="aaa";
-  late String det;
+  late String det='aa';
   late Color color;
 
   ProductModel({

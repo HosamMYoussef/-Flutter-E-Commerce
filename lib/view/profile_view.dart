@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:myshopp/core/viewmodel/auth_view_model.dart';
 import 'package:myshopp/core/viewmodel/profile_viewmodel.dart';
 import 'package:myshopp/view/auth/login_screen.dart';
+import 'package:myshopp/view/sellview.dart';
 import 'package:myshopp/widgets/custom_text.dart';
 
 import '../core/viewmodel/checkoutview_model.dart';
@@ -74,13 +75,20 @@ class ProfileView extends StatelessWidget {
                               ]),
                         ),
                         SizedBox(
-                          height: 100,
+                          height: 60,
                         ),
                         CustomListTile(
+
                           iconName: '1',
                           title: 'Edit Profile',
                           onTapFn: () {
                              Get.to(EditProfileView());
+                          },
+                        ),CustomListTile(
+                          iconName: 'sell2',
+                          title: 'Want Sell Something ?',
+                          onTapFn: () {
+                             Get.to(SellView());
                           },
                         ),
                         CustomListTile(

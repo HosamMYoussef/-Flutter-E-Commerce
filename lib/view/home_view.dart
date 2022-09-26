@@ -8,6 +8,7 @@ import 'package:myshopp/constants.dart';
 import 'package:myshopp/view/auth/login_screen.dart';
 import 'package:myshopp/view/cart_view.dart';
 import 'package:myshopp/view/search_view.dart';
+import 'package:path/path.dart';
 
 import '../constants.dart';
 import '../constants.dart';
@@ -91,6 +92,7 @@ class HomeView extends StatelessWidget {
       child: TextFormField(
         
         decoration: InputDecoration(
+          
           hintText: "What are you looking for?",
           border: InputBorder.none,
           prefixIcon: Icon(
@@ -177,9 +179,10 @@ class HomeView extends StatelessWidget {
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
+                
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       decoration: BoxDecoration(

@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/core/viewmodel/cart_view_model.dart';
 import 'package:myshopp/model/cart_product_model.dart';
 import 'package:myshopp/model/product_model.dart';
+import 'package:myshopp/view/Favorites_view.dart';
+import 'package:myshopp/view/checkout_view.dart';
 import 'package:myshopp/widgets/custom_button.dart';
 import 'package:myshopp/widgets/custom_text.dart';
+
+import '../core/viewmodel/Favorites_ view_model.dart';
+import '../core/viewmodel/checkoutview_model.dart';
+import '../model/Favorites_model.dart';
 
 class ProductDetailView extends StatelessWidget {
   ProductModel productModel;
@@ -16,6 +24,7 @@ class ProductDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(CheckoutViewModel());
     return Scaffold(
       body: Column(
         children: [
@@ -37,6 +46,33 @@ class ProductDetailView extends StatelessWidget {
                           ),
                         ),
                       ),
+                      // GetBuilder<FavoritesviewModel>(
+                      //     init: FavoritesviewModel(),
+                      //     builder: ((controller) => Padding(
+                      //           padding:
+                      //               const EdgeInsets.only(top: 130, left: 320),
+                      //           child: Container(
+                      //             child: IconButton(
+                      //               onPressed: () {
+                      //                 controller
+                      //                     .addProduct(FavortiesProdcutModel(
+                      //                   name: productModel.name,
+                      //                   image: productModel.image,
+                      //                   price: productModel.price,
+                      //                   productId: productModel.productId,
+                      //                   // category: productModel.category,
+                      //                 ));
+                      //               },
+                      //               // backgroundColor: primaryColor,
+
+                      //               icon: Icon(
+                      //                 LineIcons.heart,
+                      //                 size: 40,
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ))
+                      // ),
                       IconButton(
                         onPressed: () {
                           Get.back();
@@ -52,13 +88,36 @@ class ProductDetailView extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Column(
                       children: [
-                        CustomText(
-                          text: productModel.name,
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                              text: productModel.name,
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top:10.0,right: 20),
+                              child: Column(
+                                children: [
+                                  CustomText(
+                                    text: 'Price',
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                  ),
+                                  CustomText(
+                                    text: '\$${productModel.price}',
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: primaryColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
-                          height: 25,
+                          height: 10,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,62 +167,150 @@ class ProductDetailView extends StatelessWidget {
                   ),
                 ],
               ),
-              
             ),
           ),
           Material(
             elevation: 12,
             color: Colors.white,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 17, horizontal: 30),
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: 'PRICE',
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                      CustomText(
-                        text: '\$${productModel.price}',
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(right: 20),
+                    height: 50,
+                    width: 58,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
                         color: primaryColor,
                       ),
-                    ],
-                  ),
-                  GetBuilder<CartViewModel>(
-                    init: CartViewModel(),
-                    builder: ((controller) => Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                          //padding: EdgeInsets.all(27),
-
-                          width: 146,
-                          height: 50,
-                          child: CustomButton(
-                            text: 'ADD',
+                    ),
+                    child: GetBuilder<CartViewModel>(
+                      init: CartViewModel(),
+                      builder: ((controller) => IconButton(
+                            icon: SvgPicture.asset(
+                              "assets/images/add_to_cart.svg",
+                              color: primaryColor,
+                            ),
                             onPressed: () {
                               controller.addProduct(CartProductModel(
-                                  name: productModel.name,
-                                  image: productModel.image,
-                                  price: productModel.price,
-                                  productId: productModel.productId,
-                                 // category: productModel.category,
-                                  quantity:1,));
+                                name: productModel.name,
+                                image: productModel.image,
+                                price: productModel.price,
+                                productId: productModel.productId,
+                                // category: productModel.category,
+                                quantity: 1,
+                              ));
                             },
+                          )),
+                    ),
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      height: 50,
+                      child: GetBuilder<CartViewModel>(
+                        init: Get.put(CartViewModel()),
+                        builder: (controller) => FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18)),
+                          color: primaryColor,
+                          onPressed: () {
+                            controller.addProduct(CartProductModel(
+                              name: productModel.name,
+                              image: productModel.image,
+                              price: productModel.price,
+                              productId: productModel.productId,
+                              // category: productModel.category,
+                              quantity: 1,
+                            ));
+                            Get.to(CheckoutView());
+                          },
+                          child: Text(
+                            "Buy  Now".toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        )),
-                  )
-               
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
+              // child: Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         CustomText(
+              //           text: 'PRICE',
+              //           fontSize: 12,
+              //           color: Colors.grey,
+              //         ),
+              //         CustomText(
+              //           text: '\$${productModel.price}',
+              //           fontSize: 18,
+              //           fontWeight: FontWeight.bold,
+              //           color: primaryColor,
+              //         ),
+              //       ],
+              //     ),
+              //     GetBuilder<CartViewModel>(
+              //       init: CartViewModel(),
+              //       builder: ((controller) => Container(
+
+              //             decoration: BoxDecoration(
+              //                 borderRadius: BorderRadius.circular(40)),
+              //             //padding: EdgeInsets.all(27),
+
+              //             width: 146,
+              //             height: 50,
+              //             child: CustomButton(
+              //               text: 'ADD',
+              //               onPressed: () {
+              //                 print(productModel.name);
+              //                 controller.addProduct(CartProductModel(
+              //                   name: productModel.name,
+              //                   image: productModel.image,
+              //                   price: productModel.price,
+              //                   productId: productModel.productId,
+              //                   // category: productModel.category,
+              //                   quantity: 1,
+              //                 ));
+              //               },
+              //             ),
+              //           )),
+              //     )
+
+              //   ],
+              // ),
             ),
           ),
         ],
       ),
+      floatingActionButton: GetBuilder<FavoritesviewModel>(
+          init: FavoritesviewModel(),
+          builder: ((controller) => Padding(
+                padding: const EdgeInsets.only(bottom: 80, right: 0),
+                child: FloatingActionButton(
+                  onPressed: () {
+                    controller.addProduct(FavortiesProdcutModel(
+                      name: productModel.name,
+                      image: productModel.image,
+                      price: productModel.price,
+                      productId: productModel.productId,
+                      // category: productModel.category,
+                    ));
+                  },
+                  backgroundColor: primaryColor,
+                  child: Icon(LineIcons.heart),
+                ),
+              ))),
     );
   }
 }
