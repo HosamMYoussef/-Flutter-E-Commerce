@@ -78,32 +78,26 @@ class CartView extends StatelessWidget {
                               elevation: 4,
                               child: Row(
                                 children: [
-                                  GetBuilder<HomeViewModel>(
-                                    builder: (controller) => GestureDetector(
-                                      onTap: () {
-                                        Get.to(ProductDetailView(
-                                            productModel:
-                                                controller.products[index]));
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(29)),
-                                        width: 120,
-                                        height: 120,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            bottomLeft: Radius.circular(20),
-                                          ),
-                                          child: Image.network(
-                                            controller
-                                                .products[index].image,
-                                            fit: BoxFit.cover,
-                                          ),
+                                  GetBuilder<CartViewModel>(
+                                    builder: (controller) =>
+                                     Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(29)),
+                                      width: 120,
+                                      height: 120,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          bottomLeft: Radius.circular(20),
+                                        ),
+                                        child: Image.network(
+                                          controller
+                                              .cartProductModel[index].image,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
-                                    ),
+                                      ),
                                   ),
                                   SizedBox(
                                     width: 30,
