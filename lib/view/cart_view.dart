@@ -7,6 +7,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/core/viewmodel/cart_view_model.dart';
+import 'package:myshopp/view/Favorites_view.dart';
 import 'package:myshopp/view/product_details_view.dart';
 import 'package:myshopp/widgets/custom_button.dart';
 import 'package:myshopp/widgets/custom_text.dart';
@@ -71,6 +72,7 @@ class CartView extends StatelessWidget {
                                 controller.removeProduct(controller
                                     .cartProductModel[index].productId);
                               }
+                              
                             },
                             child: Card(
                               shape: RoundedRectangleBorder(
@@ -79,8 +81,7 @@ class CartView extends StatelessWidget {
                               child: Row(
                                 children: [
                                   GetBuilder<CartViewModel>(
-                                    builder: (controller) =>
-                                     Container(
+                                    builder: (controller) => Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(29)),
@@ -97,7 +98,7 @@ class CartView extends StatelessWidget {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                      ),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 30,
@@ -181,15 +182,6 @@ class CartView extends StatelessWidget {
                                                           fontSize: 16),
                                                     ),
                                                   ),
-                                                  // CustomText(
-                                                  //   text: controller
-                                                  //       .cartProductModel[index]
-                                                  //       .quantity
-                                                  //       .toString(),
-                                                  //   alignment: Alignment.center,
-                                                  //   fontSize: 10,
-                                                  //   color: Colors.black,
-                                                  // ),
                                                   SizedBox(
                                                     width: 40,
                                                     height: 32,

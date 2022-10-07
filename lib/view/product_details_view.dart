@@ -241,6 +241,7 @@ class ProductDetailView extends StatelessWidget {
                   ),
                 ],
               ),
+              //!ignore 
               // child: Row(
               //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //   children: [

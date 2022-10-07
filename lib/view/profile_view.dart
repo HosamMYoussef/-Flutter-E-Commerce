@@ -50,13 +50,7 @@ class ProfileView extends StatelessWidget {
                                 SizedBox(
                                   width: 30,
                                 ),
-                                // TextButton(
-                                //     onPressed: (() {
-                                //       print(controller.currentUser!.name);
-                                //    controller.SignOut();
-                                //       // Get.off(LoginView());
-                                //     }),
-                                //     child: Text('signout'))
+                                
                                 Column(
                                   children: [
                                     CustomText(

@@ -49,21 +49,21 @@ class MyApp extends StatelessWidget {
       
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
-      home: ControlView(),
-      // home: AnimatedSplashScreen(
+      //home: ControlView(),
+     home: AnimatedSplashScreen(
         
-      //   duration: 2000,
-      //   splashTransition: SplashTransition.decoratedBoxTransition,
-      //   splashIconSize: 800
-      //   ,
+        duration: 1500,
+        splashTransition: SplashTransition.fadeTransition,
+        splashIconSize: 300,
         
-      //   splash:Lottie.asset('assets/images/open.json', ),
-      //   nextScreen:  ControlView(),
-      //   //backgroundColor: primaryColor,
-      //   pageTransitionType: PageTransitionType.bottomToTop ,
-      //   animationDuration: Duration(seconds: 2),
-      //   //backgroundColor: Colors.greenAccent
-      // ),
+        
+        splash:Image.asset('assets/images/23.png', ),
+        nextScreen:  ControlView(),
+        //backgroundColor: primaryColor,
+        pageTransitionType: PageTransitionType.bottomToTop ,
+        animationDuration: Duration(milliseconds:1500 ),
+        backgroundColor: Colors.white
+      ),
       theme: ThemeData(
         canvasColor: Colors.white,
         fontFamily: 'OpenSans',
@@ -72,15 +72,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// enum PageTransitionType {
-//   fade,
-//   rightToLeft,
-//   leftToRight,
-//   upToDown,
-//   downToUp,
-//   scale,
-//   rotate,
-//   size,
-//   rightToLeftWithFade,
-//   leftToRightWithFade,
-// }

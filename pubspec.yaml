@@ -58,6 +58,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
   dot_navigation_bar: ^1.0.1+4
+  splash_screen_view: ^2.0.1
 
  
 
