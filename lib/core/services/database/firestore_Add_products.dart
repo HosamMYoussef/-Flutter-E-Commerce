@@ -7,7 +7,7 @@ import '../../../model/checkout_model.dart';
 
 class FirestoreSell {
   late final CollectionReference _ordersCollection =
-      FirebaseFirestore.instance.collection('products');
+      FirebaseFirestore.instance.collection('Products');
 
   Future<List<QueryDocumentSnapshot>> getOrdersFromFirestore() async {
     var _orders =

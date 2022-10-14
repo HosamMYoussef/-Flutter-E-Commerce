@@ -195,7 +195,7 @@ class HomeView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         child: Image.network(
                           controller.products[index].image,
-                          fit: BoxFit.cover,
+                          // fit: BoxFit.cover,
                         ),
                       ),
                     ),

@@ -12,6 +12,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:myshopp/view/control_view.dart';
 import 'package:myshopp/view/home_view.dart';
+import 'package:myshopp/view/sellview.dart';
+import 'package:myshopp/view/upload.dart';
 import 'package:myshopp/widgets/custom_text.dart';
 import 'package:page_transition/page_transition.dart';
 import 'core/viewmodel/cart_view_model.dart';
@@ -49,21 +51,22 @@ class MyApp extends StatelessWidget {
       
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
-      //home: ControlView(),
-     home: AnimatedSplashScreen(
+      // home: SellView(),
+      home: ControlView(),
+    //  home: AnimatedSplashScreen(
         
-        duration: 1500,
-        splashTransition: SplashTransition.fadeTransition,
-        splashIconSize: 300,
+    //     duration: 1500,
+    //     splashTransition: SplashTransition.fadeTransition,
+    //     splashIconSize: 300,
         
         
-        splash:Image.asset('assets/images/23.png', ),
-        nextScreen:  ControlView(),
-        //backgroundColor: primaryColor,
-        pageTransitionType: PageTransitionType.bottomToTop ,
-        animationDuration: Duration(milliseconds:1500 ),
-        backgroundColor: Colors.white
-      ),
+    //     splash:Image.asset('assets/images/23.png', ),
+    //     nextScreen:  ControlView(),
+    //     //backgroundColor: primaryColor,
+    //     pageTransitionType: PageTransitionType.bottomToTop ,
+    //     animationDuration: Duration(milliseconds:1500 ),
+    //     backgroundColor: Colors.white
+    //   ),
       theme: ThemeData(
         canvasColor: Colors.white,
         fontFamily: 'OpenSans',
