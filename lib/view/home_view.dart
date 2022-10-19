@@ -90,9 +90,7 @@ class HomeView extends StatelessWidget {
         color: Colors.grey.shade200,
       ),
       child: TextFormField(
-        
         decoration: InputDecoration(
-          
           hintText: "What are you looking for?",
           border: InputBorder.none,
           prefixIcon: Icon(
@@ -100,7 +98,6 @@ class HomeView extends StatelessWidget {
             color: Colors.black54,
           ),
         ),
-       
         onFieldSubmitted: (value) {
           Get.to(SearchView(value));
         },
@@ -174,12 +171,17 @@ class HomeView extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
+                // Navigator.of(context)
+                //     .push(MaterialPageRoute(builder: (context) {
+                //   return ProductDetailView(
+                //       productModel: controller.products[index]);
+                // },),);
+
                 Get.to(ProductDetailView(
-                    productModel: controller.products[index]));
+                   id: controller.products[index].productId));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
-                
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -195,6 +197,7 @@ class HomeView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         child: Image.network(
                           controller.products[index].image,
+                          fit: BoxFit.cover,
                           // fit: BoxFit.cover,
                         ),
                       ),

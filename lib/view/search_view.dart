@@ -115,7 +115,7 @@ class _SearchViewState extends State<SearchView> {
                     return GestureDetector(
                       onTap: () {
                         Get.to(
-                          ProductDetailView(productModel:_searchProducts[index]),
+                          ProductDetailView(id: controller.products[index].productId),
                         );
                       },
                       child: Container(

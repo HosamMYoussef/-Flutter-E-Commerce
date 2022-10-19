@@ -15,15 +15,19 @@ import 'package:myshopp/widgets/custom_text.dart';
 
 import '../core/viewmodel/Favorites_ view_model.dart';
 import '../core/viewmodel/checkoutview_model.dart';
+import '../core/viewmodel/home_view_model.dart';
 import '../model/Favorites_model.dart';
 
 class ProductDetailView extends StatelessWidget {
-  ProductModel productModel;
+  // ProductModel productModel;
+  String id;
 
-  ProductDetailView({required this.productModel});
+  ProductDetailView({required this.id});
 
   @override
   Widget build(BuildContext context) {
+    var x = Get.find<HomeViewModel>().products;
+    final productModel = x.firstWhere((meal) => meal.productId == id);
     Get.put(CheckoutViewModel());
     return Scaffold(
       body: Column(
@@ -77,7 +81,7 @@ class ProductDetailView extends StatelessWidget {
                         onPressed: () {
                           Get.back();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_ios,
                           color: Colors.black,
                         ),
@@ -97,7 +101,8 @@ class ProductDetailView extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top:10.0,right: 20),
+                              padding:
+                                  const EdgeInsets.only(top: 10.0, right: 20),
                               child: Column(
                                 children: [
                                   CustomText(
@@ -116,7 +121,7 @@ class ProductDetailView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -145,7 +150,7 @@ class ProductDetailView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 33,
                         ),
                         CustomText(
@@ -153,7 +158,7 @@ class ProductDetailView extends StatelessWidget {
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         CustomText(
@@ -173,12 +178,12 @@ class ProductDetailView extends StatelessWidget {
             elevation: 12,
             color: Colors.white,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(right: 20),
+                    margin: const EdgeInsets.only(right: 20),
                     height: 50,
                     width: 58,
                     decoration: BoxDecoration(
@@ -229,7 +234,7 @@ class ProductDetailView extends StatelessWidget {
                           },
                           child: Text(
                             "Buy  Now".toUpperCase(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -241,7 +246,7 @@ class ProductDetailView extends StatelessWidget {
                   ),
                 ],
               ),
-              //!ignore 
+              //!ignore
               // child: Row(
               //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //   children: [
@@ -309,7 +314,7 @@ class ProductDetailView extends StatelessWidget {
                     ));
                   },
                   backgroundColor: primaryColor,
-                  child: Icon(LineIcons.heart),
+                  child: const Icon(LineIcons.heart),
                 ),
               ))),
     );
@@ -335,7 +340,7 @@ class RoundedShapeInfo extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

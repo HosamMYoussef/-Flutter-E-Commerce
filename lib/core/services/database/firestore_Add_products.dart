@@ -20,7 +20,7 @@ class FirestoreSell {
     var documentId = docRef.id; //? <-- Document ID
     print(documentId);
 
-    _ordersCollection.doc(documentId).update({'productId':documentId });
+    _ordersCollection.doc(documentId).update({'productId': documentId});
   }
   // <-- Document ID
 
@@ -30,14 +30,21 @@ class FirestoreSell {
 
   // //
 
-  // // Future deleteData(String id) async {
-  // //   try {
-  // //     await FirebaseFirestore.instance
-  // //         .collection("products")
-  // //         .doc(_ordersCollection.doc().id)
-  // //         .delete();
-  // //   } catch (e) {
-  // //     return false;
-  // //   }
-  // // }
+  deleteData(String iD) async {
+    await FirebaseFirestore.instance
+        .collection("products")
+        .where("productId", isEqualTo: iD)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        FirebaseFirestore.instance
+            .collection("products")
+            .doc(element.id)
+            .delete()
+            .then((value) {
+          print("Success!");
+        });
+      });
+    });
+  }
 }

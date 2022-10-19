@@ -40,8 +40,8 @@ class FavoritesView extends StatelessWidget {
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/images/empty.gif',
+                        SvgPicture.asset(
+                          'assets/images/caart.svg',
                           width: 350,
                           height: 350,
                         ),
@@ -49,7 +49,7 @@ class FavoritesView extends StatelessWidget {
                           height: 30,
                         ),
                         CustomText(
-                          text: "Your  Cart is empty... ",
+                          text: "Your Favorites will show here... ",
                           fontSize: 23,
                           alignment: Alignment.topCenter,
                         )
@@ -58,7 +58,12 @@ class FavoritesView extends StatelessWidget {
                   : ListView.separated(
                       itemBuilder: (ctx, index) {
                         return InkWell(
-                          onTap: () {},
+                          onTap: () {
+                             Get.to(ProductDetailView(
+                                                id:controller
+                                                  .favoritesProductModel[index]
+                                                  .productId, ));
+                          },
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -74,15 +79,7 @@ class FavoritesView extends StatelessWidget {
                                         topLeft: Radius.circular(15),
                                         topRight: Radius.circular(15),
                                       ),
-                                      child: GetBuilder<HomeViewModel>(
-                                        builder: (controller) =>
-                                            GestureDetector(
-                                          onTap: () {
-                                            Get.to(ProductDetailView(
-                                                productModel: controller
-                                                    .products[index]));
-                                          },
-                                          child: GetBuilder<FavoritesviewModel>(
+                                          child:  GetBuilder<FavoritesviewModel>(
                                             builder: (controller) =>
                                                 Image.network(
                                               controller
@@ -93,8 +90,7 @@ class FavoritesView extends StatelessWidget {
                                               fit: BoxFit.cover,
                                             ),
                                           ),
-                                        ),
-                                      ),
+                                      
                                     ),
                                     Positioned(
                                       top: 10,

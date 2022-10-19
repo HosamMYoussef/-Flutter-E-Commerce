@@ -71,6 +71,9 @@ class _SellViewState extends State<SellView> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ProfileViewModel());
+ late String? sellerId=
+                Get.find<ProfileViewModel>().currentUser!.userId;
     Get.put(SellModel());
     return GetBuilder<SelectImageViewModel>(
       init: SelectImageViewModel(),
@@ -131,6 +134,7 @@ class _SellViewState extends State<SellView> {
                             },
                             onSavedFn: (value) {
                               Get.find<SellModel>().name = value;
+                              Get.find<SellModel>().sellerId = sellerId;
                             },
                           ),
                           SizedBox(
@@ -147,6 +151,20 @@ class _SellViewState extends State<SellView> {
                                 },
                                 onSavedFn: (value) {
                                   Get.find<SellModel>().category = value;
+                                },
+                              ),
+                                SizedBox(
+                                height: 10,
+                              ),
+                              CustomTextFormField(
+                                title: 'Product Description',
+                                hintText: '',
+                                validatorFn: (value) {
+                                  if (value!.isEmpty)
+                                    return 'Please enter longer description .';
+                                },
+                                onSavedFn: (value) {
+                                  Get.find<SellModel>().description = value;
                                 },
                               ),
                               SizedBox(
@@ -174,7 +192,7 @@ class _SellViewState extends State<SellView> {
                                     return 'Please enter product details .';
                                 },
                                 onSavedFn: (value) {
-                                  Get.find<SellModel>().detail = value;
+                                  Get.find<SellModel>().det = value;
                                 },
                               ),
                               SizedBox(
@@ -203,23 +221,10 @@ class _SellViewState extends State<SellView> {
                                     return 'Please enter Product Color .';
                                 },
                                 onSavedFn: (value) {
-                                  Get.find<SellModel>().det = value;
+                                  Get.find<SellModel>().color = value;
                                 },
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              CustomTextFormField(
-                                title: 'Product Description',
-                                hintText: '',
-                                validatorFn: (value) {
-                                  if (value!.isEmpty)
-                                    return 'Please enter longer description .';
-                                },
-                                onSavedFn: (value) {
-                                  Get.find<SellModel>().description = value;
-                                },
-                              ),
+                            
                               SizedBox(
                                 height: 20,
                               ),
@@ -274,7 +279,7 @@ class _SellViewState extends State<SellView> {
                                                     Get.find<SellModel>()
                                                         .image = imageURL;
 
-                                                    Get.back();
+                                                    // Get.back();
                                                   } catch (error) {
                                                     Get.back();
                                                   }

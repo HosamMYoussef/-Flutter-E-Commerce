@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:myshopp/core/viewmodel/auth_view_model.dart';
 import 'package:myshopp/core/viewmodel/profile_viewmodel.dart';
+import 'package:myshopp/view/User_product_view.dart';
 import 'package:myshopp/view/auth/login_screen.dart';
 import 'package:myshopp/view/sellview.dart';
 import 'package:myshopp/widgets/custom_text.dart';
@@ -30,7 +31,7 @@ class ProfileView extends StatelessWidget {
               body: Container(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 70, right: 16, left: 20),
+                    padding: EdgeInsets.only(top: 50, right: 16, left: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -69,7 +70,7 @@ class ProfileView extends StatelessWidget {
                               ]),
                         ),
                         SizedBox(
-                          height: 60,
+                          height: 20,
                         ),
                         CustomListTile(
 
@@ -86,6 +87,12 @@ class ProfileView extends StatelessWidget {
                           },
                         ),
                         CustomListTile(
+                          iconName: 'box (2)',
+                          title: 'Manage Your Products',
+                          onTapFn: () {
+                            Get.to(UserProduct());
+                          },
+                        ), CustomListTile(
                           iconName: '3',
                           title: 'Order History',
                           onTapFn: () {

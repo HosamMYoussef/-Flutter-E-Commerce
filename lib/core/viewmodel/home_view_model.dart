@@ -4,9 +4,8 @@ import 'package:get/get.dart';
 import 'package:myshopp/model/Category_model.dart';
 
 import '../../model/product_model.dart';
+import '../services/database/firestore_Add_products.dart';
 import '../services/home_Services.dart';
-
-
 
 class HomeViewModel extends GetxController {
   List<CategoryModel> _categories = [];
@@ -15,7 +14,6 @@ class HomeViewModel extends GetxController {
   List<CategoryModel> get categories => _categories;
 
   List<ProductModel> get products => _products;
-
 
   ValueNotifier<bool> get loading => _loading;
   ValueNotifier<bool> _loading = ValueNotifier(false);
@@ -48,6 +46,13 @@ class HomeViewModel extends GetxController {
           .add(ProductModel.fromJson(product.data() as Map<String, dynamic>));
     });
     _loading.value = false;
+    update();
+  }
+
+  deleteProductsFromFireStore(String id) async {
+     FirestoreSell().deleteData(id);
+
+    products.removeWhere((prod) => prod.productId == id);
     update();
   }
 }
