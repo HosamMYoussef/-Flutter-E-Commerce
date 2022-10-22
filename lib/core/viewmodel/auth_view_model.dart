@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myshopp/model/user_model.dart';
+import 'package:myshopp/view/auth/login_screen.dart';
 import 'package:myshopp/view/control_view.dart';
 import 'package:myshopp/view/home_view.dart';
 
@@ -105,7 +106,7 @@ class AuthViewModel extends GetxController {
           .then((user) {
         saveUser(user);
       });
-      Get.offAll(ControlView());
+      Get.offAll(LoginView());
     } catch (error) {
       String errorMessage =
           error.toString().substring(error.toString().indexOf(' ') + 1);

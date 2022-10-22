@@ -32,12 +32,13 @@ class CartView extends StatelessWidget {
                     width: 350,
                     height: 350,
                   ),
-                 const  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   CustomText(
                     text: "Your  Cart is empty... ",
-                    fontSize: 23,
+                    fontFamily: 'Baumans',
+                    fontSize: 26,
                     alignment: Alignment.topCenter,
                   )
                 ],
@@ -46,7 +47,8 @@ class CartView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      padding:const  EdgeInsets.only(top: 50, right: 16, left: 16),
+                      padding:
+                          const EdgeInsets.only(top: 50, right: 16, left: 16),
                       child: ListView.separated(
                         separatorBuilder: (context, index) {
                           return const SizedBox(
@@ -61,7 +63,7 @@ class CartView extends StatelessWidget {
                               color: Colors.red,
                               alignment: Alignment.centerRight,
                               padding: EdgeInsets.only(right: 33),
-                              child:const  Icon(
+                              child: const Icon(
                                 Icons.delete_outline,
                                 color: Colors.white,
                                 size: 30,
@@ -93,7 +95,7 @@ class CartView extends StatelessWidget {
                                         width: 120,
                                         height: 120,
                                         child: ClipRRect(
-                                          borderRadius:const  BorderRadius.only(
+                                          borderRadius: const BorderRadius.only(
                                             topLeft: Radius.circular(20),
                                             bottomLeft: Radius.circular(20),
                                           ),
@@ -105,7 +107,7 @@ class CartView extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                   const  SizedBox(
+                                    const SizedBox(
                                       width: 30,
                                     ),
                                     Padding(
@@ -126,7 +128,7 @@ class CartView extends StatelessWidget {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16,
                                           ),
-                                         const  SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
                                           Container(
@@ -166,7 +168,7 @@ class CartView extends StatelessWidget {
                                                               .increaseQuantity(
                                                                   index);
                                                         },
-                                                        child:const  Icon(
+                                                        child: const Icon(
                                                           Icons.add,
                                                           size: 20,
                                                           color: Colors.black,
@@ -210,7 +212,7 @@ class CartView extends StatelessWidget {
                                                               .decreaseQuantity(
                                                                   index);
                                                         },
-                                                        child:const  Icon(
+                                                        child: const Icon(
                                                           Icons.remove,
                                                           size: 20,
                                                           color: Colors.black,
@@ -237,10 +239,11 @@ class CartView extends StatelessWidget {
                     elevation: 12,
                     child: Container(
                       color: Colors.grey.shade50,
-                      padding: const EdgeInsets.only(top: 10, left: 30, right: 30
-                          //vertical: 17
+                      padding:
+                          const EdgeInsets.only(top: 10, left: 30, right: 30
+                              //vertical: 17
 
-                          ),
+                              ),
                       height: 64,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -283,7 +286,7 @@ class CartView extends StatelessWidget {
                               },
                               child: Text(
                                 "CheckOut".toUpperCase(),
-                                style:const  TextStyle(
+                                style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,

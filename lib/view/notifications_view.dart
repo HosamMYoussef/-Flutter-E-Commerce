@@ -14,7 +14,7 @@ class NotificationsView extends StatelessWidget {
           Container(
             height: 130,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 24, left: 16, right: 16),
+              padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -25,14 +25,15 @@ class NotificationsView extends StatelessWidget {
                     onPressed: () {
                       Get.back();
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back_ios,
                       color: Colors.black,
                     ),
                   ),
                   CustomText(
                     text: 'Notifications',
-                    fontSize: 20,
+                    fontFamily: 'cairo',
+                    fontSize: 26,
                     alignment: Alignment.bottomCenter,
                   ),
                   Container(
@@ -42,23 +43,25 @@ class NotificationsView extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 50,),
-          Expanded(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                 Image.asset('assets/images/cat.gif'),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  CustomText(
-                    text: "No New Notifications... ",
-                    fontSize: 28,
-                    alignment: Alignment.topCenter,
-                  )
-                ],
-              )
+          const SizedBox(
+            height: 50,
           ),
+          Expanded(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.asset('assets/images/cat.gif'),
+              const SizedBox(
+                height: 40,
+              ),
+              CustomText(
+                text: "No new notifications... ",
+                fontFamily: 'Baumans',
+                fontSize: 25,
+                alignment: Alignment.topCenter,
+              )
+            ],
+          )),
         ],
       ),
     );

@@ -72,8 +72,7 @@ class _SellViewState extends State<SellView> {
   @override
   Widget build(BuildContext context) {
     Get.put(ProfileViewModel());
- late String? sellerId=
-                Get.find<ProfileViewModel>().currentUser!.userId;
+    late String? sellerId = Get.find<ProfileViewModel>().currentUser!.userId;
     Get.put(SellModel());
     return GetBuilder<SelectImageViewModel>(
       init: SelectImageViewModel(),
@@ -83,26 +82,27 @@ class _SellViewState extends State<SellView> {
             Container(
               height: 100,
               child: Padding(
-                padding:
-                    EdgeInsets.only(bottom: 24, left: 16, right: 16, top: 40),
+                padding: const EdgeInsets.only(
+                    bottom: 24, left: 16, right: 16, top: 40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
                       padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(),
+                      constraints: const BoxConstraints(),
                       onPressed: () {
                         Get.back();
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.black,
                       ),
                     ),
                     CustomText(
                       text: 'Sell Prodcuts',
-                      fontSize: 20,
+                      fontFamily: 'Baumans',
+                      fontSize: 22,
                       alignment: Alignment.center,
                     ),
                     Container(
@@ -122,7 +122,7 @@ class _SellViewState extends State<SellView> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           CustomTextFormField(
@@ -137,7 +137,7 @@ class _SellViewState extends State<SellView> {
                               Get.find<SellModel>().sellerId = sellerId;
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Column(
@@ -153,7 +153,7 @@ class _SellViewState extends State<SellView> {
                                   Get.find<SellModel>().category = value;
                                 },
                               ),
-                                SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               CustomTextFormField(
@@ -167,7 +167,7 @@ class _SellViewState extends State<SellView> {
                                   Get.find<SellModel>().description = value;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               CustomTextFormField(
@@ -181,7 +181,7 @@ class _SellViewState extends State<SellView> {
                                   Get.find<SellModel>().sized = value;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               CustomTextFormField(
@@ -195,7 +195,7 @@ class _SellViewState extends State<SellView> {
                                   Get.find<SellModel>().det = value;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               CustomTextFormField(
@@ -210,7 +210,7 @@ class _SellViewState extends State<SellView> {
                                   Get.find<SellModel>().price = value;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               CustomTextFormField(
@@ -224,8 +224,8 @@ class _SellViewState extends State<SellView> {
                                   Get.find<SellModel>().color = value;
                                 },
                               ),
-                            
-                              SizedBox(
+
+                              const SizedBox(
                                 height: 20,
                               ),
                               // GetBuilder<SelectImageViewModel>(
@@ -235,7 +235,7 @@ class _SellViewState extends State<SellView> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Product Image'),
+                                  const Text('Product Image'),
                                   ElevatedButton(
                                     onPressed: () {
                                       Get.dialog(
@@ -248,7 +248,7 @@ class _SellViewState extends State<SellView> {
                                           content: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Divider(
+                                              const Divider(
                                                 height: 1,
                                               ),
                                               ListTile(
@@ -264,12 +264,12 @@ class _SellViewState extends State<SellView> {
                                                 title: CustomText(
                                                   text: 'Camera',
                                                 ),
-                                                leading: Icon(
+                                                leading: const Icon(
                                                   Icons.camera,
                                                   color: Colors.blue,
                                                 ),
                                               ),
-                                              Divider(
+                                              const Divider(
                                                 height: 1,
                                               ),
                                               ListTile(
@@ -287,7 +287,7 @@ class _SellViewState extends State<SellView> {
                                                 title: CustomText(
                                                   text: 'Gallery',
                                                 ),
-                                                leading: Icon(
+                                                leading: const Icon(
                                                   Icons.photo_library,
                                                   color: Colors.blue,
                                                 ),
@@ -297,17 +297,17 @@ class _SellViewState extends State<SellView> {
                                         ),
                                       );
                                     },
-                                    child: Text('Select Image'),
+                                    child: const Text('Select Image'),
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           _isLoading
-                              ? CircularProgressIndicator()
+                              ? const CircularProgressIndicator()
                               : CustomButton(
                                   text: 'Upload',
                                   onPressed: () async {

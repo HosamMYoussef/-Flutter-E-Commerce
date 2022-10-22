@@ -123,7 +123,23 @@ flutter:
     - family: SourceSans
       fonts:
         - asset: assets/fonts/SourceSansPro-Regular.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
+        
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo-Black.ttf
+        - asset: assets/fonts/Cairo-Bold.ttf
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+        - asset: assets/fonts/Cairo-ExtraBold.ttf
+        - asset: assets/fonts/Cairo-ExtraLight.ttf
+        - asset: assets/fonts/Cairo-Light.ttf
+        - asset: assets/fonts/Cairo-Medium.ttf
+  #    
+    - family: Baumans
+      fonts:
+       
+        - asset: assets/fonts/Baumans-Regular.ttf
+          style: italic  #      - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,

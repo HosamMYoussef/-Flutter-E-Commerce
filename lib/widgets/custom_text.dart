@@ -8,6 +8,7 @@ class CustomText extends StatelessWidget {
   final int maxLines;
   final double fontSize;
   final Alignment alignment;
+  final  String fontFamily;
   final Color color;
     final FontWeight fontWeight;
       final double? height;
@@ -18,6 +19,7 @@ class CustomText extends StatelessWidget {
       this.fontSize = 16,
       this.color = Colors.black,
       this.maxLines=1,
+      this.fontFamily='OpenSans',
           this.height,
       this.alignment = Alignment.topLeft});
 
@@ -28,10 +30,12 @@ class CustomText extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
+          // fontFamily: 'Cairo',
           color: color,
           fontSize: fontSize,
           fontWeight: fontWeight,
                     height: height,
+                    fontFamily: fontFamily,
 
         ),
         maxLines: maxLines,

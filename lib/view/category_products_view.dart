@@ -38,7 +38,8 @@ class CategoryProductsView extends StatelessWidget {
                   ),
                   CustomText(
                     text: categoryName,
-                    fontSize: 20,
+                    fontFamily: 'Baumans',
+                    fontSize: 24,
                     alignment: Alignment.bottomCenter,
                   ),
                   Container(
@@ -64,7 +65,7 @@ class CategoryProductsView extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       Get.to(
-                        ProductDetailView(id:products[index].productId),
+                        ProductDetailView(id: products[index].productId),
                       );
                     },
                     child: Container(

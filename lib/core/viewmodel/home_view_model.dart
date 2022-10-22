@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:myshopp/model/Category_model.dart';
+import 'package:myshopp/model/user_model.dart';
 
 import '../../model/product_model.dart';
 import '../services/database/firestore_Add_products.dart';
@@ -11,7 +13,10 @@ class HomeViewModel extends GetxController {
   List<CategoryModel> _categories = [];
   List<ProductModel> _products = [];
 
+  List<UserModel> _users = [];
   List<CategoryModel> get categories => _categories;
+
+  List<UserModel> get users => _users;
 
   List<ProductModel> get products => _products;
 
@@ -23,6 +28,7 @@ class HomeViewModel extends GetxController {
     super.onInit();
     _getCategoriesFromFireStore();
     _getProductsFromFireStore();
+    _getusersFromFireStore();
   }
 
   _getCategoriesFromFireStore() async {
@@ -49,8 +55,19 @@ class HomeViewModel extends GetxController {
     update();
   }
 
+  _getusersFromFireStore() async {
+    _loading.value = true;
+    List<QueryDocumentSnapshot> usersSnapshot =
+        await FirestoreHome().getusersFromFirestore();
+    usersSnapshot.forEach((user) {
+      _users.add(UserModel.fromJson(user.data() as Map<String, dynamic>));
+    });
+    _loading.value = false;
+    update();
+  }
+
   deleteProductsFromFireStore(String id) async {
-     FirestoreSell().deleteData(id);
+    FirestoreSell().deleteData(id);
 
     products.removeWhere((prod) => prod.productId == id);
     update();

@@ -20,26 +20,28 @@ class OrderHistoryView extends StatelessWidget {
            
             height: 130,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 24, left: 16, right: 16),
+              padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   IconButton(
                     padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(),
+                    constraints: const BoxConstraints(),
                     onPressed: () {
                       Get.back();
                      // Get.put(CheckoutViewModel);
                     },
-                    icon: Icon(
+                    icon:const  Icon(
                       Icons.arrow_back_ios,
                       color: Colors.black,
                     ),
                   ),
                   CustomText(
                     text: 'Order History',
-                    fontSize: 20,
+                                               fontFamily: 'Baumans',
+
+                    fontSize: 24,
                     alignment: Alignment.bottomCenter,
                   ),
                   Container(
@@ -61,7 +63,7 @@ class OrderHistoryView extends StatelessWidget {
                           width: 400,
                           height: 400,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         CustomText(
@@ -75,13 +77,13 @@ class OrderHistoryView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                             const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                           child: Card(
                             shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                             elevation: 7,
                             
                             child: Padding(
-                              padding: EdgeInsets.all(16),
+                              padding:const  EdgeInsets.all(16),
                               child: Container(
                                 
                                 child: Column(
@@ -146,7 +148,7 @@ class OrderHistoryView extends StatelessWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (context, index) => SizedBox(height: 10,
+                      separatorBuilder: (context, index) => const SizedBox(height: 10,
                        
                       ),
                       itemCount: controller.checkouts.length,

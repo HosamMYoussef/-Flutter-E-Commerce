@@ -17,151 +17,273 @@ class LoginView extends GetWidget<AuthViewModel> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(elevation: 0.0, backgroundColor: Colors.white),
+    
+ return Scaffold(
+  backgroundColor:  const Color.fromRGBO(246, 246, 246, 1),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-            right: 16,
-            left: 16,
-            top: 20,
-            bottom: 42,
-          ),
-          child: Column(
+        scrollDirection: Axis.vertical,
+
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              text: 'Welcome',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(RegisterView());
-                              },
-                              child: CustomText(
-                                text: 'SignUp',
-                                fontSize: 18,
-                                color: primaryColor,
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        CustomText(
-                          text: 'Sign in to Continue',
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: 48,
-                        ),
-                        CustomTextFormField (
-                          title: 'Email',
-                          hintText: 'hosamyoussef@gmail.com',
-                          onSavedFn: (value) {
-                            controller.email = value!;
-                          },
-                          validatorFn: (value) {
+              SizedBox(
+                height: 80,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Padding(
+                      padding:  EdgeInsets.only(top: 40.0),
+                      child:SizedBox(),
+                    ),
+                    const Text(
+                      'Shopfy',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Baumans',
+                        fontSize: 26,
+                      ),
+                    ),
+                    Container(
+                      width: 30,
+                    ),
+                  ],
+                ),
+              ),
+              Form(
+                key: _formKey,
+                child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 20, left: 20.0),
+                    child: Text('Welcome \n back!',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 42)),
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      'Email',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20.0, right: 20, top: 9),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20)),
+                      height: 60,
+                      width: 400,
+                      // color: Colors.white,
+                      child: TextFormField(
+                        validator: (value) {
                             if (value == null) {
                               print('ERROR');
                             }
                           },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        CustomTextFormField(
-                            title: 'Password',
-                            hintText: '********',
-                            obscureText: true,
-                            validatorFn: (value) {
-                              if (value!.isEmpty)
-                                return 'Password is incorrect';
-                            },
-                            onSavedFn: (value) {
-                              controller.password = value!;
-                            },
+                           onSaved: (value) {
+                            controller.email = value!;
+                          },
+                        decoration: const InputDecoration(
+                          hintText: '  Enter your email address',
+                          hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 151, 150, 150),
+                            fontFamily: "Cairo",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
                           ),
-                        SizedBox(
-                          height: 25,
+                          border: InputBorder.none,
+                          prefixIcon: Icon(Icons.email_outlined),
                         ),
-                        CustomText(
-                          text: 'Forget Password ?',
-                          fontSize: 14,
-                          alignment: Alignment.centerRight,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      'Password',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20.0, right: 20, top: 9),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20)),
+                      height: 60,
+                      width: 400,
+                      // color: Colors.white,
+                      child: TextFormField(
+                          obscureText: true,
+                         validator: (value) {
+                            if (value!.isEmpty) return 'Password is incorrect';
+                          },
+                          onSaved: (value) {
+                            controller.password = value!;
+                          },
+                        decoration: const InputDecoration(
+                          hintText: '  Enter Your Password',
+                          hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 151, 150, 150),
+                            fontFamily: "Cairo",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                          border: InputBorder.none,
+                          prefixIcon: Icon(Icons.lock_outlined),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        CustomButton(
-                          text: 'SIGN IN',
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 260.0),
+                    child: Text(
+                      'Forget password?',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 76.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20)),
+                      height: 52,
+                      width: 238,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
                               controller.signInWithEmailAndPassword();
                             }
-                          },
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          primary: primaryColor,
+                          elevation: 0,
                         ),
-                        SizedBox(
-                          height: 28,
+                        child: const Text(
+                          'Sign in',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Cairo',
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500),
                         ),
-                        CustomText(
-                          alignment: Alignment.center,
-                          text: '-OR-',
-                          fontSize: 18,
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade200),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: CustomButttonSocial(
-                            onPressedFn: (() {
-                              // controller.facebookSignInMethod();
-                            }),
-                            text: "Sign In with Facebook",
-                            image: 'assets/images/facebook.png',
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade200),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: CustomButttonSocial(
-                            text: "Sign In with Google",
-                            image: 'assets/images/google.png',
-                            onPressedFn: () {
-                              controller.googleSignInMethod();
-                            },
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ],
-          ),
-        ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [ 
+                      const Text(
+                        'Don’t have an account yet ?',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 151, 150, 150),
+                            fontFamily: 'Cairo',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                      ),GestureDetector(
+                        onTap: (){
+                           Get.to(RegisterView());
+                        },
+                        child: const Text(
+                          ' sign up',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Cairo',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Center(
+                    child: Text(
+                      'or',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      
+                      GestureDetector(
+                        onTap: (){
+                          controller.googleSignInMethod();
+                        },
+                        child: Container(
+                          height: 52,
+                          width: 92,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(13)),
+                              child: Image.asset('assets/images/google.png'),
+                        ),
+                      ),const SizedBox(width: 35,),
+                      GestureDetector(
+                        onTap: (){},
+                        child: Container(
+                          height: 52,
+                          width: 92,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(13)),
+                              child: Image.asset('assets/images/facebook.png'),
+                        ),
+                      ),
+                    ],
+                  )
+                ]),
+              )
+            ]),
       ),
     );
   }

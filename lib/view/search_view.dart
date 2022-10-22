@@ -59,7 +59,8 @@ class _SearchViewState extends State<SearchView> {
                   ),
                   CustomText(
                     text: 'Search',
-                    fontSize: 20,
+                    fontSize: 24,
+                    fontFamily: 'Baumans',
                     alignment: Alignment.bottomCenter,
                   ),
                   Container(
@@ -115,12 +116,12 @@ class _SearchViewState extends State<SearchView> {
                     return GestureDetector(
                       onTap: () {
                         Get.to(
-                          ProductDetailView(id: controller.products[index].productId),
+                          ProductDetailView(
+                              id: controller.products[index].productId),
                         );
                       },
                       child: Container(
                         width: 164,
-                        
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +134,7 @@ class _SearchViewState extends State<SearchView> {
                               height: 240,
                               width: 164,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(25) ,
+                                borderRadius: BorderRadius.circular(25),
                                 child: Image.network(
                                   _searchProducts[index].image,
                                   fit: BoxFit.cover,

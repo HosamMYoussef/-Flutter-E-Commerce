@@ -27,7 +27,15 @@ class ProductDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var x = Get.find<HomeViewModel>().products;
+    var y = Get.find<HomeViewModel>().users;
     final productModel = x.firstWhere((meal) => meal.productId == id);
+    var username;
+    if (productModel.sellerId == null) {
+      username = 'Shopfy';
+    } else {
+      username =
+          y.firstWhere((meal) => meal.userId == productModel.sellerId).name;
+    }
     Get.put(CheckoutViewModel());
     return Scaffold(
       body: Column(
@@ -97,6 +105,7 @@ class ProductDetailView extends StatelessWidget {
                           children: [
                             CustomText(
                               text: productModel.name,
+                               fontFamily: 'Baumans',
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
                             ),
@@ -151,15 +160,37 @@ class ProductDetailView extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(
-                          height: 33,
+                          height: 15,
                         ),
-                        CustomText(
-                          text: 'Details',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                        Row(
+                          children: [
+                            CustomText(
+                              text: 'Sold by :',
+                             
+                              fontSize: 18,
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                username,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  decoration: TextDecoration.underline,
+                                   fontSize: 18,
+                                   fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                         const SizedBox(
                           height: 15,
+                        ),
+                        CustomText(
+                          text: 'Details',
+                          
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                         CustomText(
                           text: productModel.det,

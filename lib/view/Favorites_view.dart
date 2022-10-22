@@ -27,11 +27,12 @@ class FavoritesView extends StatelessWidget {
         builder: (controller) => Scaffold(
               appBar: AppBar(
                 elevation: 0,
-                title: Padding(
-                  padding: const EdgeInsets.all(120.0),
+                title:const Padding(
+                  padding:  EdgeInsets.all(120.0),
                   child: Text(
                     'Favorites',
-                    style: TextStyle(color: Colors.black, fontSize: 24),
+                    style: TextStyle(color: Colors.black, fontSize: 26,
+                     fontFamily: 'Baumans',),
                   ),
                 ),
                 backgroundColor: Colors.white,
@@ -45,12 +46,13 @@ class FavoritesView extends StatelessWidget {
                           width: 350,
                           height: 350,
                         ),
-                        SizedBox(
+                         const SizedBox(
                           height: 30,
                         ),
                         CustomText(
                           text: "Your Favorites will show here... ",
                           fontSize: 23,
+                           fontFamily: 'Baumans',
                           alignment: Alignment.topCenter,
                         )
                       ],
@@ -75,7 +77,7 @@ class FavoritesView extends StatelessWidget {
                                 Stack(
                                   children: [
                                     ClipRRect(
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius:const  BorderRadius.only(
                                         topLeft: Radius.circular(15),
                                         topRight: Radius.circular(15),
                                       ),
@@ -102,7 +104,7 @@ class FavoritesView extends StatelessWidget {
                                           color: Colors.black54,
                                         ),
                                         width: 150,
-                                        padding: EdgeInsets.symmetric(
+                                        padding:const  EdgeInsets.symmetric(
                                           vertical: 5,
                                           horizontal: 20,
                                         ),
@@ -110,7 +112,7 @@ class FavoritesView extends StatelessWidget {
                                           controller
                                               .favoritesProductModel[index]
                                               .name,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 20,
                                             color: Colors.white,
                                           ),
@@ -129,7 +131,7 @@ class FavoritesView extends StatelessWidget {
                                           // color: Colors.black54,
                                         ),
                                         width: 150,
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                           vertical: 5,
                                           horizontal: 20,
                                         ),
@@ -151,7 +153,7 @@ class FavoritesView extends StatelessWidget {
                                             color: Colors.black54,
                                           ),
                                           width: 50,
-                                          padding: EdgeInsets.symmetric(
+                                          padding:const  EdgeInsets.symmetric(
                                             vertical: 1,
                                             horizontal: 5,
                                           ),
@@ -180,7 +182,7 @@ class FavoritesView extends StatelessWidget {
                       },
                       itemCount: controller.favoritesProductModel.length,
                       separatorBuilder: (context, index) {
-                        return SizedBox(
+                        return const  SizedBox(
                           height: 15,
                         );
                       },

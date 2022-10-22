@@ -22,11 +22,14 @@ import 'product_details_view.dart';
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeViewModel());
     return GetBuilder<HomeViewModel>(
       init: Get.find<HomeViewModel>(),
       builder: (controller) => controller.loading.value
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
+              backgroundColor:  const Color.fromRGBO(246, 246, 246, 1),
+
               body: SingleChildScrollView(
                 child: Container(
                   padding:
@@ -39,7 +42,8 @@ class HomeView extends StatelessWidget {
                       ),
                       CustomText(
                         text: 'Categories',
-                        fontSize: 18,
+                        fontFamily: 'Baumans',
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                       SizedBox(
@@ -54,7 +58,8 @@ class HomeView extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Best Selling ",
-                            fontSize: 18,
+                            fontFamily: 'Baumans',
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                           GestureDetector(
@@ -90,7 +95,7 @@ class HomeView extends StatelessWidget {
         color: Colors.grey.shade200,
       ),
       child: TextFormField(
-        decoration: InputDecoration(
+        decoration:const InputDecoration(
           hintText: "What are you looking for?",
           border: InputBorder.none,
           prefixIcon: Icon(
@@ -178,7 +183,7 @@ class HomeView extends StatelessWidget {
                 // },),);
 
                 Get.to(ProductDetailView(
-                   id: controller.products[index].productId));
+                    id: controller.products[index].productId));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
@@ -188,7 +193,7 @@ class HomeView extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
                       ),
                       height: 240,

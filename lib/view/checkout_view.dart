@@ -38,13 +38,14 @@ class CheckoutView extends StatelessWidget {
                       onPressed: () {
                         Get.back();
                       },
-                      icon: Icon(
+                      icon:const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.black,
                       ),
                     ),
                     CustomText(
                       text: 'Checkout',
+                      fontFamily: 'Baumans',
                       fontSize: 20,
                       alignment: Alignment.bottomCenter,
                     ),
@@ -58,7 +59,7 @@ class CheckoutView extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.only(right: 16, left: 16, bottom: 24),
+                  padding:const EdgeInsets.only(right: 16, left: 16, bottom: 24),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -234,7 +235,6 @@ class ListViewProducts extends StatelessWidget {
                         width: 120,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-
                           child: Image.network(
                             controller.cartProductModel[index].image,
                             fit: BoxFit.cover,
