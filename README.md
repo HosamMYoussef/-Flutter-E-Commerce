@@ -2,6 +2,8 @@
 
 
 E commerce app using flutter and fire base
+using Getx state management 
+using shared preference 
 
 ## Getting Started
 
