@@ -5,8 +5,10 @@ import 'package:get/get.dart';
 import 'package:myshopp/model/Category_model.dart';
 import 'package:myshopp/model/user_model.dart';
 
+import '../../model/comment_model.dart';
 import '../../model/product_model.dart';
 import '../services/database/firestore_Add_products.dart';
+import '../services/database/firestore_comment.dart';
 import '../services/home_Services.dart';
 
 class HomeViewModel extends GetxController {
@@ -14,6 +16,9 @@ class HomeViewModel extends GetxController {
   List<ProductModel> _products = [];
 
   List<UserModel> _users = [];
+  List<CommentModel> _comments = [];
+
+  List<CommentModel> get comments => _comments;
   List<CategoryModel> get categories => _categories;
 
   List<UserModel> get users => _users;
@@ -29,6 +34,19 @@ class HomeViewModel extends GetxController {
     _getCategoriesFromFireStore();
     _getProductsFromFireStore();
     _getusersFromFireStore();
+    _getCommentsFromFireStore();
+  }
+
+  _getCommentsFromFireStore() async {
+    _loading.value = true;
+    List<QueryDocumentSnapshot> commentsSnapshot =
+        await FirestoreHome().getCommentsFromFirestore();
+    commentsSnapshot.forEach((comment) {
+      _comments
+          .add(CommentModel.fromJson(comment.data() as Map<String, dynamic>));
+    });
+    _loading.value = false;
+    update();
   }
 
   _getCategoriesFromFireStore() async {

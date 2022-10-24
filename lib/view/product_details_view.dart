@@ -3,13 +3,19 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
 import 'package:line_icons/line_icons.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/core/viewmodel/cart_view_model.dart';
+import 'package:myshopp/core/viewmodel/comments_viewModel.dart';
+import 'package:myshopp/core/viewmodel/profile_viewmodel.dart';
 import 'package:myshopp/model/cart_product_model.dart';
+import 'package:myshopp/model/comment_model.dart';
 import 'package:myshopp/model/product_model.dart';
 import 'package:myshopp/view/Favorites_view.dart';
 import 'package:myshopp/view/checkout_view.dart';
+import 'package:myshopp/view/profile_view.dart';
 import 'package:myshopp/widgets/custom_button.dart';
 import 'package:myshopp/widgets/custom_text.dart';
 
@@ -21,14 +27,22 @@ import '../model/Favorites_model.dart';
 class ProductDetailView extends StatelessWidget {
   // ProductModel productModel;
   String id;
+  late String cat;
 
   ProductDetailView({required this.id});
-
   @override
   Widget build(BuildContext context) {
+    Get.put(CommentViewModel());
+    var comment = Get.find<HomeViewModel>().comments;
+   final fieldText = TextEditingController();
+
     var x = Get.find<HomeViewModel>().products;
+    // print(comments.length);
     var y = Get.find<HomeViewModel>().users;
     final productModel = x.firstWhere((meal) => meal.productId == id);
+    List<CommentModel> comments =
+        comment.where((meal) => meal.productId == id).toList();
+    cat = productModel.category;
     var username;
     if (productModel.sellerId == null) {
       username = 'Shopfy';
@@ -36,8 +50,11 @@ class ProductDetailView extends StatelessWidget {
       username =
           y.firstWhere((meal) => meal.userId == productModel.sellerId).name;
     }
+
     Get.put(CheckoutViewModel());
+    Get.put(ProfileViewModel());
     return Scaffold(
+      // backgroundColor: Color.fromRGBO(246, 246, 246, 1),
       body: Column(
         children: [
           Expanded(
@@ -58,33 +75,6 @@ class ProductDetailView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // GetBuilder<FavoritesviewModel>(
-                      //     init: FavoritesviewModel(),
-                      //     builder: ((controller) => Padding(
-                      //           padding:
-                      //               const EdgeInsets.only(top: 130, left: 320),
-                      //           child: Container(
-                      //             child: IconButton(
-                      //               onPressed: () {
-                      //                 controller
-                      //                     .addProduct(FavortiesProdcutModel(
-                      //                   name: productModel.name,
-                      //                   image: productModel.image,
-                      //                   price: productModel.price,
-                      //                   productId: productModel.productId,
-                      //                   // category: productModel.category,
-                      //                 ));
-                      //               },
-                      //               // backgroundColor: primaryColor,
-
-                      //               icon: Icon(
-                      //                 LineIcons.heart,
-                      //                 size: 40,
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ))
-                      // ),
                       IconButton(
                         onPressed: () {
                           Get.back();
@@ -97,7 +87,8 @@ class ProductDetailView extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Column(
                       children: [
                         Row(
@@ -105,7 +96,7 @@ class ProductDetailView extends StatelessWidget {
                           children: [
                             CustomText(
                               text: productModel.name,
-                               fontFamily: 'Baumans',
+                              fontFamily: 'Cairo',
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
                             ),
@@ -137,12 +128,15 @@ class ProductDetailView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             RoundedShapeInfo(
-                              title: 'Size',
-                              content: CustomText(
-                                text: productModel.sized,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                alignment: Alignment.center,
+                              title: 'Size: ',
+                              content: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: CustomText(
+                                  text: productModel.sized,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  alignment: Alignment.center,
+                                ),
                               ),
                             ),
                             RoundedShapeInfo(
@@ -163,24 +157,45 @@ class ProductDetailView extends StatelessWidget {
                           height: 15,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CustomText(
-                              text: 'Sold by :',
-                             
-                              fontSize: 18,
-                            ),
+                            Row(
+                              children: [
+                                CustomText(
+                                  text: 'Sold by :',
+                                  fontSize: 18,
+                                ),
                             TextButton(
                               onPressed: () {},
                               child: Text(
                                 username,
                                 style: const TextStyle(
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline,
-                                   fontSize: 18,
-                                   fontWeight: FontWeight.bold
-                                ),
+                                    color: Colors.black,
+                                    decoration: TextDecoration.underline,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
                               ),
                             )
+                              ],
+                            ),
+                            GetBuilder<FavoritesviewModel>(
+          init: FavoritesviewModel(),
+          builder: ((controller) => Padding(
+                padding: const EdgeInsets.only(bottom: 0, right: 0),
+                child: FloatingActionButton(
+                  onPressed: () {
+                    controller.addProduct(FavortiesProdcutModel(
+                      name: productModel.name,
+                      image: productModel.image,
+                      price: productModel.price,
+                      productId: productModel.productId,
+                      // category: productModel.category,
+                    ));
+                  },
+                  backgroundColor: primaryColor,
+                  child: const Icon(LineIcons.heart),
+                ),
+              ))),
                           ],
                         ),
                         const SizedBox(
@@ -188,7 +203,6 @@ class ProductDetailView extends StatelessWidget {
                         ),
                         CustomText(
                           text: 'Details',
-                          
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -197,6 +211,155 @@ class ProductDetailView extends StatelessWidget {
                           fontSize: 14,
                           height: 2,
                           maxLines: 100,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomText(
+                          text: 'You might also like ',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        _listViewProducts(),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomText(
+                          text: 'Reviews ',
+                          fontFamily: 'Cairo',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Column(
+                          children: [
+                            for (int i = 0; i < comments.length; i++)
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top:8.0),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 16,
+                                          child: comments[i].pic.length <= 20
+                                              ? Image.asset(
+                                                  'assets/images/prof.png')
+                                              : ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  child: Image.network(
+                                                      comments[i].pic),
+                                                ),
+                                        ),
+                                        const SizedBox(
+                                          width: 14,
+                                        ),
+                                        CustomText(
+                                          text: (comments[i].name),
+                                          fontSize: 16,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 10),
+                                      child: RichText(
+                                        text: TextSpan(
+                                            // style: DefaultTextStyle.of(context).style,
+                                            children: [
+                                              const TextSpan(
+                                                  text: 'Reviewed on ',
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black54)),
+                                              TextSpan(
+                                                  text: comments[i].date,
+                                                  style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black54)),
+                                            ]),
+                                      )),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 5),
+                                    child: Text(comments[i].details,
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black87)),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  const Divider(
+                                    height: 2,
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 5.0, right: 20, top: 9),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black12, width: 2),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20)),
+                            height: 60,
+                            width: 400,
+                            // color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 40.0),
+                              child: TextFormField(
+                                controller: fieldText,
+
+                                validator: (value) {
+                                  if (value == null) {
+                                    print('ERROR');
+                                  }
+                                },
+                                onChanged: (value) {
+                                   Get.find<CommentViewModel>().details = value;
+                                  Get.find<CommentViewModel>().pic =
+                                      Get.find<ProfileViewModel>()
+                                          .currentUser!
+                                          .pic;
+                                  Get.find<CommentViewModel>().name =
+                                      Get.find<ProfileViewModel>()
+                                          .currentUser!
+                                          .name;
+                                  Get.find<CommentViewModel>().productid = id;
+                                },
+                                
+                                decoration: InputDecoration(
+                                    hintText: 'Write a review',
+                                    hintStyle:const  TextStyle(
+                                      color: Color.fromARGB(255, 151, 150, 150),
+                                      fontFamily: "Cairo",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                    ),
+                                    border: InputBorder.none,
+                                    suffixIcon: IconButton(
+                                        onPressed: () {
+                                          Get.find<CommentViewModel>()
+                                              .addCommentsToFireStore();
+                                              fieldText.clear();
+                                        },
+                                        icon: const Icon(Icons.send_outlined,color: primaryColor,))),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -277,77 +440,86 @@ class ProductDetailView extends StatelessWidget {
                   ),
                 ],
               ),
-              //!ignore
-              // child: Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         CustomText(
-              //           text: 'PRICE',
-              //           fontSize: 12,
-              //           color: Colors.grey,
-              //         ),
-              //         CustomText(
-              //           text: '\$${productModel.price}',
-              //           fontSize: 18,
-              //           fontWeight: FontWeight.bold,
-              //           color: primaryColor,
-              //         ),
-              //       ],
-              //     ),
-              //     GetBuilder<CartViewModel>(
-              //       init: CartViewModel(),
-              //       builder: ((controller) => Container(
-
-              //             decoration: BoxDecoration(
-              //                 borderRadius: BorderRadius.circular(40)),
-              //             //padding: EdgeInsets.all(27),
-
-              //             width: 146,
-              //             height: 50,
-              //             child: CustomButton(
-              //               text: 'ADD',
-              //               onPressed: () {
-              //                 print(productModel.name);
-              //                 controller.addProduct(CartProductModel(
-              //                   name: productModel.name,
-              //                   image: productModel.image,
-              //                   price: productModel.price,
-              //                   productId: productModel.productId,
-              //                   // category: productModel.category,
-              //                   quantity: 1,
-              //                 ));
-              //               },
-              //             ),
-              //           )),
-              //     )
-
-              //   ],
-              // ),
             ),
           ),
         ],
       ),
-      floatingActionButton: GetBuilder<FavoritesviewModel>(
-          init: FavoritesviewModel(),
-          builder: ((controller) => Padding(
-                padding: const EdgeInsets.only(bottom: 80, right: 0),
-                child: FloatingActionButton(
-                  onPressed: () {
-                    controller.addProduct(FavortiesProdcutModel(
-                      name: productModel.name,
-                      image: productModel.image,
-                      price: productModel.price,
-                      productId: productModel.productId,
-                      // category: productModel.category,
-                    ));
-                  },
-                  backgroundColor: primaryColor,
-                  child: const Icon(LineIcons.heart),
+    );
+  }
+
+  _listViewProducts() {
+    List<ProductModel> products = Get.find<HomeViewModel>()
+        .products
+        .where((meal) => meal.category == cat)
+        .toList();
+    products.removeWhere((element) => element.productId == id);
+    return GetBuilder<HomeViewModel>(
+      builder: (controller) => Container(
+        height: 320,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ProductDetailView(id: products[index].productId);
+                    },
+                  ),
+                );
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width * .4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      height: 240,
+                      width: 164,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          products[index].image,
+                          fit: BoxFit.cover,
+                          // fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    CustomText(
+                      text: products[index].name,
+                      fontSize: 16,
+                    ),
+                    CustomText(
+                      text: products[index].description,
+                      fontSize: 12,
+                      color: Colors.grey,
+                      maxLines: 1,
+                    ),
+                    CustomText(
+                      fontWeight: FontWeight.bold,
+                      text: '\$${products[index].price}',
+                      fontSize: 16,
+                      color: primaryColor,
+                    ),
+                  ],
                 ),
-              ))),
+              ),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              width: 15,
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -371,7 +543,7 @@ class RoundedShapeInfo extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 13),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

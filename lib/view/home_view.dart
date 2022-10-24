@@ -31,57 +31,85 @@ class HomeView extends StatelessWidget {
               backgroundColor:  const Color.fromRGBO(246, 246, 246, 1),
 
               body: SingleChildScrollView(
-                child: Container(
-                  padding:
-                      EdgeInsets.only(top: 65, left: 16, right: 16, bottom: 14),
-                  child: Column(
-                    children: [
-                      _searchTextFormField(),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      CustomText(
-                        text: 'Categories',
+                child: Column(
+                  children: [
+                    SizedBox(
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Padding(
+                      padding:  EdgeInsets.only(top: 20.0),
+                      child:SizedBox(),
+                    ),
+                    const Text(
+                      'Shopify',
+                      style: TextStyle(
+                        color: Colors.black,
                         fontFamily: 'Baumans',
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      _listViewCategory(),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    ),
+                    Container(
+                      width: 30,
+                    ),
+                  ],
+                ),
+              ),
+                    Container(
+                      padding:
+                          EdgeInsets.only(top: 29, left: 16, right: 16, bottom: 14),
+                      child: Column(
                         children: [
+                          _searchTextFormField(),
+                          SizedBox(
+                            height: 40,
+                          ),
                           CustomText(
-                            text: "Best Selling ",
+                            text: 'Categories',
                             fontFamily: 'Baumans',
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(CategoryProductsView(
-                                  categoryName: 'Best Selling',
-                                  products: controller.products));
-                            },
-                            child: CustomText(
-                              text: "See all ",
-                              fontSize: 16,
-                              color: primaryColor,
-                            ),
+                          SizedBox(
+                            height: 20,
                           ),
+                          _listViewCategory(),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                text: "Best Selling ",
+                                fontFamily: 'Baumans',
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(CategoryProductsView(
+                                      categoryName: 'Best Selling',
+                                      products: controller.products));
+                                },
+                                child: CustomText(
+                                  text: "See all ",
+                                  fontSize: 16,
+                                  color: primaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          _listViewProducts(),
                         ],
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      _listViewProducts(),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

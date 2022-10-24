@@ -54,9 +54,12 @@ class ProfileView extends StatelessWidget {
                                 
                                 Column(
                                   children: [
-                                    CustomText(
-                                      text: controller.currentUser!.name,
-                                      fontSize: 26,
+                                    FittedBox(
+                                      fit:BoxFit.scaleDown,
+                                      child: CustomText(
+                                        text: controller.currentUser!.name,
+                                        fontSize: 24,
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 6,

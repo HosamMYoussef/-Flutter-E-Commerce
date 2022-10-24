@@ -34,7 +34,7 @@ class RegisterView extends GetWidget<AuthViewModel> {
                     child: SizedBox(),
                   ),
                   const Text(
-                    'Shopfy',
+                    'Shopify',
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Baumans',

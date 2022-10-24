@@ -9,6 +9,8 @@ class FirestoreHome {
 
   final CollectionReference _usersCollection =
       FirebaseFirestore.instance.collection('users');
+  final CollectionReference _commentCollection =
+      FirebaseFirestore.instance.collection('comments');
 
   Future<List<QueryDocumentSnapshot>> getCategoriesFromFirestore() async {
     var categories = await _categoriesCollection.get();
@@ -24,8 +26,12 @@ class FirestoreHome {
     var products = await _productsCollection.get();
     return products.docs;
   }
+
   Future<List<QueryDocumentSnapshot>> getusersFromFirestore() async {
     var products = await _usersCollection.get();
+    return products.docs;
+  }Future<List<QueryDocumentSnapshot>> getCommentsFromFirestore() async {
+    var products = await _commentCollection.orderBy('date', descending: true).get();
     return products.docs;
   }
 }
