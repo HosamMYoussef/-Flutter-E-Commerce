@@ -34,7 +34,7 @@ class HomeView extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                height: 50,
+                height: 60,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,

@@ -16,6 +16,7 @@ import 'package:myshopp/model/product_model.dart';
 import 'package:myshopp/view/Favorites_view.dart';
 import 'package:myshopp/view/checkout_view.dart';
 import 'package:myshopp/view/profile_view.dart';
+import 'package:myshopp/view/seller_info.dart';
 import 'package:myshopp/widgets/custom_button.dart';
 import 'package:myshopp/widgets/custom_text.dart';
 
@@ -24,29 +25,40 @@ import '../core/viewmodel/checkoutview_model.dart';
 import '../core/viewmodel/home_view_model.dart';
 import '../model/Favorites_model.dart';
 
-class ProductDetailView extends StatelessWidget {
+class ProductDetailView extends StatefulWidget {
   // ProductModel productModel;
   String id;
-  late String cat;
 
   ProductDetailView({required this.id});
+
+  @override
+  State<ProductDetailView> createState() => _ProductDetailViewState();
+}
+
+class _ProductDetailViewState extends State<ProductDetailView> {
+  late String cat;
+
   @override
   Widget build(BuildContext context) {
     Get.put(CommentViewModel());
-    var comment = Get.find<HomeViewModel>().comments;
-   final fieldText = TextEditingController();
+    final fieldText = TextEditingController();
 
     var x = Get.find<HomeViewModel>().products;
     // print(comments.length);
     var y = Get.find<HomeViewModel>().users;
-    final productModel = x.firstWhere((meal) => meal.productId == id);
+    final productModel = x.firstWhere((meal) => meal.productId == widget.id);
+    var comment = Get.find<HomeViewModel>().comments;
     List<CommentModel> comments =
-        comment.where((meal) => meal.productId == id).toList();
+        comment.where((meal) => meal.productId == widget.id).toList();
     cat = productModel.category;
     var username;
+    var userId;
+    
     if (productModel.sellerId == null) {
-      username = 'Shopfy';
+      username = 'Shopify';
+      userId = 'def';
     } else {
+      userId=y.firstWhere((meal) => meal.userId == productModel.sellerId).userId;
       username =
           y.firstWhere((meal) => meal.userId == productModel.sellerId).name;
     }
@@ -165,37 +177,50 @@ class ProductDetailView extends StatelessWidget {
                                   text: 'Sold by :',
                                   fontSize: 18,
                                 ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                username,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    decoration: TextDecoration.underline,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )
+                                TextButton(
+                                  onPressed: () {
+                                    if(userId.length>5){
+                                        Get.to(SellerInfo(id: userId));
+                                    }
+                                    
+                                  },
+                                  child: Text(
+                                    username,
+                                    style: username=='Shopify'? const TextStyle(
+                                        color: Colors.black,
+                                        // decoration: TextDecoration.underline,
+                                        fontSize: 18,
+                                        fontFamily: 'Amazon',
+                                        ):const TextStyle(
+                                           fontFamily: 'Amazon',
+                                        color: Colors.blue,
+                                        // decoration: TextDecoration.underline,
+                                        fontSize: 18,
+                                        )
+                                  ),
+                                )
                               ],
                             ),
                             GetBuilder<FavoritesviewModel>(
-          init: FavoritesviewModel(),
-          builder: ((controller) => Padding(
-                padding: const EdgeInsets.only(bottom: 0, right: 0),
-                child: FloatingActionButton(
-                  onPressed: () {
-                    controller.addProduct(FavortiesProdcutModel(
-                      name: productModel.name,
-                      image: productModel.image,
-                      price: productModel.price,
-                      productId: productModel.productId,
-                      // category: productModel.category,
-                    ));
-                  },
-                  backgroundColor: primaryColor,
-                  child: const Icon(LineIcons.heart),
-                ),
-              ))),
+                                init: FavoritesviewModel(),
+                                builder: ((controller) => Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 0, right: 0),
+                                      child: FloatingActionButton(
+                                        onPressed: () {
+                                          controller
+                                              .addProduct(FavortiesProdcutModel(
+                                            name: productModel.name,
+                                            image: productModel.image,
+                                            price: productModel.price,
+                                            productId: productModel.productId,
+                                            // category: productModel.category,
+                                          ));
+                                        },
+                                        backgroundColor: primaryColor,
+                                        child: const Icon(LineIcons.heart),
+                                      ),
+                                    ))),
                           ],
                         ),
                         const SizedBox(
@@ -244,7 +269,7 @@ class ProductDetailView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(top:8.0),
+                                    padding: const EdgeInsets.only(top: 8.0),
                                     child: Row(
                                       children: [
                                         CircleAvatar(
@@ -322,14 +347,13 @@ class ProductDetailView extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 40.0),
                               child: TextFormField(
                                 controller: fieldText,
-
                                 validator: (value) {
                                   if (value == null) {
                                     print('ERROR');
                                   }
                                 },
                                 onChanged: (value) {
-                                   Get.find<CommentViewModel>().details = value;
+                                  Get.find<CommentViewModel>().details = value;
                                   Get.find<CommentViewModel>().pic =
                                       Get.find<ProfileViewModel>()
                                           .currentUser!
@@ -338,12 +362,12 @@ class ProductDetailView extends StatelessWidget {
                                       Get.find<ProfileViewModel>()
                                           .currentUser!
                                           .name;
-                                  Get.find<CommentViewModel>().productid = id;
+                                  Get.find<CommentViewModel>().productid =
+                                      widget.id;
                                 },
-                                
                                 decoration: InputDecoration(
                                     hintText: 'Write a review',
-                                    hintStyle:const  TextStyle(
+                                    hintStyle: const TextStyle(
                                       color: Color.fromARGB(255, 151, 150, 150),
                                       fontFamily: "Cairo",
                                       fontWeight: FontWeight.w600,
@@ -352,11 +376,31 @@ class ProductDetailView extends StatelessWidget {
                                     border: InputBorder.none,
                                     suffixIcon: IconButton(
                                         onPressed: () {
+                                          setState(() {
+                                            comment.add(CommentModel(
+                                                productId: widget.id,
+                                                details:
+                                                    Get.find<CommentViewModel>()
+                                                        .details!,
+                                                name:
+                                                    Get.find<ProfileViewModel>()
+                                                        .currentUser!
+                                                        .name,
+                                                pic:
+                                                    Get.find<ProfileViewModel>()
+                                                        .currentUser!
+                                                        .pic,
+                                                date: DateFormat.yMMMd()
+                                                    .format(DateTime.now())));
+                                          });
                                           Get.find<CommentViewModel>()
                                               .addCommentsToFireStore();
-                                              fieldText.clear();
+                                          fieldText.clear();
                                         },
-                                        icon: const Icon(Icons.send_outlined,color: primaryColor,))),
+                                        icon: const Icon(
+                                          Icons.send_outlined,
+                                          color: primaryColor,
+                                        ))),
                               ),
                             ),
                           ),
@@ -452,7 +496,7 @@ class ProductDetailView extends StatelessWidget {
         .products
         .where((meal) => meal.category == cat)
         .toList();
-    products.removeWhere((element) => element.productId == id);
+    products.removeWhere((element) => element.productId == widget.id);
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
         height: 320,

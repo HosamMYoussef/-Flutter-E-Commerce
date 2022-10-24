@@ -36,65 +36,44 @@ class _SearchViewState extends State<SearchView> {
             .toList();
 
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: 110,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 24, left: 16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(),
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                  CustomText(
-                    text: 'Search',
-                    fontSize: 24,
-                    fontFamily: 'Baumans',
-                    alignment: Alignment.bottomCenter,
-                  ),
-                  Container(
-                    width: 24,
-                  ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70.0), // here the desired height
+        child: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                size: 30,
+              ),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ),
+          flexibleSpace: Container(
+            height: 400,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment. bottomRight,
+                colors: [
+                   Color.fromRGBO(162, 230, 209, 1),
+                  Color.fromRGBO(131, 217, 226, 1),
                 ],
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Container(
-              height: 49,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(45),
-              ),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  ),
-                ),
-                initialValue: _searchValue,
-                onFieldSubmitted: (value) {
-                  setState(() {
-                    _searchValue = value.toLowerCase();
-                  });
-                },
-              ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 30, left: 50, right: 16, bottom: 10),
+              child: Card(elevation: 4, child: _searchTextFormField()),
             ),
           ),
+        ),
+      ),
+      body: Column(
+        children: [
+  
           SizedBox(
             height: 24,
           ),
@@ -117,7 +96,7 @@ class _SearchViewState extends State<SearchView> {
                       onTap: () {
                         Get.to(
                           ProductDetailView(
-                              id: controller.products[index].productId),
+                              id: _searchProducts[index].productId),
                         );
                       },
                       child: Container(
@@ -166,6 +145,32 @@ class _SearchViewState extends State<SearchView> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _searchTextFormField() {
+    return Container(
+      height: 49,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: TextFormField(
+        decoration: InputDecoration(
+           hintText: "Search Shopify",
+          border: InputBorder.none,
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.black,
+          ),
+        ),
+        initialValue: _searchValue,
+        onFieldSubmitted: (value) {
+          setState(() {
+            _searchValue = value.toLowerCase();
+          });
+        },
       ),
     );
   }

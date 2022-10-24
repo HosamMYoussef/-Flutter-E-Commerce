@@ -123,6 +123,10 @@ flutter:
     - family: SourceSans
       fonts:
         - asset: assets/fonts/SourceSansPro-Regular.ttf
+
+    - family: Amazon
+      fonts:
+        - asset: assets/fonts/AmazonEmber.ttf
         
     - family: Cairo
       fonts:
