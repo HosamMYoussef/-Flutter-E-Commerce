@@ -17,7 +17,6 @@ class OrderHistoryView extends StatelessWidget {
       body: Column(
         children: [
           Container(
-           
             height: 130,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
@@ -30,17 +29,16 @@ class OrderHistoryView extends StatelessWidget {
                     constraints: const BoxConstraints(),
                     onPressed: () {
                       Get.back();
-                     // Get.put(CheckoutViewModel);
+                      // Get.put(CheckoutViewModel);
                     },
-                    icon:const  Icon(
+                    icon: const Icon(
                       Icons.arrow_back_ios,
                       color: Colors.black,
                     ),
                   ),
                   CustomText(
                     text: 'Order History',
-                                               fontFamily: 'Baumans',
-
+                    fontFamily: 'Baumans',
                     fontSize: 24,
                     alignment: Alignment.bottomCenter,
                   ),
@@ -76,16 +74,15 @@ class OrderHistoryView extends StatelessWidget {
                   : ListView.separated(
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding:
-                             const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 6),
                           child: Card(
-                            shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25)),
                             elevation: 7,
-                            
                             child: Padding(
-                              padding:const  EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(16),
                               child: Container(
-                                
                                 child: Column(
                                   children: [
                                     Row(
@@ -148,8 +145,8 @@ class OrderHistoryView extends StatelessWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (context, index) => const SizedBox(height: 10,
-                       
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 10,
                       ),
                       itemCount: controller.checkouts.length,
                     ),

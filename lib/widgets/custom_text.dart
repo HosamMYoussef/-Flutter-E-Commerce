@@ -19,7 +19,7 @@ class CustomText extends StatelessWidget {
       this.fontSize = 16,
       this.color = Colors.black,
       this.maxLines=1,
-      this.fontFamily='OpenSans',
+      this.fontFamily='Amazon',
           this.height,
       this.alignment = Alignment.topLeft});
 
@@ -30,6 +30,7 @@ class CustomText extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
+          overflow: TextOverflow.ellipsis,
           // fontFamily: 'Cairo',
           color: color,
           fontSize: fontSize,

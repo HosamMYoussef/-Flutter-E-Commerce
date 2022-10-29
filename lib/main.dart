@@ -3,13 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:myshopp/core/viewmodel/auth_view_model.dart';
 import 'package:myshopp/view/control_view.dart';
 import 'package:myshopp/view/product_details_view.dart';
 import 'package:myshopp/view/upload.dart';
+import 'package:myshopp/widgets/Splash_Screen.dart';
 
 import 'core/viewmodel/cart_view_model.dart';
+import 'core/viewmodel/home_view_model.dart';
 import 'firebase_options.dart';
 import 'helper/binding.dart';
+import 'helper/local_storage_data.dart';
 
 //import 'package:get/get.dart';
 
@@ -18,8 +22,14 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+
+  Get.put(LocalStorageUser());
   Get.put(CartViewModel());
-  //Get.put(CheckoutViewModel());
+  Get.put(HomeViewModel());
+  Get.put(ControlView());
+  Get.put(AuthViewModel());
+  Get.find<AuthViewModel>();
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -41,8 +51,22 @@ class MyApp extends StatelessWidget {
 
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
-      // home: SellView(),
-      home: ControlView(),
+      home: FutureBuilder(
+        future: Get.find<HomeViewModel>().getProductsFromFireStore(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SplashScreen();
+          } else if (snapshot.error != null) {
+            // handel errors
+            return const Center(
+              child: Text('An error ocurred '),
+            );
+          } else {
+            return ControlView();
+          }
+        },
+      ),
+      // home: SplashScreen(),
       //  home: AnimatedSplashScreen(
 
       //     duration: 1500,
@@ -62,7 +86,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.grey.shade100),
       //     routes: {
       //   '/': (ctx) => ControlView(),
-       
+
       //   ProductDetailView.routeName: (ctx) => ProductDetailView(),
       // },
     );

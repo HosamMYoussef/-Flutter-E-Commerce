@@ -1,20 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:get/get.dart';
-import 'package:myshopp/constants.dart';
-import 'package:myshopp/constants.dart';
-import 'package:myshopp/view/auth/login_screen.dart';
-import 'package:myshopp/view/cart_view.dart';
 import 'package:myshopp/view/search_view.dart';
-import 'package:path/path.dart';
 
 import '../constants.dart';
-import '../constants.dart';
-import '../core/viewmodel/control_view_model.dart';
 import '../core/viewmodel/home_view_model.dart';
-import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import 'category_products_view.dart';
 import 'product_details_view.dart';
@@ -25,7 +15,7 @@ class HomeView extends StatelessWidget {
     Get.put(HomeViewModel());
     return GetBuilder<HomeViewModel>(
       init: Get.find<HomeViewModel>(),
-      builder: (controller) => controller.loading.value
+      builder: (controller) => controller.isloading
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
               backgroundColor:  const Color.fromRGBO(246, 246, 246, 1),
@@ -102,7 +92,7 @@ class HomeView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(
+                         const  SizedBox(
                             height: 30,
                           ),
                           _listViewProducts(),

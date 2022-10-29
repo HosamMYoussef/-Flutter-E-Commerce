@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:myshopp/model/comment_model.dart';
 import 'package:intl/intl.dart';
 
-import '../services/database/firestore_comment.dart';
+import '../services/home_Services.dart';
 
 class CommentViewModel extends GetxController {
   String? productid, details, name, pic;
 
   addCommentsToFireStore() async {
-    await FireStoreComment().addCommentToFirestore(CommentModel(
+    await FirestoreHome().addCommentToFirestore(CommentModel(
       details: details!,
       name: name!,
       pic: pic!,

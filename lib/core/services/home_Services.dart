@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../model/comment_model.dart';
+
 class FirestoreHome {
   final CollectionReference _categoriesCollection =
       FirebaseFirestore.instance.collection('Categories');
@@ -33,5 +35,8 @@ class FirestoreHome {
   }Future<List<QueryDocumentSnapshot>> getCommentsFromFirestore() async {
     var products = await _commentCollection.orderBy('date', descending: true).get();
     return products.docs;
+  }
+  addCommentToFirestore(CommentModel commentModel) async {
+    await _commentCollection.doc().set(commentModel.toJson());
   }
 }

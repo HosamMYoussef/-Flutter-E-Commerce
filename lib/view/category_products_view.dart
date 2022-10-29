@@ -18,7 +18,7 @@ class CategoryProductsView extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 130,
+            height: 100,
             child: Padding(
               padding: EdgeInsets.only(bottom: 24, left: 16, right: 16),
               child: Row(

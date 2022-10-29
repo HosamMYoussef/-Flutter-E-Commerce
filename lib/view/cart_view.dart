@@ -116,10 +116,14 @@ class CartView extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          CustomText(
-                                            text: controller
-                                                .cartProductModel[index].name,
-                                            fontSize: 16,
+                                          Container(
+                                            width: 200,
+                                            child: CustomText(
+                                              text: controller
+                                                  .cartProductModel[index].name,
+                                                  maxLines: 3,
+                                              fontSize: 16,
+                                            ),
                                           ),
                                           CustomText(
                                             text:

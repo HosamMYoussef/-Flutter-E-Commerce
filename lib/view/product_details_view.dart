@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -53,12 +54,13 @@ class _ProductDetailViewState extends State<ProductDetailView> {
     cat = productModel.category;
     var username;
     var userId;
-    
+
     if (productModel.sellerId == null) {
       username = 'Shopify';
       userId = 'def';
     } else {
-      userId=y.firstWhere((meal) => meal.userId == productModel.sellerId).userId;
+      userId =
+          y.firstWhere((meal) => meal.userId == productModel.sellerId).userId;
       username =
           y.firstWhere((meal) => meal.userId == productModel.sellerId).name;
     }
@@ -66,6 +68,8 @@ class _ProductDetailViewState extends State<ProductDetailView> {
     Get.put(CheckoutViewModel());
     Get.put(ProfileViewModel());
     return Scaffold(
+      // extendBodyBehindAppBar: true,
+      
       // backgroundColor: Color.fromRGBO(246, 246, 246, 1),
       body: Column(
         children: [
@@ -106,11 +110,15 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CustomText(
-                              text: productModel.name,
-                              fontFamily: 'Cairo',
-                              fontSize: 26,
-                              fontWeight: FontWeight.bold,
+                            Container(
+                              width: 250,
+                              child: CustomText(
+                                maxLines: 2,
+                                text: productModel.name,
+                                fontFamily: 'Amazon',
+                                fontSize: 20,
+                                //fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Padding(
                               padding:
@@ -179,25 +187,24 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    if(userId.length>5){
-                                        Get.to(SellerInfo(id: userId));
+                                    if (userId.length > 5) {
+                                      Get.to(SellerInfo(id: userId));
                                     }
-                                    
                                   },
-                                  child: Text(
-                                    username,
-                                    style: username=='Shopify'? const TextStyle(
-                                        color: Colors.black,
-                                        // decoration: TextDecoration.underline,
-                                        fontSize: 18,
-                                        fontFamily: 'Amazon',
-                                        ):const TextStyle(
-                                           fontFamily: 'Amazon',
-                                        color: Colors.blue,
-                                        // decoration: TextDecoration.underline,
-                                        fontSize: 18,
-                                        )
-                                  ),
+                                  child: Text(username,
+                                      style: username == 'Shopify'
+                                          ? const TextStyle(
+                                              color: Colors.black,
+                                              // decoration: TextDecoration.underline,
+                                              fontSize: 18,
+                                              fontFamily: 'Amazon',
+                                            )
+                                          : const TextStyle(
+                                              fontFamily: 'Amazon',
+                                              color: Colors.blue,
+                                              // decoration: TextDecoration.underline,
+                                              fontSize: 18,
+                                            )),
                                 )
                               ],
                             ),
