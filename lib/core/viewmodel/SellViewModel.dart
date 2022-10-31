@@ -67,6 +67,8 @@ class SellModel extends GetxController {
       sized: sized!,
       color: Colors.red,
       sellerId: sellerId!,
+      rating: '0',
+      reviews: '0',
     ));
     Get.back();
   }

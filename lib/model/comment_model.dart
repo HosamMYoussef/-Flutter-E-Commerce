@@ -1,5 +1,6 @@
 class CommentModel {
   late String productId, details, name, pic,date;
+  String?rating;
 
   CommentModel({
     required this.productId,
@@ -7,6 +8,7 @@ class CommentModel {
     required this.name,
     required this.pic,
     required this.date,
+     this.rating,
   });
 
   CommentModel.fromJson(Map<dynamic, dynamic> map) {
@@ -15,6 +17,7 @@ class CommentModel {
     name = map['name'];
     pic = map['pic'];
     date = map['date'];
+    rating = map['rating'];
   }
 
   toJson() {
@@ -24,6 +27,7 @@ class CommentModel {
       'name': name,
       'pic': pic,
       'date': date,
+      'rating': rating,
     };
   }
 }

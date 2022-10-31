@@ -1,3 +1,4 @@
+import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -18,38 +19,37 @@ class HomeView extends StatelessWidget {
       builder: (controller) => controller.isloading
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
-              backgroundColor:  const Color.fromRGBO(246, 246, 246, 1),
-
+              backgroundColor: const Color.fromRGBO(246, 246, 246, 1),
               body: SingleChildScrollView(
                 child: Column(
                   children: [
                     SizedBox(
-                height: 60,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Padding(
-                      padding:  EdgeInsets.only(top: 20.0),
-                      child:SizedBox(),
-                    ),
-                    const Text(
-                      'Shopify',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Baumans',
-                        fontSize: 26,
+                      height: 60,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(top: 20.0),
+                            child: SizedBox(),
+                          ),
+                          const Text(
+                            'Shopify',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Baumans',
+                              fontSize: 26,
+                            ),
+                          ),
+                          Container(
+                            width: 30,
+                          ),
+                        ],
                       ),
                     ),
                     Container(
-                      width: 30,
-                    ),
-                  ],
-                ),
-              ),
-                    Container(
-                      padding:
-                          EdgeInsets.only(top: 29, left: 16, right: 16, bottom: 14),
+                      padding: EdgeInsets.only(
+                          top: 29, left: 16, right: 16, bottom: 14),
                       child: Column(
                         children: [
                           _searchTextFormField(),
@@ -92,7 +92,7 @@ class HomeView extends StatelessWidget {
                               ),
                             ],
                           ),
-                         const  SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
                           _listViewProducts(),
@@ -113,7 +113,7 @@ class HomeView extends StatelessWidget {
         color: Colors.grey.shade200,
       ),
       child: TextFormField(
-        decoration:const InputDecoration(
+        decoration: const InputDecoration(
           hintText: "What are you looking for?",
           border: InputBorder.none,
           prefixIcon: Icon(
@@ -214,7 +214,7 @@ class HomeView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
                       ),
-                      height: 240,
+                      height: 220,
                       width: 164,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
@@ -225,10 +225,43 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     CustomText(
                       text: controller.products[index].name,
                       fontSize: 16,
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(children: [
+                      RatingBar.readOnly(
+                        filledIcon: Icons.star,
+                        emptyIcon: Icons.star_border,
+                        initialRating: (controller.products[index].rating ==
+                                    null ||
+                                controller.products[index].reviews == null ||
+                                controller.products[index].reviews!.length <
+                                    1 ||
+                                controller.products[index].rating!.length < 1)
+                            ? 0.0
+                            : double.parse(controller.products[index].rating!) /
+                                int.parse(controller.products[index].reviews!),
+
+                        maxRating: 5,
+                        size: 20,
+                        // alignment: Alignment.center,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      CustomText(
+                        color: Colors.black45,
+                        text:controller.products[index].reviews!.length <
+                                    1? '(0)': '(${controller.products[index].reviews})',
+                      )
+                    ]),
                     CustomText(
                       text: controller.products[index].description,
                       fontSize: 12,

@@ -36,14 +36,15 @@ class _SellerInfoState extends State<SellerInfo> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70.0), // here the desired height
+        preferredSize: const Size.fromHeight(60.0), // here the desired height
         child: AppBar(
           leading: Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: IconButton(
               icon: Icon(
-                Icons.arrow_back,
+                Icons.arrow_back_sharp,
                 size: 30,
+                color: Colors.black,
               ),
               onPressed: () {
                 Get.back();
@@ -55,19 +56,19 @@ class _SellerInfoState extends State<SellerInfo> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
-                end: Alignment.topRight,
+                end: Alignment. bottomRight,
                 colors: [
-                  Color.fromRGBO(162, 230, 209, 1),
                   Color.fromRGBO(131, 217, 226, 1),
-                  // Color.fromRGBO(101,214,144, 1),
-                  // Color.fromRGBO(162, 230, 209, 1),
+                   Color.fromRGBO(162, 230, 209, 1),
                 ],
               ),
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  top: 30, left: 50, right: 16, bottom: 10),
-              child: Card(elevation: 4, child: _searchTextFormField()),
+                  top: 26, left: 50, right: 16, bottom: 3),
+              child: Card(shape:  RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(15.0),
+  ),elevation: 4, child: _searchTextFormField()),
             ),
           ),
         ),

@@ -32,11 +32,22 @@ class FirestoreHome {
   Future<List<QueryDocumentSnapshot>> getusersFromFirestore() async {
     var products = await _usersCollection.get();
     return products.docs;
-  }Future<List<QueryDocumentSnapshot>> getCommentsFromFirestore() async {
-    var products = await _commentCollection.orderBy('date', descending: true).get();
+  }
+
+  Future<List<QueryDocumentSnapshot>> getCommentsFromFirestore() async {
+    var products =
+        await _commentCollection.orderBy('date', descending: true).get();
     return products.docs;
   }
+
   addCommentToFirestore(CommentModel commentModel) async {
     await _commentCollection.doc().set(commentModel.toJson());
+  }
+
+  updateReview(String id, String rating, String reviews) async{
+    await FirebaseFirestore.instance.collection("Products").doc(id).update({
+      "reviews": reviews,
+      "rating": rating,
+    });
   }
 }

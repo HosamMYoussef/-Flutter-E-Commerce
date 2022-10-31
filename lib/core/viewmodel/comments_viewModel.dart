@@ -7,12 +7,14 @@ import '../services/home_Services.dart';
 
 class CommentViewModel extends GetxController {
   String? productid, details, name, pic;
+  String? rating;
 
   addCommentsToFireStore() async {
     await FirestoreHome().addCommentToFirestore(CommentModel(
       details: details!,
       name: name!,
       pic: pic!,
+      rating: rating!,
       productId: productid!,
       date: DateFormat.yMMMd().format(DateTime.now()),
     ));

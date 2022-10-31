@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:myshopp/core/viewmodel/auth_view_model.dart';
 import 'package:myshopp/view/control_view.dart';
 import 'package:myshopp/view/product_details_view.dart';
-import 'package:myshopp/view/upload.dart';
+import 'package:myshopp/view/review_view.dart';
 import 'package:myshopp/widgets/Splash_Screen.dart';
 
 import 'core/viewmodel/cart_view_model.dart';
@@ -51,21 +51,23 @@ class MyApp extends StatelessWidget {
 
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
-      home: FutureBuilder(
-        future: Get.find<HomeViewModel>().getProductsFromFireStore(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const SplashScreen();
-          } else if (snapshot.error != null) {
-            // handel errors
-            return const Center(
-              child: Text('An error ocurred '),
-            );
-          } else {
-            return ControlView();
-          }
-        },
-      ),
+
+      home: ControlView(),
+      // home: FutureBuilder(
+      //   future: Get.find<HomeViewModel>().getProductsFromFireStore(),
+      //   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return const SplashScreen();
+      //     } else if (snapshot.error != null) {
+      //       // handel errors
+      //       return const Center(
+      //         child: Text('An error ocurred '),
+      //       );
+      //     } else {
+      //       return ControlView();
+      //     }
+      //   },
+      // ),
       // home: SplashScreen(),
       //  home: AnimatedSplashScreen(
 

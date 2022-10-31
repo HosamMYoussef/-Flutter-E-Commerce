@@ -67,7 +67,7 @@ class HomeViewModel extends GetxController {
   Future getProductsFromFireStore() async {
     _loading.value = true;
     var load = false;
-    _isloading = true;
+    _isloading = false;
     List<QueryDocumentSnapshot> productsSnapshot =
         await FirestoreHome().getProductsFromFirestore();
     productsSnapshot.forEach((product) {
@@ -100,71 +100,70 @@ class HomeViewModel extends GetxController {
     //       sellerId: 'R0eYNlf8UzdyqL9TvuinWaObrin2'));
     // });
 
-    //! api 2 from fake ecommerce  working good with more than 200 products
-    final url = Uri.parse(
-        'https://fake-e-commerce-api.onrender.com/product/limit/1/40');
+    //   //! api 2 from fake ecommerce  working good with more than 200 products
+    //   final url = Uri.parse(
+    //       'https://fake-e-commerce-api.onrender.com/product/limit/1/40');
 
-    final response = await http.get(url);
-    print('extractedData');
-    print(json.decode(response.body));
-    print(json.decode(response.statusCode.toString()));
-    final extractedData = json.decode(response.body);
+    //   final response = await http.get(url);
+    //   print('extractedData');
+    //   print(json.decode(response.body));
+    //   print(json.decode(response.statusCode.toString()));
+    //   final extractedData = json.decode(response.body);
 
-    // print(json.decode(response.body)['name'].toString());
+    //   // print(json.decode(response.body)['name'].toString());
 
-    final List<ProductModel> loadedProducts = [];
-    if (extractedData == null) {
-      return;
-    }
-    // ignore: unused_local_variable
-    for (var item in extractedData) {
-      _products.add(ProductModel(
-          productId: item['_id'].toString(),
-          category: item['category'],
-          description: item['description'],
-          image: item['image'],
-          price: item['price'].toString(),
-          sized: 'L',
-          det: item['description'],
-          color: Colors.lightBlue,
-          name: item['name'],
-          sellerId: 'R0eYNlf8UzdyqL9TvuinWaObrin2'));
+    //   final List<ProductModel> loadedProducts = [];
+    //   if (extractedData == null) {
+    //     return;
+    //   }
+    //   // ignore: unused_local_variable
+    //   for (var item in extractedData) {
+    //     _products.add(ProductModel(
+    //         productId: item['_id'].toString(),
+    //         category: item['category'],
+    //         description: item['description'],
+    //         image: item['image'],
+    //         price: item['price'].toString(),
+    //         sized: 'L',
+    //         det: item['description'],
+    //         color: Colors.lightBlue,
+    //         name: item['name'],
+    //         sellerId: 'R0eYNlf8UzdyqL9TvuinWaObrin2'));
 
-      print(_products.length);
-      _isloading = false;
-      print(_isloading);
+    //     print(_products.length);
+    //     _isloading = false;
+    //     print(_isloading);
+    //  _loading.value = false;
 
-      // TODO api 3 working
-      // final url = Uri.parse('https://fakestoreapi.com/products');
+    //     update();
+    //   }
+    // TODO api 3 working
+    // final url = Uri.parse('https://fakestoreapi.com/products');
 
-      // final response = await http.get(url);
+    // final response = await http.get(url);
 
-      // final extractedData = json.decode(response.body);
-      // print(response.statusCode.toString());
+    // final extractedData = json.decode(response.body);
+    // print(response.statusCode.toString());
 
-      // // print(json.decode(response.body)['name'].toString());
+    // // print(json.decode(response.body)['name'].toString());
 
-      // final List<ProductModel> loadedProducts = [];
-      // if (extractedData == null) {
-      //   return;
-      // }
-      // // ignore: unused_local_variable
-      // for (var item in extractedData) {
-      //   _products.add(ProductModel(
-      //       productId: item['id'].toString(),
-      //       category: item['category'],
-      //       description: item['title'],
-      //       image: item['image'],
-      //       price: item['price'].toString(),
-      //       sized: 'L',
-      //       det: item['description'],
-      //       color: Colors.pinkAccent,
-      //       name: item['title'],
-      //       sellerId: 'R0eYNlf8UzdyqL9TvuinWaObrin2'));
-      _loading.value = false;
-
-      update();
-    }
+    // final List<ProductModel> loadedProducts = [];
+    // if (extractedData == null) {
+    //   return;
+    // }
+    // // ignore: unused_local_variable
+    // for (var item in extractedData) {
+    //   _products.add(ProductModel(
+    //       productId: item['id'].toString(),
+    //       category: item['category'],
+    //       description: item['title'],
+    //       image: item['image'],
+    //       price: item['price'].toString(),
+    //       sized: 'L',
+    //       det: item['description'],
+    //       color: Colors.pinkAccent,
+    //       name: item['title'],
+    //       sellerId: 'R0eYNlf8UzdyqL9TvuinWaObrin2'));
   }
 
   _getusersFromFireStore() async {
@@ -182,6 +181,15 @@ class HomeViewModel extends GetxController {
     FirestoreSell().deleteData(id);
 
     products.removeWhere((prod) => prod.productId == id);
+    update();
+  }
+
+  updateReview(String id, String rating, String reviews) async {
+    await FirebaseFirestore.instance.collection("Products").doc(id).update({
+      "reviews": reviews,
+      "rating": rating,
+    });
+    getProductsFromFireStore();
     update();
   }
 }
