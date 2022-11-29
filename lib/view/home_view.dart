@@ -2,6 +2,7 @@ import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:myshopp/view/review_view.dart';
 import 'package:myshopp/view/search_view.dart';
 
 import '../constants.dart';
@@ -24,14 +25,14 @@ class HomeView extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 60,
+                      height: 70,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           const Padding(
-                            padding: EdgeInsets.only(top: 20.0),
-                            child: SizedBox(),
+                            padding: EdgeInsets.only(top: 30.0),
+                            child: SizedBox( width: 20,),
                           ),
                           const Text(
                             'Shopify',
@@ -54,7 +55,7 @@ class HomeView extends StatelessWidget {
                         children: [
                           _searchTextFormField(),
                           SizedBox(
-                            height: 40,
+                            height: 30,
                           ),
                           CustomText(
                             text: 'Categories',
@@ -212,7 +213,7 @@ class HomeView extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
+                        color: Colors.transparent,
                       ),
                       height: 220,
                       width: 164,
@@ -244,8 +245,10 @@ class HomeView extends StatelessWidget {
                                 controller.products[index].reviews == null ||
                                 controller.products[index].reviews!.length <
                                     1 ||
-                                controller.products[index].rating!.length < 1)
-                            ? 0.0
+                                controller.products[index].rating!.length < 1 ||
+                                controller.products[index].reviews == '0' ||
+                                controller.products[index].rating == '0')
+                            ? 0
                             : double.parse(controller.products[index].rating!) /
                                 int.parse(controller.products[index].reviews!),
 
@@ -258,8 +261,9 @@ class HomeView extends StatelessWidget {
                       ),
                       CustomText(
                         color: Colors.black45,
-                        text:controller.products[index].reviews!.length <
-                                    1? '(0)': '(${controller.products[index].reviews})',
+                        text: controller.products[index].reviews!.isEmpty
+                            ? '(0)'
+                            : '(${controller.products[index].reviews})',
                       )
                     ]),
                     CustomText(

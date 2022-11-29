@@ -1,3 +1,4 @@
+import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myshopp/view/product_details_view.dart';
@@ -62,53 +63,165 @@ class CategoryProductsView extends StatelessWidget {
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Get.to(
-                        ProductDetailView(id: products[index].productId),
-                      );
-                    },
-                    child: Container(
-                      width: 164,
-                      height: 300,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Colors.white,
-                            ),
-                            height: 240,
-                            width: 164,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
-                                products[index].image,
-                                fit: BoxFit.cover,
+                  if (index % 2 == 0) {
+                    return GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          ProductDetailView(id: products[index].productId),
+                        );
+                      },
+                      child: Container(
+                        width: 164,
+                        height: 300,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: Colors.white,
+                              ),
+                              height: 220,
+                              width: 164,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                  products[index].image,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          CustomText(
-                            text: products[index].name,
-                            fontSize: 16,
-                          ),
-                          CustomText(
-                            text: products[index].description,
-                            fontSize: 12,
-                            color: Colors.grey,
-                            maxLines: 1,
-                          ),
-                          CustomText(
-                            text: '\$${products[index].price}',
-                            fontSize: 16,
-                            color: primaryColor,
-                          ),
-                        ],
+                            CustomText(
+                              text: products[index].name,
+                              fontSize: 16,
+                            ),
+                            Row(children: [
+                              RatingBar.readOnly(
+                                filledIcon: Icons.star,
+                                emptyIcon: Icons.star_border,
+                                initialRating: (products[index].rating ==
+                                            null ||
+                                        products[index].reviews == null ||
+                                        products[index].reviews!.length < 1 ||
+                                        products[index].rating!.length < 1 ||
+                                        products[index].reviews == '0' ||
+                                        products[index].rating == '0')
+                                    ? 0
+                                    : double.parse(products[index].rating!) /
+                                        int.parse(products[index].reviews!),
+
+                                maxRating: 5,
+                                size: 20,
+                                // alignment: Alignment.center,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              CustomText(
+                                color: Colors.black45,
+                                text: products[index].reviews!.isEmpty
+                                    ? '(0)'
+                                    : '(${products[index].reviews})',
+                              )
+                            ]),
+                            CustomText(
+                              text: products[index].description,
+                              fontSize: 12,
+                              color: Colors.grey,
+                              maxLines: 1,
+                            ),
+                            CustomText(
+                              text: '\$${products[index].price}',
+                              fontSize: 16,
+                              color: primaryColor,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    return OverflowBox(
+                      maxHeight: 290 + 70,
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            ProductDetailView(id: products[index].productId),
+                          );
+                        },
+                        child: Container(
+                           margin: EdgeInsets.only(top: 67),
+                          width: 164,
+                          height: 330,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: Colors.white,
+                                ),
+                                height: 205,
+                                width: 164,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.network(
+                                    products[index].image,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              CustomText(
+                                text: products[index].name,
+                                fontSize: 16,
+                              ),
+                              Row(children: [
+                                RatingBar.readOnly(
+                                  filledIcon: Icons.star,
+                                  emptyIcon: Icons.star_border,
+                                  initialRating: (products[index].rating ==
+                                              null ||
+                                          products[index].reviews == null ||
+                                          products[index].reviews!.length < 1 ||
+                                          products[index].rating!.length < 1 ||
+                                          products[index].reviews == '0' ||
+                                          products[index].rating == '0')
+                                      ? 0
+                                      : double.parse(products[index].rating!) /
+                                          int.parse(products[index].reviews!),
+
+                                  maxRating: 5,
+                                  size: 20,
+                                  // alignment: Alignment.center,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CustomText(
+                                  color: Colors.black45,
+                                  text: products[index].reviews!.isEmpty
+                                      ? '(0)'
+                                      : '(${products[index].reviews})',
+                                )
+                              ]),
+                              CustomText(
+                                text: products[index].description,
+                                fontSize: 12,
+                                color: Colors.grey,
+                                maxLines: 1,
+                              ),
+                              CustomText(
+                                text: '\$${products[index].price}',
+                                fontSize: 16,
+                                color: primaryColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
                 },
               ),
             ),

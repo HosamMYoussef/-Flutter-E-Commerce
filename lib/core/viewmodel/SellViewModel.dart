@@ -56,6 +56,22 @@ class SellModel extends GetxController {
   }
 
   addProductsToFireStore() async {
+    Get.put(HomeViewModel());
+
+    Get.find<HomeViewModel>().products.add(ProductModel(
+          category: category!,
+          description: description!,
+          det: det!,
+          image: image!,
+          name: name!,
+          price: price!,
+          productId: productId!,
+          sized: sized!,
+          color: Colors.red,
+          sellerId: sellerId!,
+          rating: '0',
+          reviews: '0',
+        ));
     await FirestoreSell().addOrderToFirestore(ProductModel(
       category: category!,
       description: description!,
@@ -65,16 +81,11 @@ class SellModel extends GetxController {
       price: price!,
       productId: productId!,
       sized: sized!,
-      color: Colors.red,
+      color: Colors.black,
       sellerId: sellerId!,
       rating: '0',
       reviews: '0',
     ));
     Get.back();
   }
-
-  
-    
-  }
-  
-
+}

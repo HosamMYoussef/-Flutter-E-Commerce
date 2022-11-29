@@ -8,26 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 class SelectImageViewModel extends GetxController {
   File? imageFile;
   String? picUrl;
-
-  cameraImage() async {
-    final _pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.camera,
-      maxHeight: 400,
-      maxWidth: 400,
-    );
-    imageFile = File(_pickedFile!.path);
-    update();
-  }
-
-  galleryImage() async {
-    final _pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxHeight: 400,
-      maxWidth: 400,
-    );
-    imageFile = File(_pickedFile!.path);
-    update();
-  }
+  bool _isLoading = false;
 
   File? _imageFile;
   late String imageURL;
@@ -47,9 +28,11 @@ class SelectImageViewModel extends GetxController {
     _imageFile = File(image.path);
     imageURL = x;
     update();
-  }Future camera() async {
+  }
+
+  Future camera() async {
     final XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.camera);
 
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref = storage.ref().child("image1" + DateTime.now().toString());

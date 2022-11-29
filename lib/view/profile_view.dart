@@ -51,11 +51,10 @@ class ProfileView extends StatelessWidget {
                                 SizedBox(
                                   width: 30,
                                 ),
-                                
                                 Column(
                                   children: [
                                     FittedBox(
-                                      fit:BoxFit.scaleDown,
+                                      fit: BoxFit.scaleDown,
                                       child: CustomText(
                                         text: controller.currentUser!.name,
                                         fontSize: 24,
@@ -76,17 +75,17 @@ class ProfileView extends StatelessWidget {
                           height: 20,
                         ),
                         CustomListTile(
-
                           iconName: '1',
                           title: 'Edit Profile',
                           onTapFn: () {
-                             Get.to(EditProfileView());
+                            Get.to(EditProfileView());
                           },
-                        ),CustomListTile(
+                        ),
+                        CustomListTile(
                           iconName: 'sell2',
-                          title: 'Want Sell Something ?',
+                          title: 'Want to Sell Something ?',
                           onTapFn: () {
-                             Get.to(SellView());
+                            Get.to(SellView());
                           },
                         ),
                         CustomListTile(
@@ -95,7 +94,8 @@ class ProfileView extends StatelessWidget {
                           onTapFn: () {
                             Get.to(UserProduct());
                           },
-                        ), CustomListTile(
+                        ),
+                        CustomListTile(
                           iconName: '3',
                           title: 'Order History',
                           onTapFn: () {

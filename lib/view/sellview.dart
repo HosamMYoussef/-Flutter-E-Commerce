@@ -28,46 +28,9 @@ class SellView extends StatefulWidget {
 }
 
 class _SellViewState extends State<SellView> {
-  File? _imageFile;
-  late String imageURL;
-  Future gallery() async {
-    final XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("image1" + DateTime.now().toString());
-    UploadTask uploadTask = ref.putFile(File(image!.path));
-    String x = await uploadTask.then((res) async {
-      return res.ref.getDownloadURL();
-    });
-    print(x);
-
-    setState(() {
-      _imageFile = File(image.path);
-      imageURL = x;
-    });
-  }
-
-  Future camera() async {
-    final XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("image1" + DateTime.now().toString());
-    UploadTask uploadTask = ref.putFile(File(image!.path));
-    String x = await uploadTask.then((res) async {
-      return res.ref.getDownloadURL();
-    });
-    // print(x);
-
-    setState(() {
-      _imageFile = File(image.path);
-      imageURL = x;
-    });
-  }
-
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  bool _isLoadingg = false;
 
   @override
   Widget build(BuildContext context) {
@@ -224,83 +187,117 @@ class _SellViewState extends State<SellView> {
                                   Get.find<SellModel>().color = value;
                                 },
                               ),
-
                               const SizedBox(
                                 height: 20,
                               ),
-                              // GetBuilder<SelectImageViewModel>(
-                              //   init: SelectImageViewModel(),
-                              // builder: (controller) =>
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text('Product Image'),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Get.dialog(
-                                        AlertDialog(
-                                          title: CustomText(
-                                            text: 'Choose option',
-                                            fontSize: 20,
-                                            color: Colors.blue,
-                                          ),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              const Divider(
-                                                height: 1,
-                                              ),
-                                              ListTile(
-                                                onTap: () async {
-                                                  try {
-                                                    await controller
-                                                        .cameraImage();
-                                                    Get.back();
-                                                  } catch (error) {
-                                                    Get.back();
-                                                  }
-                                                },
-                                                title: CustomText(
-                                                  text: 'Camera',
-                                                ),
-                                                leading: const Icon(
-                                                  Icons.camera,
-                                                  color: Colors.blue,
-                                                ),
-                                              ),
-                                              const Divider(
-                                                height: 1,
-                                              ),
-                                              ListTile(
-                                                onTap: () async {
-                                                  try {
-                                                    await gallery();
-                                                    Get.find<SellModel>()
-                                                        .image = imageURL;
+                              GetBuilder<SelectImageViewModel>(
+                                  init: SelectImageViewModel(),
+                                  builder: (controller) => Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text('Product Image'),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Get.dialog(
+                                                AlertDialog(
+                                                  title: CustomText(
+                                                    text: 'Choose option',
+                                                    fontSize: 20,
+                                                    color: Colors.blue,
+                                                  ),
+                                                  content: _isLoadingg
+                                                      ? const CircularProgressIndicator()
+                                                      : Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            const Divider(
+                                                              height: 1,
+                                                            ),
+                                                            ListTile(
+                                                              onTap: () async {
+                                                                try {
+                                                                  setState(() {
+                                                                    _isLoadingg =
+                                                                        true;
+                                                                  });
+                                                                  await controller
+                                                                      .camera();
+                                                                  Get.find<SellModel>()
+                                                                          .image =
+                                                                      controller
+                                                                          .imageURL;
+                                                                  setState(() {
+                                                                    _isLoadingg =
+                                                                        false;
+                                                                  });
+                                                                  Get.back();
+                                                                } catch (error) {
+                                                                  Get.back();
+                                                                }
+                                                              },
+                                                              title: CustomText(
+                                                                text: 'Camera',
+                                                              ),
+                                                              leading:
+                                                                  const Icon(
+                                                                Icons.camera,
+                                                                color:
+                                                                    Colors.blue,
+                                                              ),
+                                                            ),
+                                                            const Divider(
+                                                              height: 1,
+                                                            ),
+                                                            ListTile(
+                                                              onTap: () async {
+                                                                try {
+                                                                  setState(() {
+                                                                    _isLoadingg =
+                                                                        true;
+                                                                  });
+                                                                  await controller
+                                                                      .gallery();
+                                                                  Get.find<SellModel>()
+                                                                          .image =
+                                                                      controller
+                                                                          .imageURL;
+                                                                  setState(() {
+                                                                    _isLoadingg =
+                                                                        false;
+                                                                  });
+                                                                  Get.back();
 
-                                                    // Get.back();
-                                                  } catch (error) {
-                                                    Get.back();
-                                                  }
-                                                },
-                                                title: CustomText(
-                                                  text: 'Gallery',
+                                                                  // Get.back();
+                                                                } catch (error) {
+                                                                  Get.back();
+                                                                }
+                                                              },
+                                                              title: CustomText(
+                                                                text: 'Gallery',
+                                                              ),
+                                                              leading:
+                                                                  const Icon(
+                                                                Icons
+                                                                    .photo_library,
+                                                                color:
+                                                                    Colors.blue,
+                                                              ),
+                                                            ),
+                                                            _isLoadingg
+                                                                ? const CircularProgressIndicator()
+                                                                : SizedBox(
+                                                                    height: 20),
+                                                          ],
+                                                        ),
                                                 ),
-                                                leading: const Icon(
-                                                  Icons.photo_library,
-                                                  color: Colors.blue,
-                                                ),
-                                              ),
-                                            ],
+                                              );
+                                            },
+                                            child: const Text('Select Image'),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                    child: const Text('Select Image'),
-                                  ),
-                                ],
-                              ),
+                                        ],
+                                      )),
                             ],
                           ),
                           const SizedBox(
@@ -327,6 +324,7 @@ class _SellViewState extends State<SellView> {
                                       //           .currentUser!
                                       //           .pic;
                                       // }
+                                      
                                       _formKey.currentState!.save();
                                       await Get.find<SellModel>()
                                           .addProductsToFireStore();

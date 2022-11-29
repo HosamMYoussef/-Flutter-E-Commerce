@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:myshopp/view/product_details_view.dart';
 import 'package:myshopp/view/search_view.dart';
+import 'package:myshopp/widgets/appbar.dart';
 import '../constants.dart';
 import '../core/viewmodel/comments_viewModel.dart';
 import '../core/viewmodel/home_view_model.dart';
@@ -35,44 +36,7 @@ class _SellerInfoState extends State<SellerInfo> {
     UserModel sellerInfo = y.firstWhere((meal) => meal.userId == widget.id);
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60.0), // here the desired height
-        child: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back_sharp,
-                size: 30,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ),
-          flexibleSpace: Container(
-            height: 400,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment. bottomRight,
-                colors: [
-                  Color.fromRGBO(131, 217, 226, 1),
-                   Color.fromRGBO(162, 230, 209, 1),
-                ],
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 26, left: 50, right: 16, bottom: 3),
-              child: Card(shape:  RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(15.0),
-  ),elevation: 4, child: _searchTextFormField()),
-            ),
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Container(
         child: SingleChildScrollView(
           child: Padding(
@@ -162,8 +126,12 @@ class _SellerInfoState extends State<SellerInfo> {
                         _listViewProducts(),
                       ],
                     )),
-                    SizedBox(height: 5,),
-                    Divider(thickness: 4,),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  thickness: 4,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 20),
@@ -330,27 +298,27 @@ class _SellerInfoState extends State<SellerInfo> {
     );
   }
 
-  Widget _searchTextFormField() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      child: TextFormField(
-        decoration: const InputDecoration(
-          hintText: "Search Shopify",
-          border: InputBorder.none,
-          prefixIcon: Icon(
-            Icons.search,
-            color: Colors.black54,
-          ),
-        ),
-        onFieldSubmitted: (value) {
-          Get.to(SearchView(value));
-        },
-      ),
-    );
-  }
+  // Widget _searchTextFormField() {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(10),
+  //       color: Colors.white,
+  //     ),
+  //     child: TextFormField(
+  //       decoration: const InputDecoration(
+  //         hintText: "Search Shopify",
+  //         border: InputBorder.none,
+  //         prefixIcon: Icon(
+  //           Icons.search,
+  //           color: Colors.black54,
+  //         ),
+  //       ),
+  //       onFieldSubmitted: (value) {
+  //         Get.to(SearchView(value));
+  //       },
+  //     ),
+  //   );
+  // }
 
   _listViewProducts() {
     List<ProductModel> products = Get.find<HomeViewModel>()

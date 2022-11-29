@@ -32,13 +32,13 @@ class FirestoreSell {
 
   deleteData(String iD) async {
     await FirebaseFirestore.instance
-        .collection("products")
+        .collection("Products")
         .where("productId", isEqualTo: iD)
         .get()
         .then((value) {
       value.docs.forEach((element) {
         FirebaseFirestore.instance
-            .collection("products")
+            .collection("Products")
             .doc(element.id)
             .delete()
             .then((value) {

@@ -19,6 +19,7 @@ import 'package:myshopp/view/Favorites_view.dart';
 import 'package:myshopp/view/checkout_view.dart';
 import 'package:myshopp/view/profile_view.dart';
 import 'package:myshopp/view/seller_info.dart';
+import 'package:myshopp/widgets/appbar.dart';
 import 'package:myshopp/widgets/custom_button.dart';
 import 'package:myshopp/widgets/custom_text.dart';
 
@@ -48,10 +49,10 @@ class _ProductDetailViewState extends State<ProductDetailView> {
     var x = Get.find<HomeViewModel>().products;
     // print(comments.length);
     var y = Get.find<HomeViewModel>().users;
-    final productModel = x.firstWhere((meal) => meal.productId == widget.id);
+    final productModel = x.firstWhere((prod) => prod.productId == widget.id);
     var comment = Get.find<HomeViewModel>().comments;
     List<CommentModel> comments =
-        comment.where((meal) => meal.productId == widget.id).toList();
+        comment.where((prod) => prod.productId == widget.id).toList();
     cat = productModel.category;
     var username;
     var values;
@@ -60,7 +61,9 @@ class _ProductDetailViewState extends State<ProductDetailView> {
     if (productModel.rating == null ||
         productModel.reviews == null ||
         productModel.reviews!.length < 1 ||
-        productModel.rating!.length < 1) {
+        productModel.rating!.length < 1 ||
+        productModel.reviews == '0' ||
+        productModel.rating == '0') {
       intialRating = 0.0;
     } else {
       intialRating = double.parse(productModel.rating!) /
@@ -81,8 +84,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
     Get.put(ProfileViewModel());
     return Scaffold(
       // extendBodyBehindAppBar: true,
-
-      // backgroundColor: Color.fromRGBO(246, 246, 246, 1),
+      appBar: CustomAppBar(),
       body: Column(
         children: [
           Expanded(
@@ -90,26 +92,46 @@ class _ProductDetailViewState extends State<ProductDetailView> {
               child: Column(
                 children: [
                   Stack(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.topCenter,
                     children: [
                       Container(
-                        height: 196,
+                        height: 30,
                         width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.network(
-                            productModel.image,
-                            fit: BoxFit.cover,
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromRGBO(131, 217, 226, 1),
+                              Color.fromRGBO(162, 230, 209, 1),
+                            ],
                           ),
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.black,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
+                          ),
+                          height: 196,
+                          width: double.infinity,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                              topRight: Radius.circular(30),
+                            ),
+                            child: Image.network(
+                              productModel.image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -186,60 +208,28 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                           ],
                         ),
                         const SizedBox(
-                          height: 15,
-                        ),
-                        Row(children: [
-                          RatingBar.readOnly(
-                            filledIcon: Icons.star,
-                            emptyIcon: Icons.star_border,
-                            initialRating: intialRating,
-                            maxRating: 5,
-                            size: 30,
-                            alignment: Alignment.center,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          CustomText(
-                            color: Colors.black45,
-                            text: '(${productModel.reviews})',
-                          )
-                        ]),
-                        const SizedBox(
-                          height: 15,
+                          height: 5,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                CustomText(
-                                  text: 'Sold by :',
-                                  fontSize: 18,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    if (userId.length > 5) {
-                                      Get.to(SellerInfo(id: userId));
-                                    }
-                                  },
-                                  child: Text(username,
-                                      style: username == 'Shopify'
-                                          ? const TextStyle(
-                                              color: Colors.black,
-                                              // decoration: TextDecoration.underline,
-                                              fontSize: 18,
-                                              fontFamily: 'Amazon',
-                                            )
-                                          : const TextStyle(
-                                              fontFamily: 'Amazon',
-                                              color: Colors.blue,
-                                              // decoration: TextDecoration.underline,
-                                              fontSize: 18,
-                                            )),
-                                )
-                              ],
-                            ),
+                            Row(children: [
+                              RatingBar.readOnly(
+                                filledIcon: Icons.star,
+                                emptyIcon: Icons.star_border,
+                                initialRating: intialRating,
+                                maxRating: 5,
+                                size: 30,
+                                alignment: Alignment.center,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              CustomText(
+                                color: Colors.black45,
+                                text: '(${productModel.reviews})',
+                              )
+                            ]),
                             GetBuilder<FavoritesviewModel>(
                                 init: FavoritesviewModel(),
                                 builder: ((controller) => Padding(
@@ -262,8 +252,37 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                     ))),
                           ],
                         ),
+                        Row(
+                          children: [
+                            CustomText(
+                              text: 'Sold by :',
+                              fontSize: 18,
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                if (userId.length > 5) {
+                                  Get.to(SellerInfo(id: userId));
+                                }
+                              },
+                              child: Text(username,
+                                  style: username == 'Shopify'
+                                      ? const TextStyle(
+                                          color: Colors.black,
+                                          // decoration: TextDecoration.underline,
+                                          fontSize: 18,
+                                          fontFamily: 'Amazon',
+                                        )
+                                      : const TextStyle(
+                                          fontFamily: 'Amazon',
+                                          color: Colors.blue,
+                                          // decoration: TextDecoration.underline,
+                                          fontSize: 18,
+                                        )),
+                            )
+                          ],
+                        ),
                         const SizedBox(
-                          height: 15,
+                          height: 5,
                         ),
                         CustomText(
                           text: 'Details',
@@ -301,223 +320,228 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                    title: Text(
-                                      'Rate this Product',
-                                      style: TextStyle(
-                                          fontFamily: 'Amazon', fontSize: 20),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    content: Container(
-                                      height: 250,
-                                      width: 400,
-                                      child: Column(
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 8.0),
-                                                child: Row(
-                                                  children: [
-                                                    CircleAvatar(
-                                                      radius: 16,
-                                                      child: Get.find<ProfileViewModel>()
-                                                                  .currentUser!
-                                                                  .pic
-                                                                  .length <=
-                                                              20
-                                                          ? Image.asset(
-                                                              'assets/images/prof.png')
-                                                          : ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20),
-                                                              child: Image.network(
-                                                                  Get.find<
-                                                                          ProfileViewModel>()
-                                                                      .currentUser!
-                                                                      .pic),
-                                                            ),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 14,
-                                                    ),
-                                                    Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        CustomText(
-                                                          text: (Get.find<
-                                                                  ProfileViewModel>()
-                                                              .currentUser!
-                                                              .name),
-                                                          fontSize: 16,
-                                                        ),
-                                                        SizedBox(
-                                                          height: 5,
-                                                        ),
-                                                        Container(
-                                                          width: 200,
-                                                          child: CustomText(
-                                                            text:
-                                                                'Reviews are public and include your account name and picture ',
-                                                            fontSize: 14,
-                                                            maxLines: 2,
+                                  title: Text(
+                                    'Rate this Product',
+                                    style: TextStyle(
+                                        fontFamily: 'Amazon', fontSize: 20),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  content: Container(
+                                    height: 250,
+                                    width: 400,
+                                    child: Column(
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
+                                              child: Row(
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 16,
+                                                    child: Get.find<ProfileViewModel>()
+                                                                .currentUser!
+                                                                .pic
+                                                                .length <=
+                                                            20
+                                                        ? Image.asset(
+                                                            'assets/images/prof.png')
+                                                        : ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                            child: Image.network(
+                                                                Get.find<
+                                                                        ProfileViewModel>()
+                                                                    .currentUser!
+                                                                    .pic),
                                                           ),
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 30,
-                                              ),
-                                            ],
-                                          ),
-                                          RatingBar(
-                                            filledIcon: Icons.star,
-                                            emptyIcon: Icons.star_border,
-                                            onRatingChanged: (value) {
-                                              setState(() {
-                                                // Get.find<CommentViewModel>()
-                                                //         .rating !=
-                                                //     value.toString();
-                                                print(value);
-                                                values = value;
-                                                print(values);
-                                              });
-                                            },
-                                            initialRating: 0,
-                                            maxRating: 5,
-                                            size: 35,
-                                            alignment: Alignment.center,
-                                          ),
-                                          const SizedBox(
-                                            height: 30,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0, right: 20, top: 9),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black12,
-                                                      width: 2),
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              // height: 60,
-                                              // width: 400,
-                                              // color: Colors.white,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 40.0),
-                                                child: TextFormField(
-                                                  controller: fieldText,
-                                                  validator: (value) {
-                                                    if (value == null) {
-                                                      print('ERROR');
-                                                    }
-                                                  },
-                                                  onChanged: (value) {
-                                                    Get.find<CommentViewModel>()
-                                                        .details = value;
-                                                    Get.find<CommentViewModel>()
-                                                        .pic = Get.find<
-                                                            ProfileViewModel>()
-                                                        .currentUser!
-                                                        .pic;
-                                                    Get.find<CommentViewModel>()
-                                                        .name = Get.find<
-                                                            ProfileViewModel>()
-                                                        .currentUser!
-                                                        .name;
-                                                    Get.find<CommentViewModel>()
-                                                        .productid = widget.id;
-                                                  },
-                                                  decoration: InputDecoration(
-                                                      hintText:
-                                                          'Write a review',
-                                                      hintStyle:
-                                                          const TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 151, 150, 150),
-                                                        fontFamily: "Cairo",
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 14,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      CustomText(
+                                                        text: (Get.find<
+                                                                ProfileViewModel>()
+                                                            .currentUser!
+                                                            .name),
                                                         fontSize: 16,
                                                       ),
-                                                      border: InputBorder.none,
-                                                      suffixIcon: IconButton(
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              Get.find<CommentViewModel>()
-                                                                      .rating =
-                                                                  values
-                                                                      .toString();
-                                                              comment.add(CommentModel(
-                                                                  rating: values
-                                                                      .toString(),
-                                                                  productId:
-                                                                      widget.id,
-                                                                  details:
-                                                                      Get.find<CommentViewModel>()
-                                                                          .details!,
-                                                                  name: Get.find<
-                                                                          ProfileViewModel>()
-                                                                      .currentUser!
-                                                                      .name,
-                                                                  pic: Get.find<
-                                                                          ProfileViewModel>()
-                                                                      .currentUser!
-                                                                      .pic,
-                                                                  date: DateFormat
-                                                                          .yMMMd()
-                                                                      .format(
-                                                                          DateTime.now())));
-                                                            });
-                                                            Get.find<
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Container(
+                                                        width: 186,
+                                                        child: CustomText(
+                                                          text:
+                                                              'Reviews are public and include your account name and picture ',
+                                                          fontSize: 13,
+                                                          maxLines: 3,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 30,
+                                            ),
+                                          ],
+                                        ),
+                                        RatingBar(
+                                          filledIcon: Icons.star,
+                                          emptyIcon: Icons.star_border,
+                                          onRatingChanged: (value) {
+                                            setState(() {
+                                              // Get.find<CommentViewModel>()
+                                              //         .rating !=
+                                              //     value.toString();
+                                              print(value);
+                                              values = value;
+                                              print(values);
+                                            });
+                                          },
+                                          initialRating: 0,
+                                          maxRating: 5,
+                                          size: 35,
+                                          alignment: Alignment.center,
+                                        ),
+                                        const SizedBox(
+                                          height: 30,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5.0, right: 20, top: 9),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.black12,
+                                                    width: 2),
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            // height: 60,
+                                            // width: 400,
+                                            // color: Colors.white,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 40.0),
+                                              child: TextFormField(
+                                                controller: fieldText,
+                                                validator: (value) {
+                                                  if (value == null) {
+                                                    print('ERROR');
+                                                  }
+                                                },
+                                                onChanged: (value) {
+                                                  Get.find<CommentViewModel>()
+                                                      .details = value;
+                                                  Get.find<CommentViewModel>()
+                                                      .pic = Get.find<
+                                                          ProfileViewModel>()
+                                                      .currentUser!
+                                                      .pic;
+                                                  Get.find<CommentViewModel>()
+                                                      .name = Get.find<
+                                                          ProfileViewModel>()
+                                                      .currentUser!
+                                                      .name;
+                                                  Get.find<CommentViewModel>()
+                                                      .productid = widget.id;
+                                                },
+                                                decoration: InputDecoration(
+                                                  hintText: 'Write a review',
+                                                  hintStyle: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 151, 150, 150),
+                                                    fontFamily: "Cairo",
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16,
+                                                  ),
+                                                  border: InputBorder.none,
+                                                  suffixIcon: IconButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        Get.find<CommentViewModel>()
+                                                                .rating =
+                                                            values.toString();
+
+                                                        //? adding comment to memory
+                                                        comment.add(
+                                                          CommentModel(
+                                                            rating: values
+                                                                .toString(),
+                                                            productId:
+                                                                widget.id,
+                                                            details: Get.find<
                                                                     CommentViewModel>()
-                                                                .addCommentsToFireStore();
-                                                            fieldText.clear();
-                                                            Get.back();
-                                                            Get.find<HomeViewModel>().updateReview(
-                                                                productModel
-                                                                    .productId,
-                                                                (values +
-                                                                        (double.parse(productModel
-                                                                            .rating!)))
-                                                                    .toString(),
-                                                                (int.parse(productModel
-                                                                            .reviews!) +
-                                                                        1)
-                                                                    .toString());
-                                                          },
-                                                          icon: const Icon(
-                                                            Icons.send_outlined,
-                                                            color: primaryColor,
-                                                          ))),
+                                                                .details!,
+                                                            name: Get.find<
+                                                                    ProfileViewModel>()
+                                                                .currentUser!
+                                                                .name,
+                                                            pic: Get.find<
+                                                                    ProfileViewModel>()
+                                                                .currentUser!
+                                                                .pic,
+                                                            date: DateFormat
+                                                                    .yMMMd()
+                                                                .format(
+                                                              DateTime.now(),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      });
+                                                      //? adding comment to fireStore
+                                                      Get.find<
+                                                              CommentViewModel>()
+                                                          .addCommentsToFireStore();
+                                                      fieldText.clear();
+                                                      Get.back();
+                                                      Get.find<HomeViewModel>().updateReview(
+                                                          productModel
+                                                              .productId,
+                                                          (values +
+                                                                  (double.parse(
+                                                                      productModel
+                                                                          .rating!)))
+                                                              .toString(),
+                                                          (int.parse(productModel
+                                                                      .reviews!) +
+                                                                  1)
+                                                              .toString());
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons.send_outlined,
+                                                      color: primaryColor,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                          // const SizedBox(
-                                          //   height: 30,
-                                          // ),
-                                        ],
-                                      ),
-                                    ));
+                                        ),
+                                        // const SizedBox(
+                                        //   height: 30,
+                                        // ),
+                                      ],
+                                    ),
+                                  ),
+                                );
                               },
                             );
                           },

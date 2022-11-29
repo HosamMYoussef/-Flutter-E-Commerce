@@ -36,9 +36,20 @@ class CartView extends StatelessWidget {
                     height: 30,
                   ),
                   CustomText(
-                    text: "Your  Cart is empty... ",
-                    fontFamily: 'Baumans',
+                    text: "Your Cart is empty ",
+                    fontFamily: 'Amazon',
                     fontSize: 26,
+                    alignment: Alignment.topCenter,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  CustomText(
+
+                  color: Colors.black54,
+                    text: "Be sure to fill your cart with something you like  ",
+                    fontFamily: 'Amazon',
+                    fontSize: 15,
                     alignment: Alignment.topCenter,
                   )
                 ],
@@ -121,7 +132,7 @@ class CartView extends StatelessWidget {
                                             child: CustomText(
                                               text: controller
                                                   .cartProductModel[index].name,
-                                                  maxLines: 3,
+                                              maxLines: 3,
                                               fontSize: 16,
                                             ),
                                           ),

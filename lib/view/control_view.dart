@@ -67,6 +67,17 @@ Widget bottomNavigationBar() {
               height: 25,
               child: Image.asset('assets/images/cart1.png')),
         ),
+         BottomNavigationBarItem(
+          label: "Auction",
+          icon: Container(
+              width: 25,
+              height: 25,
+              child: Image.asset('assets/images/auc1.png')),
+          activeIcon: Container(
+              width: 25,
+              height: 25,
+              child: Image.asset('assets/images/auc2.png')),
+        ),
         BottomNavigationBarItem(
           label: "Favorites",
           icon: Container(
