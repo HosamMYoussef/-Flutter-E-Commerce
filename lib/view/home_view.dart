@@ -35,118 +35,159 @@ class _HomeViewState extends State<HomeView> {
       builder: (controller) => controller.isloading
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(60.0),
+                child: AppBar(
+                  elevation: 0,
+                  flexibleSpace: Container(
+                    height: 400,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          // Color.fromRGBO(131, 217, 226, 1),
+                          // Color.fromRGBO(162, 230, 209, 1),
+                          Color.fromRGBO(12, 116, 117, 1),
+                          Color.fromRGBO(14, 174, 87, 1),
+                        ],
+                      ),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: Center(
+                          child: Text(
+                        'Shopify',
+                        style: TextStyle(
+                            fontSize: 26,
+                            color: Colors.white,
+                            fontFamily: 'Baumans'),
+                      )),
+                    ),
+                  ),
+                ),
+              ),
               backgroundColor: const Color.fromRGBO(246, 246, 246, 1),
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 70,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(top: 30.0),
-                            child: SizedBox(
-                              width: 20,
+                    Stack(
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * .06,
+                          // one dev to role the all
+
+                          width: MediaQuery.of(context).size.width,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                // Color.fromRGBO(131, 217, 226, 1),
+                                // Color.fromRGBO(162, 230, 209, 1),
+                                Color.fromRGBO(12, 116, 117, 1),
+                                Color.fromRGBO(14, 174, 87, 1),
+                              ],
                             ),
                           ),
-                          const Text(
-                            'Shopify',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Baumans',
-                              fontSize: 26,
-                            ),
-                          ),
-                          Container(
-                            width: 30,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                          top: 29, left: 16, right: 16, bottom: 14),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(45),
-                              color: Colors.grey.shade200,
-                            ),
-                            child: Row(children: [
-                              _searchTextFormField(),
-                              AvatarGlow(
-                                animate: isListening,
-                                endRadius: 25,
-                                glowColor: primaryColor,
-                                child: IconButton(
-                                  icon: Icon(
-                                      isListening ? Icons.mic : Icons.mic_none,
-                                      size: 30),
-                                  onPressed: toggleRecording,
-                                ),
+                        ),
+                        Container(
+                            decoration: const BoxDecoration(
+                              color: const Color.fromRGBO(246, 246, 246, 1),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(35),
+                                topRight: Radius.circular(35),
                               ),
-                            ]),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          GestureDetector(
-                            onTap: (() {
-                              Get.to(Test());
-                            }),
-                            child: CustomText(
-                              text: 'Categories',
-                              fontFamily: 'Baumans',
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          _listViewCategory(),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  print(Get.find<CartViewModel>()
-                                      .cartProductModel
-                                      .length);
-                                },
-                                child: CustomText(
-                                  text: "Best Selling ",
-                                  fontFamily: 'Baumans',
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  top: 10, left: 16, right: 16, bottom: 14),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(45),
+                                      color: Colors.grey.shade200,
+                                    ),
+                                    child: Row(children: [
+                                      _searchTextFormField(),
+                                      AvatarGlow(
+                                        animate: isListening,
+                                        endRadius: 25,
+                                        glowColor: primaryColor,
+                                        child: IconButton(
+                                          icon: Icon(
+                                              isListening
+                                                  ? Icons.mic
+                                                  : Icons.mic_none,
+                                              size: 30),
+                                          onPressed: toggleRecording,
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  GestureDetector(
+                                    onTap: (() {
+                                      Get.to(Test());
+                                    }),
+                                    child: CustomText(
+                                      text: 'Categories',
+                                      fontFamily: 'Baumans',
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  _listViewCategory(),
+                                  SizedBox(
+                                    height: 25,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          print(Get.find<CartViewModel>()
+                                              .cartProductModel
+                                              .length);
+                                        },
+                                        child: CustomText(
+                                          text: "Best Selling ",
+                                          fontFamily: 'Baumans',
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.to(CategoryProductsView(
+                                              categoryName: 'Best Selling',
+                                              products: controller.products));
+                                        },
+                                        child: CustomText(
+                                          text: "See all ",
+                                          fontSize: 16,
+                                          color: primaryColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  _listViewProducts(),
+                                ],
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.to(CategoryProductsView(
-                                      categoryName: 'Best Selling',
-                                      products: controller.products));
-                                },
-                                child: CustomText(
-                                  text: "See all ",
-                                  fontSize: 16,
-                                  color: primaryColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          _listViewProducts(),
-                        ],
-                      ),
+                            )),
+                      ],
                     ),
                   ],
                 ),

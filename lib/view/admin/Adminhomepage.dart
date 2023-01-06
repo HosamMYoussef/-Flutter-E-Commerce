@@ -47,7 +47,7 @@ class Adminhome extends StatelessWidget {
                   'Admin Panel',
                   style: TextStyle(
                       fontSize: 26,
-                      color: Colors.black,
+                      color: Colors.white,
                       fontFamily: 'openSans'),
                 )),
               ),

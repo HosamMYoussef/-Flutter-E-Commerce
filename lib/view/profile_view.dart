@@ -31,11 +31,72 @@ class ProfileView extends StatelessWidget {
               child: CircularProgressIndicator(),
             )
           : Scaffold(
-              body: Container(
+            appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60.0),
+        child: AppBar(
+          elevation: 0,
+          flexibleSpace: Container(
+            height: 400,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  // Color.fromRGBO(131, 217, 226, 1),
+                  // Color.fromRGBO(162, 230, 209, 1),
+                  Color.fromRGBO(12, 116, 117, 1),
+                  Color.fromRGBO(14, 174, 87, 1),
+                ],
+              ),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.only(top: 20.0),
+              child: Center(
+                  child: Text(
+                'Profile',
+                style: TextStyle(
+                    fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
+              )),
+            ),
+          ),
+        ),
+      ),
+              body:Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * .06,
+                    // one dev to role the all
+
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          // Color.fromRGBO(131, 217, 226, 1),
+                          // Color.fromRGBO(162, 230, 209, 1),
+                          Color.fromRGBO(12, 116, 117, 1),
+                          Color.fromRGBO(14, 174, 87, 1),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(35),
+                        topRight: Radius.circular(35),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    child:Container(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 50, right: 16, left: 20),
-                    child: Column(
+                    padding: EdgeInsets.only(top: 10, right: 16, left: 20),
+                    child: 
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
@@ -105,13 +166,13 @@ class ProfileView extends StatelessWidget {
                             Get.to(OrderHistoryView());
                           },
                         ),
-                        CustomListTile(
-                          iconName: '4',
-                          title: 'Cards',
-                          onTapFn: () {
-                            Get.to(CardsView());
-                          },
-                        ),
+                        // CustomListTile(
+                        //   iconName: '4',
+                        //   title: 'Cards',
+                        //   onTapFn: () {
+                        //     Get.to(CardsView());
+                        //   },
+                        // ),
                         CustomListTile(
                           iconName: '5',
                           title: 'Notifications',
@@ -132,6 +193,9 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
               ),
+                  ),
+                ],
+              )  
             ),
     );
   }

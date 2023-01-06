@@ -23,43 +23,138 @@ class CartView extends StatelessWidget {
     return GetBuilder<CartViewModel>(
       init: Get.put(CartViewModel()),
       builder: (controller) => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60.0),
+          child: AppBar(
+            elevation: 0,
+            flexibleSpace: Container(
+              height: 400,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    // Color.fromRGBO(131, 217, 226, 1),
+                    // Color.fromRGBO(162, 230, 209, 1),
+                    Color.fromRGBO(12, 116, 117, 1),
+                    Color.fromRGBO(14, 174, 87, 1),
+                  ],
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Center(
+                    child: Text(
+                  'Cart',
+                  style: TextStyle(
+                      fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
+                )),
+              ),
+            ),
+          ),
+        ),
         body: controller.cartProductModel.length == 0
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+            ? Stack(
                 children: [
-                  Image.asset(
-                    'assets/images/empty.gif',
-                    width: 350,
-                    height: 350,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  CustomText(
-                    text: "Your Cart is empty ",
-                    fontFamily: 'Amazon',
-                    fontSize: 26,
-                    alignment: Alignment.topCenter,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  CustomText(
+                  Container(
+                    height: MediaQuery.of(context).size.height * .06,
+                    // one dev to role the all
 
-                  color: Colors.black54,
-                    text: "Be sure to fill your cart with something you like  ",
-                    fontFamily: 'Amazon',
-                    fontSize: 15,
-                    alignment: Alignment.topCenter,
-                  )
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          // Color.fromRGBO(131, 217, 226, 1),
+                          // Color.fromRGBO(162, 230, 209, 1),
+                          Color.fromRGBO(12, 116, 117, 1),
+                          Color.fromRGBO(14, 174, 87, 1),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(35),
+                        topRight: Radius.circular(35),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/empty.gif',
+                              width: 350,
+                              height: 350,
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            CustomText(
+                              text: "Your Cart is empty ",
+                              fontFamily: 'Amazon',
+                              fontSize: 26,
+                              alignment: Alignment.topCenter,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            CustomText(
+                              color: Colors.black54,
+                              text:
+                                  "Be sure to fill your cart with something you like  ",
+                              fontFamily: 'Amazon',
+                              fontSize: 15,
+                              alignment: Alignment.topCenter,
+                            )
+                          ],
+                        )),
+                  ),
                 ],
               )
-            : Column(
+            : Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * .06,
+                    // one dev to role the all
+
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          // Color.fromRGBO(131, 217, 226, 1),
+                          // Color.fromRGBO(162, 230, 209, 1),
+                          Color.fromRGBO(12, 116, 117, 1),
+                          Color.fromRGBO(14, 174, 87, 1),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(35),
+                        topRight: Radius.circular(35),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
                 children: [
                   Expanded(
                     child: Container(
                       padding:
-                          const EdgeInsets.only(top: 50, right: 16, left: 16),
+                          const EdgeInsets.only(top: 10, right: 16, left: 16),
                       child: ListView.separated(
                         separatorBuilder: (context, index) {
                           return const SizedBox(
@@ -314,6 +409,9 @@ class CartView extends StatelessWidget {
                         ],
                       ),
                     ),
+                  ),
+                ],
+              ),
                   ),
                 ],
               ),

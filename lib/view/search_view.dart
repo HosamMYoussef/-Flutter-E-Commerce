@@ -39,8 +39,9 @@ class _SearchViewState extends State<SearchView> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(55.0), // here the desired height
+        preferredSize: const Size.fromHeight(60.0), // here the desired height
         child: AppBar(
+          elevation: 0,
           leading: Padding(
             padding: const EdgeInsets.only(top: 0.0),
             child: IconButton(
@@ -82,7 +83,37 @@ class _SearchViewState extends State<SearchView> {
         ),
       ),
       body: _searchProducts.length < 1
-          ? Column(
+          ? Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * .06,
+                    // one dev to role the all
+
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          // Color.fromRGBO(131, 217, 226, 1),
+                          // Color.fromRGBO(162, 230, 209, 1),
+                          Color.fromRGBO(12, 116, 117, 1),
+                          Color.fromRGBO(14, 174, 87, 1),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    child:Column(
               children: [
                 const SizedBox(
                   height: 60,
@@ -113,10 +144,43 @@ class _SearchViewState extends State<SearchView> {
                 )
               ],
             )
-          : Column(
+                  ),
+                ],
+              ) 
+          : Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * .06,
+                    // one dev to role the all
+
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          // Color.fromRGBO(131, 217, 226, 1),
+                          // Color.fromRGBO(162, 230, 209, 1),
+                          Color.fromRGBO(12, 116, 117, 1),
+                          Color.fromRGBO(14, 174, 87, 1),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    child:Column(
               children: [
                 SizedBox(
-                  height: 24,
+                  height: 10,
                 ),
                 Expanded(
                   child: Padding(
@@ -231,7 +295,10 @@ class _SearchViewState extends State<SearchView> {
                   ),
                 ),
               ],
-            ),
+            )
+                  ),
+                ],
+              ) ,
     );
   }
 

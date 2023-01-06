@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:myshopp/model/auction_model.dart';
 import 'package:myshopp/view/auction_details_view.dart';
 import 'package:myshopp/view/product_details_view.dart';
+import 'package:myshopp/widgets/appbar.dart';
 
 import '../constants.dart';
 import '../core/viewmodel/home_view_model.dart';
@@ -59,35 +61,93 @@ class _AuctionViewState extends State<AuctionView> {
     DateTime time1 = DateTime.parse(auctions[0].end);
     DateTime time2 = DateTime.parse(auctions[0].start);
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            color: Colors.white,
-            height: 90,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 0, left: 16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  CustomText(
-                    text: 'E auctions',
-                    fontFamily: 'Baumans',
-                    fontSize: 24,
-                    alignment: Alignment.bottomCenter,
-                  ),
-                  const SizedBox(
-                    width: 24,
-                  ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60.0),
+        child: AppBar(
+          elevation: 0,
+          flexibleSpace: Container(
+            height: 400,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  // Color.fromRGBO(131, 217, 226, 1),
+                  // Color.fromRGBO(162, 230, 209, 1),
+                  Color.fromRGBO(12, 116, 117, 1),
+                  Color.fromRGBO(14, 174, 87, 1),
                 ],
               ),
             ),
+            child: const Padding(
+              padding: EdgeInsets.only(top: 20.0),
+              child: Center(
+                  child: Text(
+                'E auctions',
+                style: TextStyle(
+                    fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
+              )),
+            ),
           ),
-          SizedBox(
-            height: 29,
+        ),
+      ),
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * .06,
+                // one dev to role the all
+
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      // Color.fromRGBO(131, 217, 226, 1),
+                      // Color.fromRGBO(162, 230, 209, 1),
+                      Color.fromRGBO(12, 116, 117, 1),
+                      Color.fromRGBO(14, 174, 87, 1),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  color: const Color.fromRGBO(246, 246, 246, 1),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(35),
+                    topRight: Radius.circular(35),
+                  ),
+                ),
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: ListTile(
+                          onTap: () {},
+                          leading: Image.asset(
+                            'assets/images/sell2.png',
+                            height: 40,
+                            width: 40,
+                          ),
+                          title: CustomText(
+                            text: 'Want to auction Something ?',
+                            fontSize: 18,
+                            fontFamily: 'Amazon',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           Expanded(
             child: GridView.builder(
@@ -103,7 +163,8 @@ class _AuctionViewState extends State<AuctionView> {
                   if (index % 2 == 0) {
                     return GestureDetector(
                       onTap: () {
-                        Get.to(AuctionProductDetails(id: auctions[index].auctionId));
+                        Get.to(AuctionProductDetails(
+                            id: auctions[index].auctionId));
                       },
                       // one dev to role the all
 
@@ -159,7 +220,8 @@ class _AuctionViewState extends State<AuctionView> {
                                         // print(timeee);
                                       }),
                                       child: CustomText(
-                                        text: 'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
+                                        text:
+                                            'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
                                         fontSize: 12,
                                         color: Colors.black,
                                       ),
@@ -178,7 +240,8 @@ class _AuctionViewState extends State<AuctionView> {
                       child: GestureDetector(
                         onTap: () {
                           Get.to(
-                            AuctionProductDetails(id: auctions[index].auctionId),
+                            AuctionProductDetails(
+                                id: auctions[index].auctionId),
                           );
                         },
                         child: Container(
@@ -217,9 +280,9 @@ class _AuctionViewState extends State<AuctionView> {
                                 fontSize: 16,
                                 color: primaryColor,
                               ),
-                              
                               CustomText(
-                                text: 'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
+                                text:
+                                    'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
                                 fontSize: 12,
                                 color: Colors.black,
                                 maxLines: 1,

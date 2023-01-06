@@ -45,7 +45,9 @@ class _SellerInfoState extends State<SellerInfo> {
               Stack(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * .02,
+                    height: MediaQuery.of(context).size.height * .06,
+                    // one dev to role the all
+
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
@@ -60,54 +62,43 @@ class _SellerInfoState extends State<SellerInfo> {
                       ),
                     ),
                   ),
-                  // one dev to role the all
-
                   Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),
+                      decoration: const BoxDecoration(
+                        color: const Color.fromRGBO(246, 246, 246, 1),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
                       ),
-                    ),
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: SizedBox(
-                        height: 0,
-                      ),
-                    ),
-                  ),
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      child: Container(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 0, right: 16, left: 10),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 16,
+                              ),
+                              CustomText(
+                                fontFamily: 'Amazon',
+                                fontWeight: FontWeight.w400,
+                                text: sellerInfo.name,
+                                fontSize: 24,
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
                 ],
-              ),
-              Container(
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 0, right: 16, left: 10),
-                  child: Column(
-                    children: [
-                      CustomText(
-                        fontFamily: 'Amazon',
-                        fontWeight: FontWeight.w400,
-                        text: sellerInfo.name,
-                        fontSize: 24,
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      CustomText(
-                        text: 'Rating :',
-                        // fontWeight: FontWeight.w400,
-                        // fontFamily: 'Amazon',
-                        fontSize: 20,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
-                ),
               ),
               Divider(
                 thickness: 4,

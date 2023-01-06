@@ -125,10 +125,10 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                           width: double.infinity,
                           child: ClipRRect(
                             borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(30),
+                              topLeft: Radius.circular(35),
                               bottomLeft: Radius.circular(20),
                               bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(30),
+                              topRight: Radius.circular(35),
                             ),
                             child: Image.network(
                               productModel.image,

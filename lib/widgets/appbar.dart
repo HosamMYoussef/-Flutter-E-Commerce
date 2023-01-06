@@ -17,25 +17,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      leading: Padding(
-        padding: const EdgeInsets.only(top: 0.0),
-        child: IconButton(
-          icon: Icon(
-            Icons.arrow_back_sharp,
-            size: 30,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ),
+      // leading: Padding(
+      //   padding: const EdgeInsets.only(top: 0.0),
+      //   child: IconButton(
+      //     icon: Icon(
+      //       Icons.arrow_back_sharp,
+      //       size: 25,
+      //       color: Colors.black,
+      //     ),
+      //     onPressed: () {
+      //       Get.back();
+      //     },
+      //   ),
+      // ),
       flexibleSpace: Container(
         // height: 400,
         decoration: const BoxDecoration(
           // borderRadius: BorderRadius.only(
-          //   bottomLeft: Radius.circular(30),
-          //   bottomRight: Radius.circular(30),
+          //   bottomLeft: Radius.circular(35),
+          //   bottomRight: Radius.circular(35),
           // ),
 
           gradient: LinearGradient(
