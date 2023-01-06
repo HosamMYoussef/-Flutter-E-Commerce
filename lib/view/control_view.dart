@@ -9,6 +9,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:myshopp/constants.dart';
 import 'package:myshopp/core/viewmodel/auth_view_model.dart';
+import 'package:myshopp/view/admin/Adminhomepage.dart';
 import 'package:myshopp/view/auth/login_screen.dart';
 import 'package:myshopp/view/home_view.dart';
 import 'package:myshopp/view/profile_view.dart';
@@ -16,6 +17,7 @@ import 'package:myshopp/view/profile_view.dart';
 import '../core/viewmodel/control_view_model.dart';
 import '../widgets/custom_text.dart';
 import 'cart_view.dart';
+// one dev to role the all
 
 class ControlView extends GetWidget<AuthViewModel> {
   @override
@@ -23,13 +25,15 @@ class ControlView extends GetWidget<AuthViewModel> {
     return Obx(() {
       return (Get.find<AuthViewModel>().user == null)
           ? LoginView()
-          : GetBuilder<ControlViewModel>(
-              init: ControlViewModel(),
-              builder: (controller) => Scaffold(
-                body: controller.currentScreen,
-                bottomNavigationBar: bottomNavigationBar(),
-              ),
-            );
+          : Get.find<AuthViewModel>().user == 'admin@gmail.com'
+              ? Adminhome()
+              : GetBuilder<ControlViewModel>(
+                  init: ControlViewModel(),
+                  builder: (controller) => Scaffold(
+                    body: controller.currentScreen,
+                    bottomNavigationBar: bottomNavigationBar(),
+                  ),
+                );
     });
   }
 }
@@ -38,7 +42,6 @@ Widget bottomNavigationBar() {
   return GetBuilder<ControlViewModel>(
     init: ControlViewModel(),
     builder: (controller) => BottomNavigationBar(
-      
       selectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
       type: BottomNavigationBarType.fixed,
       elevation: 0,
@@ -67,7 +70,7 @@ Widget bottomNavigationBar() {
               height: 25,
               child: Image.asset('assets/images/cart1.png')),
         ),
-         BottomNavigationBarItem(
+        BottomNavigationBarItem(
           label: "Auction",
           icon: Container(
               width: 25,
@@ -154,12 +157,9 @@ Widget bottomNavigationBarr() {
       init: ControlViewModel(),
       builder: (controller) => Container(
             decoration: BoxDecoration(
-              
-              
               color: Colors.white,
               boxShadow: [
-                BoxShadow( 
-                  
+                BoxShadow(
                   blurRadius: 20,
                   color: Colors.black.withOpacity(.1),
                 )

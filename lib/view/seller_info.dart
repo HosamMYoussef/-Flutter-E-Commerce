@@ -39,66 +39,68 @@ class _SellerInfoState extends State<SellerInfo> {
       appBar: CustomAppBar(),
       body: Container(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(top: 10, right: 0, left: 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: double.infinity,
-                  //decoration: BoxDecoration(color: Colors.black),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 5, right: 16, left: 10),
-                    child: Column(
-                      children: [
-                        CustomText(
-                          fontFamily: 'Amazon',
-                          fontWeight: FontWeight.w400,
-                          text: sellerInfo.name,
-                          fontSize: 24,
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        CustomText(
-                          text: 'Rating :',
-                          // fontWeight: FontWeight.w400,
-                          // fontFamily: 'Amazon',
-                          fontSize: 20,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * .02,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          // Color.fromRGBO(131, 217, 226, 1),
+                          // Color.fromRGBO(162, 230, 209, 1),
+                          Color.fromRGBO(12, 116, 117, 1),
+                          Color.fromRGBO(14, 174, 87, 1),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Divider(
-                  thickness: 4,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5, right: 16, left: 10),
+                  // one dev to role the all
+
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SizedBox(
+                        height: 0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 0, right: 16, left: 10),
                   child: Column(
                     children: [
                       CustomText(
                         fontFamily: 'Amazon',
                         fontWeight: FontWeight.w400,
-                        text: 'About Seller',
-                        fontSize: 20,
+                        text: sellerInfo.name,
+                        fontSize: 24,
                       ),
                       SizedBox(
-                        height: 14,
+                        height: 16,
                       ),
                       CustomText(
-                        text:
-                            '${sellerInfo.name}  is committed to providing each customer with the highest standard of customer service. ',
+                        text: 'Rating :',
                         // fontWeight: FontWeight.w400,
                         // fontFamily: 'Amazon',
-                        maxLines: 3,
-                        fontSize: 17,
+                        fontSize: 20,
                       ),
                       SizedBox(
                         height: 10,
@@ -106,192 +108,221 @@ class _SellerInfoState extends State<SellerInfo> {
                     ],
                   ),
                 ),
-                Divider(
-                  thickness: 4,
+              ),
+              Divider(
+                thickness: 4,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, right: 16, left: 10),
+                child: Column(
+                  children: [
+                    CustomText(
+                      fontFamily: 'Amazon',
+                      fontWeight: FontWeight.w400,
+                      text: 'About Seller',
+                      fontSize: 20,
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    CustomText(
+                      text:
+                          '${sellerInfo.name}  is committed to providing each customer with the highest standard of customer service. ',
+                      // fontWeight: FontWeight.w400,
+                      // fontFamily: 'Amazon',
+                      maxLines: 3,
+                      fontSize: 17,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
                 ),
-                Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 16, left: 10),
-                    child: Column(
-                      children: [
-                        CustomText(
-                          fontFamily: 'Amazon',
-                          fontWeight: FontWeight.w400,
-                          text: '${sellerInfo.name} Products',
-                          fontSize: 20,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        _listViewProducts(),
-                      ],
-                    )),
-                SizedBox(
-                  height: 5,
-                ),
-                Divider(
-                  thickness: 4,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 20),
+              ),
+              Divider(
+                thickness: 4,
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(top: 20, right: 16, left: 10),
                   child: Column(
                     children: [
                       CustomText(
-                        text: 'Reviews ',
                         fontFamily: 'Amazon',
-                        fontSize: 20,
                         fontWeight: FontWeight.w400,
+                        text: '${sellerInfo.name} Products',
+                        fontSize: 20,
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: 20,
                       ),
-                      Column(
-                        children: [
-                          for (int i = 0; i < comments.length; i++)
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 16,
-                                        child: comments[i].pic.length <= 20
-                                            ? Image.asset(
-                                                'assets/images/prof.png')
-                                            : ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                child: Image.network(
-                                                    comments[i].pic),
-                                              ),
-                                      ),
-                                      const SizedBox(
-                                        width: 14,
-                                      ),
-                                      CustomText(
-                                        text: (comments[i].name),
-                                        fontSize: 16,
-                                      )
-                                    ],
-                                  ),
+                      _listViewProducts(),
+                    ],
+                  )),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(
+                thickness: 4,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+                child: Column(
+                  children: [
+                    CustomText(
+                      text: 'Reviews ',
+                      fontFamily: 'Amazon',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Column(
+                      children: [
+                        for (int i = 0; i < comments.length; i++)
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 16,
+                                      child: comments[i].pic.length <= 20
+                                          ? Image.asset(
+                                              'assets/images/prof.png')
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              child: Image.network(
+                                                  comments[i].pic),
+                                            ),
+                                    ),
+                                    const SizedBox(
+                                      width: 14,
+                                    ),
+                                    CustomText(
+                                      text: (comments[i].name),
+                                      fontSize: 16,
+                                    )
+                                  ],
                                 ),
-                                Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 10),
-                                    child: RichText(
-                                      text: TextSpan(
-                                          // style: DefaultTextStyle.of(context).style,
-                                          children: [
-                                            const TextSpan(
-                                                text: 'Reviewed on ',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.black54)),
-                                            TextSpan(
-                                                text: comments[i].date,
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.black54)),
-                                          ]),
-                                    )),
-                                Padding(
+                              ),
+                              Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  child: Text(comments[i].details,
-                                      style: const TextStyle(
-                                          fontSize: 16, color: Colors.black87)),
+                                      horizontal: 5, vertical: 10),
+                                  child: RichText(
+                                    text: TextSpan(
+                                        // style: DefaultTextStyle.of(context).style,
+                                        children: [
+                                          const TextSpan(
+                                              text: 'Reviewed on ',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.black54)),
+                                          TextSpan(
+                                              text: comments[i].date,
+                                              style: const TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.black54)),
+                                        ]),
+                                  )),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                child: Text(comments[i].details,
+                                    style: const TextStyle(
+                                        fontSize: 16, color: Colors.black87)),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              const Divider(
+                                height: 2,
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 5.0, right: 20, top: 9),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black12, width: 2),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20)),
+                        height: 60,
+                        width: 400,
+                        // color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 40.0),
+                          child: TextFormField(
+                            controller: fieldText,
+                            validator: (value) {
+                              if (value == null) {
+                                print('ERROR');
+                              }
+                            },
+                            onChanged: (value) {
+                              Get.find<CommentViewModel>().details = value;
+                              Get.find<CommentViewModel>().pic =
+                                  Get.find<ProfileViewModel>().currentUser!.pic;
+                              Get.find<CommentViewModel>().name =
+                                  Get.find<ProfileViewModel>()
+                                      .currentUser!
+                                      .name;
+                              Get.find<CommentViewModel>().productid =
+                                  widget.id;
+                            },
+                            decoration: InputDecoration(
+                                hintText: 'Write a review',
+                                hintStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 151, 150, 150),
+                                  fontFamily: "Cairo",
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
                                 ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                const Divider(
-                                  height: 2,
-                                ),
-                              ],
-                            ),
-                        ],
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 5.0, right: 20, top: 9),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black12, width: 2),
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          height: 60,
-                          width: 400,
-                          // color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 40.0),
-                            child: TextFormField(
-                              controller: fieldText,
-                              validator: (value) {
-                                if (value == null) {
-                                  print('ERROR');
-                                }
-                              },
-                              onChanged: (value) {
-                                Get.find<CommentViewModel>().details = value;
-                                Get.find<CommentViewModel>().pic =
-                                    Get.find<ProfileViewModel>()
-                                        .currentUser!
-                                        .pic;
-                                Get.find<CommentViewModel>().name =
-                                    Get.find<ProfileViewModel>()
-                                        .currentUser!
-                                        .name;
-                                Get.find<CommentViewModel>().productid =
-                                    widget.id;
-                              },
-                              decoration: InputDecoration(
-                                  hintText: 'Write a review',
-                                  hintStyle: const TextStyle(
-                                    color: Color.fromARGB(255, 151, 150, 150),
-                                    fontFamily: "Cairo",
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
-                                  border: InputBorder.none,
-                                  suffixIcon: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          comment.add(CommentModel(
-                                              productId: widget.id,
-                                              details:
-                                                  Get.find<CommentViewModel>()
-                                                      .details!,
-                                              name: Get.find<ProfileViewModel>()
-                                                  .currentUser!
-                                                  .name,
-                                              pic: Get.find<ProfileViewModel>()
-                                                  .currentUser!
-                                                  .pic,
-                                              date: DateFormat.yMMMd()
-                                                  .format(DateTime.now())));
-                                        });
-                                        Get.find<CommentViewModel>()
-                                            .addCommentsToFireStore();
-                                        fieldText.clear();
-                                      },
-                                      icon: const Icon(
-                                        Icons.send_outlined,
-                                        color: primaryColor,
-                                      ))),
-                            ),
+                                border: InputBorder.none,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        comment.add(CommentModel(
+                                            productId: widget.id,
+                                            details:
+                                                Get.find<CommentViewModel>()
+                                                    .details!,
+                                            name: Get.find<ProfileViewModel>()
+                                                .currentUser!
+                                                .name,
+                                            pic: Get.find<ProfileViewModel>()
+                                                .currentUser!
+                                                .pic,
+                                            date: DateFormat.yMMMd()
+                                                .format(DateTime.now())));
+                                      });
+                                      Get.find<CommentViewModel>()
+                                          .addCommentsToFireStore();
+                                      fieldText.clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.send_outlined,
+                                      color: primaryColor,
+                                    ))),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

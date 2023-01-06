@@ -8,6 +8,7 @@ class ProductModel {
   late String detail = "aaa";
   late String? sellerId = "";
   late String? reviews = "";
+  late String? quantity = "";
   late String? rating = "";
   late String det = 'aa';
   late Color color;
@@ -25,6 +26,7 @@ class ProductModel {
     this.sellerId = '',
     this.rating = '',
     this.reviews = '',
+    this.quantity = '',
   });
 
   ProductModel.fromJson(Map<dynamic, dynamic> map) {
@@ -38,6 +40,7 @@ class ProductModel {
     det = map['det'];
     sellerId = map['sellerId'];
     reviews = map['reviews'];
+    quantity = map['quantity'];
 
     color = HexColor.fromHex(map['color']);
     sized = map['sized'];
@@ -56,6 +59,7 @@ class ProductModel {
       'rating': rating,
       'reviews': reviews,
       'sellerId': sellerId,
+      'quantity': quantity,
       'det': det,
       'productId': productId,
     };

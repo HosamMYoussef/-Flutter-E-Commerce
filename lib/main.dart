@@ -7,6 +7,7 @@ import 'package:myshopp/core/viewmodel/auth_view_model.dart';
 import 'package:myshopp/view/control_view.dart';
 import 'package:myshopp/view/product_details_view.dart';
 import 'package:myshopp/view/review_view.dart';
+import 'package:myshopp/view/testtt.dart';
 import 'package:myshopp/widgets/Splash_Screen.dart';
 
 import 'core/viewmodel/cart_view_model.dart';
@@ -24,7 +25,7 @@ Future<void> main() async {
   );
 
 
-  Get.put(LocalStorageUser());
+   Get.put(LocalStorageUser());
   Get.put(CartViewModel());
   Get.put(HomeViewModel());
   Get.put(ControlView());
@@ -41,7 +42,6 @@ Future<void> main() async {
   ));
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   // final HomeViewModel controller = Get.put(HomeViewModel());
   @override
@@ -94,3 +94,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+// one dev to role the all

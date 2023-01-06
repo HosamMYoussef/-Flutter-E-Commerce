@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myshopp/model/user_model.dart';
+import 'package:myshopp/view/admin/Adminhomepage.dart';
 import 'package:myshopp/view/auth/login_screen.dart';
 import 'package:myshopp/view/control_view.dart';
 import 'package:myshopp/view/home_view.dart';
@@ -78,16 +79,29 @@ class AuthViewModel extends GetxController {
 
   void signInWithEmailAndPassword() async {
     try {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) async {
-        await FirestoreUser()
-            .getUserFromFirestore(value.user!.uid)
-            .then((value) {
-          setUser(UserModel.fromJson(value.data() as Map<dynamic, dynamic>));
+      if (email == 'admin@gmail.com') {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((value) async {
+          await FirestoreUser()
+              .getUserFromFirestore(value.user!.uid)
+              .then((value) {
+            setUser(UserModel.fromJson(value.data() as Map<dynamic, dynamic>));
+          });
         });
-      });
-      Get.offAll(ControlView());
+        Get.offAll(Adminhome());
+      } else {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((value) async {
+          await FirestoreUser()
+              .getUserFromFirestore(value.user!.uid)
+              .then((value) {
+            setUser(UserModel.fromJson(value.data() as Map<dynamic, dynamic>));
+          });
+        });
+        Get.offAll(ControlView());
+      }
     } on FirebaseAuthException catch (e) {
       print(e);
       Get.snackbar(
@@ -125,7 +139,7 @@ class AuthViewModel extends GetxController {
       email: userCredential.user!.email!,
       name: name == null ? userCredential.user!.displayName! : this.name,
       pic: userCredential.user!.photoURL == null
-          ? 'default'
+          ? 'https://firebasestorage.googleapis.com/v0/b/ecommerce-95160.appspot.com/o/prof.png?alt=media&token=1dbe4ea7-4eef-4602-83df-d10f97a2ca2f'
           : userCredential.user!.photoURL! + "?width=400",
     );
     await FirestoreUser().addUserToFirestore(_userModel);
@@ -143,9 +157,9 @@ class AuthViewModel extends GetxController {
   void signOut() async {
     try {
       await _auth.signOut();
-      LocalStorageUser.clearUserData();
-      GoogleSignIn().signOut();
-      FirebaseAuth.instance.signOut();
+      await LocalStorageUser.clearUserData();
+      // GoogleSignIn().signOut();
+      // FirebaseAuth.instance.signOut();
     } catch (error) {
       print(error);
     }
@@ -167,4 +181,6 @@ class AuthViewModel extends GetxController {
       setUser(UserModel.fromJson(value.data() as Map<dynamic, dynamic>));
     });
   }
+
+  
 }

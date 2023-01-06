@@ -71,6 +71,7 @@ class SellModel extends GetxController {
           sellerId: sellerId!,
           rating: '0',
           reviews: '0',
+          quantity: '15'
         ));
     await FirestoreSell().addOrderToFirestore(ProductModel(
       category: category!,
@@ -85,6 +86,7 @@ class SellModel extends GetxController {
       sellerId: sellerId!,
       rating: '0',
       reviews: '0',
+      quantity: '15'
     ));
     Get.back();
   }

@@ -102,8 +102,11 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              Color.fromRGBO(131, 217, 226, 1),
-                              Color.fromRGBO(162, 230, 209, 1),
+                              // Color.fromRGBO(131, 217, 226, 1),
+                              // Color.fromRGBO(162, 230, 209, 1),
+
+                              Color.fromRGBO(12, 116, 117, 1),
+                              Color.fromRGBO(14, 174, 87, 1),
                             ],
                           ),
                         ),
@@ -114,8 +117,8 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                           decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50),
                             ),
                           ),
                           height: 196,
@@ -193,18 +196,38 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                 ),
                               ),
                             ),
-                            RoundedShapeInfo(
-                              title: 'Color',
-                              content: Container(
-                                height: 22,
-                                width: 22,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: productModel.color,
-                                ),
-                              ),
-                            ),
+                              GetBuilder<FavoritesviewModel>(
+                                init: FavoritesviewModel(),
+                                builder: ((controller) => Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 0, right: 0),
+                                      child: FloatingActionButton(
+                                        onPressed: () {
+                                          controller
+                                              .addProduct(FavortiesProdcutModel(
+                                            name: productModel.name,
+                                            image: productModel.image,
+                                            price: productModel.price,
+                                            productId: productModel.productId,
+                                            // category: productModel.category,
+                                          ));
+                                        },
+                                        backgroundColor: primaryColor,
+                                        child: const Icon(LineIcons.heart),
+                                      ),
+                                    ))),
+                            // RoundedShapeInfo(
+                            //   title: 'Color',
+                            //   content: Container(
+                            //     height: 22,
+                            //     width: 22,
+                            //     decoration: BoxDecoration(
+                            //       border: Border.all(color: Colors.grey),
+                            //       borderRadius: BorderRadius.circular(8),
+                            //       color: productModel.color,
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                         const SizedBox(
@@ -230,26 +253,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                 text: '(${productModel.reviews})',
                               )
                             ]),
-                            GetBuilder<FavoritesviewModel>(
-                                init: FavoritesviewModel(),
-                                builder: ((controller) => Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: 0, right: 0),
-                                      child: FloatingActionButton(
-                                        onPressed: () {
-                                          controller
-                                              .addProduct(FavortiesProdcutModel(
-                                            name: productModel.name,
-                                            image: productModel.image,
-                                            price: productModel.price,
-                                            productId: productModel.productId,
-                                            // category: productModel.category,
-                                          ));
-                                        },
-                                        backgroundColor: primaryColor,
-                                        child: const Icon(LineIcons.heart),
-                                      ),
-                                    ))),
+                          
                           ],
                         ),
                         Row(

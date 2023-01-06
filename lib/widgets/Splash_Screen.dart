@@ -12,6 +12,7 @@ import '../core/viewmodel/home_view_model.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
+// one dev to role the all
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();

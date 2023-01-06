@@ -10,7 +10,7 @@ class ProfileViewModel extends GetxController {
   final LocalStorageUser localStorageUser = Get.find();
   UserModel? _currentUser;
   String? name, email, password, picUrl;
-  
+
   bool _loading = false;
 
   bool get loading => _loading;
@@ -21,21 +21,20 @@ class ProfileViewModel extends GetxController {
     getCurrentUser();
   }
 
+  // Future<void> SignOut() async {
+  //   GoogleSignIn().signOut();
+  //   FirebaseAuth.instance.signOut();
+  //  await LocalStorageUser.clearUserData();
+  // }
 
-  Future<void> SignOut() async {
-    GoogleSignIn().signOut();
-    FirebaseAuth.instance.signOut();
-    LocalStorageUser.clearUserData();
-  }
-  
-  void getCurrentUser() async{
-      _loading = true;
+  void getCurrentUser() async {
+    _loading = true;
     _currentUser = await LocalStorageUser.getUserData();
     _loading = false;
     update();
-  
   }
-    updateCurrentUser() async {
+
+  updateCurrentUser() async {
     try {
       UserModel _userModel = UserModel(
         userId: _currentUser!.userId,

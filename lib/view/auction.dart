@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:myshopp/model/auction_model.dart';
+import 'package:myshopp/view/auction_details_view.dart';
 import 'package:myshopp/view/product_details_view.dart';
 
 import '../constants.dart';
@@ -21,14 +23,14 @@ class AuctionView extends StatefulWidget {
 
 class _AuctionViewState extends State<AuctionView> {
   String? _timeUntill = ' ';
-  List<String> _timeUntil = [];
+
   Timer? _timer;
-  DateTime times1 = DateTime.now().add(const Duration(days: 1));
-  DateTime times2 = DateTime.now().add(const Duration(days: 1));
 
   final DateTime times = DateTime.now().add(const Duration(hours: 24));
   void startTimer(DateTime x) {
     _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      if (!mounted) return;
+
       setState(() {
         _timeUntill = TimeLeft.timeLeft(x);
       });
@@ -38,15 +40,14 @@ class _AuctionViewState extends State<AuctionView> {
   @override
   void initState() {
     // TODO: implement initState
-    startTimer(times);
-
     super.initState();
+    startTimer(times);
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    startTimer(times);
+    // startTimer(times);
 
     super.dispose();
   }
@@ -54,13 +55,15 @@ class _AuctionViewState extends State<AuctionView> {
   @override
   Widget build(BuildContext context) {
     Get.put(HomeViewModel());
-    List<ProductModel> products = Get.find<HomeViewModel>().products.toList();
+    List<AuctionModel> auctions = Get.find<HomeViewModel>().auctions.toList();
+    DateTime time1 = DateTime.parse(auctions[0].end);
+    DateTime time2 = DateTime.parse(auctions[0].start);
     return Scaffold(
       body: Column(
         children: [
           Container(
             color: Colors.white,
-            height: 60,
+            height: 90,
             child: Padding(
               padding: EdgeInsets.only(bottom: 0, left: 16, right: 16),
               child: Row(
@@ -93,22 +96,22 @@ class _AuctionViewState extends State<AuctionView> {
                   crossAxisCount: 2,
                   mainAxisSpacing: 0,
                   crossAxisSpacing: 10,
-                  mainAxisExtent: 311,
+                  mainAxisExtent: 300,
                 ),
-                itemCount: products.length,
+                itemCount: auctions.length,
                 itemBuilder: (context, index) {
                   if (index % 2 == 0) {
                     return GestureDetector(
                       onTap: () {
-                        // Get.to(
-                        //   ProductDetailView(id: products[index].productId),
-                        // );
+                        Get.to(AuctionProductDetails(id: auctions[index].auctionId));
                       },
+                      // one dev to role the all
+
                       child: Card(
                         elevation: 0,
                         child: Container(
                           width: 164,
-                          height: 300,
+                          height: 290,
                           child: Column(
                             //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +121,7 @@ class _AuctionViewState extends State<AuctionView> {
                                   borderRadius: BorderRadius.circular(4),
                                   color: Colors.white,
                                 ),
-                                height: 220,
+                                height: 209,
                                 width: 164,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.only(
@@ -126,7 +129,7 @@ class _AuctionViewState extends State<AuctionView> {
                                     topRight: Radius.circular(20),
                                   ),
                                   child: Image.network(
-                                    products[index].image,
+                                    auctions[index].image,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -137,24 +140,29 @@ class _AuctionViewState extends State<AuctionView> {
                                 child: Column(
                                   children: [
                                     CustomText(
-                                      text: products[index].name,
+                                      text: auctions[index].name,
                                       fontSize: 15,
                                     ),
                                     SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
                                     CustomText(
-                                      text: '\$${products[index].price}',
+                                      text: '\$${auctions[index].price}',
                                       fontSize: 16,
                                       color: primaryColor,
                                     ),
                                     SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
-                                    CustomText(
-                                      text: 'Ends in $_timeUntill',
-                                      fontSize: 12,
-                                      color: Colors.black,
+                                    GestureDetector(
+                                      onTap: (() {
+                                        // print(timeee);
+                                      }),
+                                      child: CustomText(
+                                        text: 'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -170,11 +178,12 @@ class _AuctionViewState extends State<AuctionView> {
                       child: GestureDetector(
                         onTap: () {
                           Get.to(
-                            ProductDetailView(id: products[index].productId),
+                            AuctionProductDetails(id: auctions[index].auctionId),
                           );
                         },
                         child: Container(
                           margin: EdgeInsets.only(top: 50),
+
                           // width: 164,
                           height: 300,
                           child: Column(
@@ -186,7 +195,7 @@ class _AuctionViewState extends State<AuctionView> {
                                   borderRadius: BorderRadius.circular(4),
                                   color: Colors.white,
                                 ),
-                                height: 220,
+                                height: 209,
                                 width: 164,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.only(
@@ -194,28 +203,29 @@ class _AuctionViewState extends State<AuctionView> {
                                     topRight: Radius.circular(20),
                                   ),
                                   child: Image.network(
-                                    products[index].image,
+                                    auctions[index].image,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
                               CustomText(
-                                text: products[index].name,
+                                text: auctions[index].name,
                                 fontSize: 15,
                               ),
                               CustomText(
-                                text: '\$${products[index].price}',
+                                text: '\$${auctions[index].price}',
                                 fontSize: 16,
                                 color: primaryColor,
                               ),
+                              
                               CustomText(
-                                text: 'Ends in $_timeUntill',
+                                text: 'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
                                 fontSize: 12,
                                 color: Colors.black,
                                 maxLines: 1,
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 20,
                               )
                             ],
                           ),

@@ -22,6 +22,7 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   void initState() {
+    print(_searchValue);
     _searchValue = widget.searchValue!.toLowerCase();
     super.initState();
   }
@@ -38,10 +39,10 @@ class _SearchViewState extends State<SearchView> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60.0), // here the desired height
+        preferredSize: const Size.fromHeight(55.0), // here the desired height
         child: AppBar(
           leading: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.only(top: 0.0),
             child: IconButton(
               icon: Icon(
                 Icons.arrow_back_sharp,
@@ -60,8 +61,10 @@ class _SearchViewState extends State<SearchView> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color.fromRGBO(131, 217, 226, 1),
-                  Color.fromRGBO(162, 230, 209, 1),
+                  // Color.fromRGBO(131, 217, 226, 1),
+                  // Color.fromRGBO(162, 230, 209, 1),
+                  Color.fromRGBO(12, 116, 117, 1),
+                  Color.fromRGBO(14, 174, 87, 1),
                 ],
               ),
             ),
@@ -258,3 +261,4 @@ class _SearchViewState extends State<SearchView> {
     );
   }
 }
+// one dev to role the all

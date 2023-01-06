@@ -20,7 +20,10 @@ import 'order_history_view.dart';
 class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => CheckoutViewModel());
+    Get.put(() => CheckoutViewModel());
+    Get.put(AuthViewModel());
+// one dev to role the all
+
     return GetBuilder<ProfileViewModel>(
       init: ProfileViewModel(),
       builder: (controller) => controller.loading == true
@@ -120,7 +123,7 @@ class ProfileView extends StatelessWidget {
                           iconName: '6',
                           title: 'Log Out',
                           onTapFn: () {
-                            controller.SignOut();
+                            Get.find<AuthViewModel>().signOut();
                             Get.offAll(LoginView());
                           },
                         ),

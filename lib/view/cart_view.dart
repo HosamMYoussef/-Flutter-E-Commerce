@@ -289,6 +289,8 @@ class CartView extends StatelessWidget {
                               ),
                             ],
                           ),
+                          // one dev to role the all
+
                           SizedBox(
                             height: 50,
                             width: 200,

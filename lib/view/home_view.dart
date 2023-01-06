@@ -1,17 +1,32 @@
+// import 'dart:html';
+
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:myshopp/view/review_view.dart';
 import 'package:myshopp/view/search_view.dart';
+import 'package:myshopp/view/testtt.dart';
 
 import '../constants.dart';
+import '../core/viewmodel/cart_view_model.dart';
 import '../core/viewmodel/home_view_model.dart';
 import '../widgets/custom_text.dart';
+import '../widgets/speach.dart';
 import 'category_products_view.dart';
 import 'product_details_view.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  String text = 'Press the button and start speaking';
+  // one dev to role the all
+
+  bool isListening = false;
   @override
   Widget build(BuildContext context) {
     Get.put(HomeViewModel());
@@ -32,7 +47,9 @@ class HomeView extends StatelessWidget {
                         children: [
                           const Padding(
                             padding: EdgeInsets.only(top: 30.0),
-                            child: SizedBox( width: 20,),
+                            child: SizedBox(
+                              width: 20,
+                            ),
                           ),
                           const Text(
                             'Shopify',
@@ -53,15 +70,39 @@ class HomeView extends StatelessWidget {
                           top: 29, left: 16, right: 16, bottom: 14),
                       child: Column(
                         children: [
-                          _searchTextFormField(),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(45),
+                              color: Colors.grey.shade200,
+                            ),
+                            child: Row(children: [
+                              _searchTextFormField(),
+                              AvatarGlow(
+                                animate: isListening,
+                                endRadius: 25,
+                                glowColor: primaryColor,
+                                child: IconButton(
+                                  icon: Icon(
+                                      isListening ? Icons.mic : Icons.mic_none,
+                                      size: 30),
+                                  onPressed: toggleRecording,
+                                ),
+                              ),
+                            ]),
+                          ),
                           SizedBox(
                             height: 30,
                           ),
-                          CustomText(
-                            text: 'Categories',
-                            fontFamily: 'Baumans',
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
+                          GestureDetector(
+                            onTap: (() {
+                              Get.to(Test());
+                            }),
+                            child: CustomText(
+                              text: 'Categories',
+                              fontFamily: 'Baumans',
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           SizedBox(
                             height: 20,
@@ -73,11 +114,18 @@ class HomeView extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CustomText(
-                                text: "Best Selling ",
-                                fontFamily: 'Baumans',
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
+                              GestureDetector(
+                                onTap: () {
+                                  print(Get.find<CartViewModel>()
+                                      .cartProductModel
+                                      .length);
+                                },
+                                child: CustomText(
+                                  text: "Best Selling ",
+                                  fontFamily: 'Baumans',
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -109,17 +157,19 @@ class HomeView extends StatelessWidget {
 
   Widget _searchTextFormField() {
     return Container(
+      width: MediaQuery.of(context).size.width * 0.772,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(45),
-        color: Colors.grey.shade200,
+        // color: Colors.grey.shade200,
       ),
       child: TextFormField(
         decoration: const InputDecoration(
+          hintStyle: TextStyle(color: Colors.black87),
           hintText: "What are you looking for?",
           border: InputBorder.none,
           prefixIcon: Icon(
             Icons.search,
-            color: Colors.black54,
+            color: Colors.black87,
           ),
         ),
         onFieldSubmitted: (value) {
@@ -292,4 +342,20 @@ class HomeView extends StatelessWidget {
       ),
     );
   }
+
+  Future toggleRecording() => SpeechApi.toggleRecording(
+        onResult: (text) => setState(() {
+          this.text = text;
+          print(text);
+        }),
+        onListening: (isListening) {
+          setState(() => this.isListening = isListening);
+
+          if (!isListening) {
+            Future.delayed(Duration(milliseconds: 500), () {
+              Get.to(SearchView(text));
+            });
+          }
+        },
+      );
 }

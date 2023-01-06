@@ -12,18 +12,17 @@ class TimeLeft {
         (_daysUntil * 24 * 60 * 60) -
         (_hoursUntil * 60 * 60) -
         (_minUntil * 60);
+// one dev to role the all
 
     if (_daysUntil > 0) {
-      retVal = _daysUntil.toString() + " days ";
+      retVal = _daysUntil.toString() + "d "+_hoursUntil.toString() +'h';
     } else if (_hoursUntil > 0) {
       retVal = _hoursUntil.toString() +
-          ":" +
+          "h " +
           _minUntil.toString() +
-          ":" +
-          _secUntil.toString() 
-          ;
+          "m"  ;
     } else if (_minUntil > 0) {
-      retVal =_minUntil.toString()+ ":" + _secUntil.toString() ;
+      retVal =_minUntil.toString()+ "m " + _secUntil.toString()+"s" ;
     } else if (_secUntil > 0) {
       retVal = _secUntil.toString() + " sec ";
     } else if (_secUntil == 0) {
@@ -35,3 +34,8 @@ class TimeLeft {
     return retVal;
   }
 }
+
+
+
+
+

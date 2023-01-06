@@ -11,21 +11,32 @@ import 'package:myshopp/view/home_view.dart';
 import '../core/viewmodel/cart_view_model.dart';
 import '../core/viewmodel/checkoutview_model.dart';
 import '../widgets/Custom_text_form_feild.dart';
+import '../widgets/ListViewPage.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 
-class CheckoutView extends StatelessWidget {
+class CheckoutView extends StatefulWidget {
+  @override
+  State<CheckoutView> createState() => _CheckoutViewState();
+}
+
+bool isChecked = false;
+bool ispayed = false;
+
+class _CheckoutViewState extends State<CheckoutView> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    Get.put(CartViewModel());
+    double total = Get.find<CartViewModel>().totalPrice;
     return GetBuilder<CheckoutViewModel>(
       init: Get.put(CheckoutViewModel()),
       builder: (controller) => Scaffold(
         body: Column(
           children: [
             Container(
-              height: 130,
+              height: 100,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 24, left: 16, right: 16),
                 child: Row(
@@ -38,7 +49,7 @@ class CheckoutView extends StatelessWidget {
                       onPressed: () {
                         Get.back();
                       },
-                      icon:const Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.black,
                       ),
@@ -59,7 +70,8 @@ class CheckoutView extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding:const EdgeInsets.only(right: 16, left: 16, bottom: 24),
+                  padding:
+                      const EdgeInsets.only(right: 16, left: 16, bottom: 24),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -130,7 +142,7 @@ class CheckoutView extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         CustomTextFormField(
                           title: 'Phone Number',
@@ -145,12 +157,74 @@ class CheckoutView extends StatelessWidget {
                           },
                         ),
                         SizedBox(
-                          height: 38,
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                    // tristate: true,
+                                    checkColor: Colors.white,
+                                    activeColor: primaryColor,
+                                    value: isChecked,
+                                    onChanged: (newbool) {
+                                      setState(() {
+                                        isChecked = newbool!;
+                                      });
+                                    }),
+                                    Text('Cash on Delivery ')
+                              ],
+                            ),
+                            // one dev to role the all
+
+                            SizedBox(
+                              height: 50,
+                              width: 150,
+                              child: FlatButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18)),
+                                color: primaryColor,
+                                onPressed: () {
+                                  setState(() {
+                                    ispayed = true;
+                                  });
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          PaymentPage(total: total)));
+                                },
+                                child: Text(
+                                  "Pay now ".toUpperCase(),
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 14,
                         ),
                         CustomButton(
                           text: 'SUBMIT',
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
+                            print(isChecked);
+                            print(ispayed);
+                            if (isChecked == false && ispayed == false) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: const Text(
+                                  'Choose payment method ',
+                                ),
+                                duration: const Duration(seconds: 2),
+                              ));
+                            }
+                            if (_formKey.currentState!.validate() &&
+                                (isChecked || ispayed)) {
                               _formKey.currentState!.save();
                               await controller.addCheckoutToFireStore();
                               Get.dialog(
@@ -192,6 +266,10 @@ class CheckoutView extends StatelessWidget {
                                 ),
                                 barrierDismissible: false,
                               );
+                              setState(() {
+                                ispayed = false;
+                                isChecked = false;
+                              });
                             }
                           },
                         ),

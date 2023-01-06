@@ -173,20 +173,20 @@ class _SellViewState extends State<SellView> {
                                   Get.find<SellModel>().price = value;
                                 },
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              CustomTextFormField(
-                                title: 'Product Color',
-                                hintText: '',
-                                validatorFn: (value) {
-                                  if (value!.isEmpty)
-                                    return 'Please enter Product Color .';
-                                },
-                                onSavedFn: (value) {
-                                  Get.find<SellModel>().color = value;
-                                },
-                              ),
+                              // const SizedBox(
+                              //   height: 10,
+                              // ),
+                              // CustomTextFormField(
+                              //   title: 'Product Color',
+                              //   hintText: '',
+                              //   validatorFn: (value) {
+                              //     if (value!.isEmpty)
+                              //       return 'Please enter Product Color .';
+                              //   },
+                              //   onSavedFn: (value) {
+                              //     Get.find<SellModel>().color = value;
+                              //   },
+                              // ),
                               const SizedBox(
                                 height: 20,
                               ),

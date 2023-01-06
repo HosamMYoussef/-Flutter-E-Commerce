@@ -1,0 +1,8 @@
+0 shoes
+1 bags
+2 camera
+3 headset
+4 mobile
+5 ps 5
+6 t-shirt
+7 watch
