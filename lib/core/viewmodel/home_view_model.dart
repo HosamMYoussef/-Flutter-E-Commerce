@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myshopp/model/Category_model.dart';
+import 'package:myshopp/model/bid_model.dart';
 import 'package:myshopp/model/user_model.dart';
 import 'dart:convert';
+import '../../model/auction_model.dart';
 import '../../model/comment_model.dart';
 import 'package:http/http.dart' as http;
 import '../../model/product_model.dart';
@@ -17,10 +19,14 @@ class HomeViewModel extends GetxController {
   List<ProductModel> _products = [];
 
   List<UserModel> _users = [];
+  List<BidModel> _bids = [];
   List<CommentModel> _comments = [];
+  List<AuctionModel> _auctions = [];
 
   List<CommentModel> get comments => _comments;
+  List<AuctionModel> get auctions => _auctions;
   List<CategoryModel> get categories => _categories;
+  List<BidModel> get bids => _bids;
 
   List<UserModel> get users => _users;
 
@@ -38,6 +44,8 @@ class HomeViewModel extends GetxController {
     getProductsFromFireStore();
     _getusersFromFireStore();
     _getCommentsFromFireStore();
+    _getAuctionsFromFireStore();
+    _getbidsFromFireStore();
   }
 
   _getCommentsFromFireStore() async {
@@ -47,6 +55,18 @@ class HomeViewModel extends GetxController {
     commentsSnapshot.forEach((comment) {
       _comments
           .add(CommentModel.fromJson(comment.data() as Map<String, dynamic>));
+    });
+    _loading.value = false;
+    update();
+  }
+
+  _getAuctionsFromFireStore() async {
+    _loading.value = true;
+    List<QueryDocumentSnapshot> auctionsSnapshot =
+        await FirestoreHome().getAuctionsFromFireStore();
+    auctionsSnapshot.forEach((auction) {
+      _auctions
+          .add(AuctionModel.fromJson(auction.data() as Map<String, dynamic>));
     });
     _loading.value = false;
     update();
@@ -177,6 +197,17 @@ class HomeViewModel extends GetxController {
     update();
   }
 
+  _getbidsFromFireStore() async {
+    _loading.value = true;
+    List<QueryDocumentSnapshot> bidsSnapshot =
+        await FirestoreHome().getbidsFromFirestore();
+    bidsSnapshot.forEach((user) {
+      _bids.add(BidModel.fromJson(user.data() as Map<String, dynamic>));
+    });
+    _loading.value = false;
+    update();
+  }
+
   deleteProductsFromFireStore(String id) async {
     FirestoreSell().deleteData(id);
 
@@ -190,6 +221,15 @@ class HomeViewModel extends GetxController {
       "rating": rating,
     });
     getProductsFromFireStore();
+    update();
+  }
+
+
+   Future updateBidCount(String id,String bids) async {
+    await FirebaseFirestore.instance.collection("auctions").doc(id).update({
+      "bids": bids,
+      
+    });
     update();
   }
 }
