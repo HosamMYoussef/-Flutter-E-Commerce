@@ -119,10 +119,10 @@ class _AuctionProductDetailsState extends State<AuctionProductDetails> {
           ),
           Container(
               decoration: const BoxDecoration(
-                color: const Color.fromRGBO(246, 246, 246, 1),
+                color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(35),
+                  topRight: Radius.circular(35),
                 ),
               ),
               alignment: Alignment.center,
@@ -252,7 +252,7 @@ class _AuctionProductDetailsState extends State<AuctionProductDetails> {
                                 width: 80,
                               ),
                               SizedBox(
-                                width: 200,
+                                width: 150,
                                 child: CustomText(
                                   text: auction.condition,
                                   color: Colors.black,

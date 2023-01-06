@@ -42,19 +42,19 @@ class _SearchViewState extends State<SearchView> {
         preferredSize: const Size.fromHeight(60.0), // here the desired height
         child: AppBar(
           elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.only(top: 0.0),
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back_sharp,
-                size: 30,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ),
+          // leading: Padding(
+          //   padding: const EdgeInsets.only(top: 0.0),
+          //   child: IconButton(
+          //     icon: Icon(
+          //       Icons.arrow_back_sharp,
+          //       size: 30,
+          //       color: Colors.black,
+          //     ),
+          //     onPressed: () {
+          //       Get.back();
+          //     },
+          //   ),
+          // ),
           flexibleSpace: Container(
             height: 400,
             decoration: const BoxDecoration(
@@ -105,7 +105,7 @@ class _SearchViewState extends State<SearchView> {
                   ),
                   Container(
                     decoration: const BoxDecoration(
-                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),
@@ -169,7 +169,7 @@ class _SearchViewState extends State<SearchView> {
                   ),
                   Container(
                     decoration: const BoxDecoration(
-                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),

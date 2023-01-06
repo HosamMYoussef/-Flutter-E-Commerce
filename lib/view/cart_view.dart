@@ -76,7 +76,7 @@ class CartView extends StatelessWidget {
                   ),
                   Container(
                     decoration: const BoxDecoration(
-                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      color:  Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35),
@@ -141,7 +141,7 @@ class CartView extends StatelessWidget {
                   ),
                   Container(
                     decoration: const BoxDecoration(
-                      color: const Color.fromRGBO(246, 246, 246, 1),
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35),
@@ -187,155 +187,159 @@ class CartView extends StatelessWidget {
                                     id: controller
                                         .cartProductModel[index].productId));
                               },
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                elevation: 4,
-                                child: Row(
-                                  children: [
-                                    GetBuilder<CartViewModel>(
-                                      builder: (controller) => Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(29)),
-                                        width: 120,
-                                        height: 120,
-                                        child: ClipRRect(
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            bottomLeft: Radius.circular(20),
-                                          ),
-                                          child: Image.network(
-                                            controller
-                                                .cartProductModel[index].image,
-                                            fit: BoxFit.cover,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width*0.9,
+                                child: Card(
+                                  
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  elevation: 4,
+                                  child: Row(
+                                    children: [
+                                      GetBuilder<CartViewModel>(
+                                        builder: (controller) => Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(29)),
+                                          width: 120,
+                                          height: 120,
+                                          child: ClipRRect(
+                                            borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              bottomLeft: Radius.circular(20),
+                                            ),
+                                            child: Image.network(
+                                              controller
+                                                  .cartProductModel[index].image,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 30,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 15.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            width: 200,
-                                            child: CustomText(
-                                              text: controller
-                                                  .cartProductModel[index].name,
-                                              maxLines: 3,
+                                      const SizedBox(
+                                        width: 25,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 15.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 170,
+                                              child: CustomText(
+                                                text: controller
+                                                    .cartProductModel[index].name,
+                                                maxLines: 3,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            CustomText(
+                                              text:
+                                                  '\$${controller.cartProductModel[index].price.toString()}',
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.bold,
                                               fontSize: 16,
                                             ),
-                                          ),
-                                          CustomText(
-                                            text:
-                                                '\$${controller.cartProductModel[index].price.toString()}',
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                          const SizedBox(
-                                            height: 16,
-                                          ),
-                                          Container(
-                                            width: 120,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              color: Colors.white,
+                                            const SizedBox(
+                                              height: 16,
                                             ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 0),
-                                              child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 40,
-                                                      height: 32,
-                                                      child: OutlinedButton(
-                                                        style: OutlinedButton
-                                                            .styleFrom(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        13),
+                                            Container(
+                                              width: 120,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                color: Colors.white,
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 0),
+                                                child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 40,
+                                                        height: 32,
+                                                        child: OutlinedButton(
+                                                          style: OutlinedButton
+                                                              .styleFrom(
+                                                            padding:
+                                                                EdgeInsets.zero,
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          13),
+                                                            ),
+                                                          ),
+                                                          onPressed: () {
+                                                            controller
+                                                                .increaseQuantity(
+                                                                    index);
+                                                          },
+                                                          child: const Icon(
+                                                            Icons.add,
+                                                            size: 20,
+                                                            color: Colors.black,
                                                           ),
                                                         ),
-                                                        onPressed: () {
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets
+                                                                .symmetric(
+                                                            horizontal: 20 / 2),
+                                                        child: Text(
+                                                          // if our item is less  then 10 then  it shows 01 02 like that
                                                           controller
-                                                              .increaseQuantity(
-                                                                  index);
-                                                        },
-                                                        child: const Icon(
-                                                          Icons.add,
-                                                          size: 20,
-                                                          color: Colors.black,
+                                                              .cartProductModel[
+                                                                  index]
+                                                              .quantity
+                                                              .toString()
+                                                              .padLeft(2, "0"),
+                                                          style: const TextStyle(
+                                                              fontSize: 16),
                                                         ),
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 20 / 2),
-                                                      child: Text(
-                                                        // if our item is less  then 10 then  it shows 01 02 like that
-                                                        controller
-                                                            .cartProductModel[
-                                                                index]
-                                                            .quantity
-                                                            .toString()
-                                                            .padLeft(2, "0"),
-                                                        style: const TextStyle(
-                                                            fontSize: 16),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 40,
-                                                      height: 32,
-                                                      child: OutlinedButton(
-                                                        style: OutlinedButton
-                                                            .styleFrom(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        13),
+                                                      SizedBox(
+                                                        width: 40,
+                                                        height: 32,
+                                                        child: OutlinedButton(
+                                                          style: OutlinedButton
+                                                              .styleFrom(
+                                                            padding:
+                                                                EdgeInsets.zero,
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          13),
+                                                            ),
+                                                          ),
+                                                          onPressed: () {
+                                                            controller
+                                                                .decreaseQuantity(
+                                                                    index);
+                                                          },
+                                                          child: const Icon(
+                                                            Icons.remove,
+                                                            size: 20,
+                                                            color: Colors.black,
                                                           ),
                                                         ),
-                                                        onPressed: () {
-                                                          controller
-                                                              .decreaseQuantity(
-                                                                  index);
-                                                        },
-                                                        child: const Icon(
-                                                          Icons.remove,
-                                                          size: 20,
-                                                          color: Colors.black,
-                                                        ),
                                                       ),
-                                                    ),
-                                                  ]),
+                                                    ]),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
