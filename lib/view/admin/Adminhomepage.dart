@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:myshopp/core/viewmodel/auth_view_model.dart';
+import 'package:myshopp/view/admin/allAuctions.dart';
 import 'package:myshopp/view/admin/allUsers.dart';
 
 import '../../core/viewmodel/profile_viewmodel.dart';
@@ -184,6 +185,39 @@ class Adminhome extends StatelessWidget {
               ),
               SizedBox(
                 height: height * .03,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  Get.to(AdminAuctions());
+                }),
+                child: Container(
+                  width: width * .4,
+                  height: height * 0.27,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 2),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        height: height * 0.17,
+                        child: Image.asset(
+                          'assets/images/aucc.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Text(
+                        'Auctions',
+                        style: const TextStyle(
+                            color: Colors.black87,
+                            fontFamily: 'Cairo',
+                            fontSize: 29,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               SizedBox(
                 height: 40,

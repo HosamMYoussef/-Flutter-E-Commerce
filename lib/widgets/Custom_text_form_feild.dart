@@ -39,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(
               color: Colors.grey.shade400,
-              fontSize: 18,
+              fontSize: 14,
             ),
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(

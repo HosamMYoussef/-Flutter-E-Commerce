@@ -30,136 +30,184 @@ class _UserProductState extends State<UserProduct> {
         .where((meal) => meal.sellerId == sellerId)
         .toList();
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(children: [
-        Container(
-          height: 100,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  constraints: BoxConstraints(),
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60.0),
+          child: AppBar(
+            elevation: 0,
+            flexibleSpace: Container(
+              height: 400,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    // Color.fromRGBO(131, 217, 226, 1),
+                    // Color.fromRGBO(162, 230, 209, 1),
+                    Color.fromRGBO(12, 116, 117, 1),
+                    Color.fromRGBO(14, 174, 87, 1),
+                  ],
                 ),
-                CustomText(
-                  text: 'Your Products',
-                  fontFamily: 'Baumans',
-                  fontSize: 24,
-                  alignment: Alignment.bottomCenter,
-                ),
-                Container(
-                  width: 24,
-                ),
-              ],
+              ),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Center(
+                    child: Text(
+                  'Your Products',
+                  style: TextStyle(
+                      fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
+                )),
+              ),
             ),
           ),
         ),
-        productsdata.length == 0
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/caart.svg',
-                    width: 350,
-                    height: 350,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  CustomText(
-                    fontFamily: 'Baumans',
-                    text: "Start selling your products now ... ",
-                    fontSize: 24,
-                    alignment: Alignment.topCenter,
+        body: SingleChildScrollView(
+          child: Column(children: [
+            productsdata.length == 0
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/caart.svg',
+                        width: 350,
+                        height: 350,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      CustomText(
+                        fontFamily: 'Baumans',
+                        text: "Start selling your products now ... ",
+                        fontSize: 24,
+                        alignment: Alignment.topCenter,
+                      )
+                    ],
                   )
-                ],
-              )
-            : ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemBuilder: (_, index) => Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(ProductDetailView(
-                            id: productsdata[index].productId));
-                      },
-                      child: ListTile(
-                        title: Text(productsdata[index].name),
-                        leading: CircleAvatar(
-                          radius: 30,
-                          backgroundImage:
-                              NetworkImage(productsdata[index].image),
-                        ),
-                        trailing: Container(
-                          width: 100,
-                          child: Row(children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.edit,
-                                color: primaryColor,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: ((context) => AlertDialog(
-                                          title: const Text('Are you Sure?'),
-                                          content: const Text(
-                                            'Do u want to remove the product from the shop',
-                                          ),
-                                          actions: [
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                Get.back();
-                                              },
-                                              child: const Text('No'),
-                                            ),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                print(productsdata[index]
-                                                    .productId);
-                                                Get.find<HomeViewModel>()
-                                                    .deleteProductsFromFireStore(
-                                                        productsdata[index]
-                                                            .productId);
-                                                setState(() {});
-                                                Get.back();
-                                              },
-                                              child: const Text('Yes'),
-                                            ),
-                                          ],
-                                        )));
-                              },
-                              icon: Icon(
-                                CupertinoIcons.delete,
-                                color: Theme.of(context).errorColor,
-                              ),
-                            ),
-                          ]),
+                : Stack(children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * .06,
+                      // one dev to role the all
+
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            // Color.fromRGBO(131, 217, 226, 1),
+                            // Color.fromRGBO(162, 230, 209, 1),
+                            Color.fromRGBO(12, 116, 117, 1),
+                            Color.fromRGBO(14, 174, 87, 1),
+                          ],
                         ),
                       ),
                     ),
-                    const Divider()
-                  ],
-                ),
-                itemCount: productsdata.length,
-              ),
-        // Text(productsdata[0].name),
-        // Text(productsdata[1].name)
-      ]),
-    ));
+                    Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(35),
+                            topRight: Radius.circular(35),
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemBuilder: (_, index) => Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(ProductDetailView(
+                                            id: productsdata[index].productId));
+                                      },
+                                      child: ListTile(
+                                        title: Text(productsdata[index].name),
+                                        leading: CircleAvatar(
+                                          radius: 30,
+                                          backgroundImage: NetworkImage(
+                                              productsdata[index].image),
+                                        ),
+                                        trailing: Container(
+                                          width: 100,
+                                          child: Row(children: [
+                                            // IconButton(
+                                            //   onPressed: () {},
+                                            //   icon: const Icon(
+                                            //     Icons.edit,
+                                            //     color: primaryColor,
+                                            //   ),
+                                            // ),
+                                            SizedBox(
+                                              width: 40,
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: ((context) =>
+                                                        AlertDialog(
+                                                          title: const Text(
+                                                              'Are you Sure?'),
+                                                          content: const Text(
+                                                            'Do u want to remove the product from the shop',
+                                                          ),
+                                                          actions: [
+                                                            ElevatedButton(
+                                                              onPressed: () {
+                                                                Get.back();
+                                                              },
+                                                              child: const Text(
+                                                                  'No'),
+                                                            ),
+                                                            ElevatedButton(
+                                                              onPressed: () {
+                                                                print(productsdata[
+                                                                        index]
+                                                                    .productId);
+                                                                Get.find<
+                                                                        HomeViewModel>()
+                                                                    .deleteProductsFromFireStore(
+                                                                        productsdata[index]
+                                                                            .productId);
+                                                                setState(() {});
+                                                                Get.back();
+                                                              },
+                                                              child: const Text(
+                                                                  'Yes'),
+                                                            ),
+                                                          ],
+                                                        )));
+                                              },
+                                              icon: Icon(
+                                                CupertinoIcons.delete,
+                                                color: Theme.of(context)
+                                                    .errorColor,
+                                              ),
+                                            ),
+                                          ]),
+                                        ),
+                                      ),
+                                    ),
+                                    const Divider()
+                                  ],
+                                ),
+                                itemCount: productsdata.length,
+                              ),
+                            ],
+                          ),
+                          // Text(productsdata[0].name),
+                          // Text(productsdata[1].name)
+                        ))
+                  ])
+          ]),
+        ));
   }
 }

@@ -42,7 +42,7 @@ class ProductModel {
     reviews = map['reviews'];
     quantity = map['quantity'];
 
-    color = HexColor.fromHex(map['color']);
+    // color = HexColor.fromHex(map['color']);
     sized = map['sized'];
   }
 

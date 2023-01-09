@@ -141,7 +141,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     child: Column(
                       children: [
                         Row(
@@ -157,25 +157,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                 //fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10.0, right: 20),
-                              child: Column(
-                                children: [
-                                  CustomText(
-                                    text: 'Price',
-                                    fontSize: 16,
-                                    color: Colors.grey,
-                                  ),
-                                  CustomText(
-                                    text: '\$${productModel.price}',
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: primaryColor,
-                                  ),
-                                ],
-                              ),
-                            ),
+                           
                           ],
                         ),
                         const SizedBox(
@@ -676,36 +658,28 @@ class _ProductDetailViewState extends State<ProductDetailView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(right: 20),
-                    height: 50,
-                    width: 58,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18),
-                      border: Border.all(
-                        color: primaryColor,
-                      ),
-                    ),
-                    child: GetBuilder<CartViewModel>(
-                      init: CartViewModel(),
-                      builder: ((controller) => IconButton(
-                            icon: SvgPicture.asset(
-                              "assets/images/add_to_cart.svg",
-                              color: primaryColor,
+                   Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10.0, right: 20),
+                              child: SizedBox(
+                                width: 80,
+                                child: Column(
+                                  children: [
+                                    CustomText(
+                                      text: 'Price',
+                                      fontSize: 16,
+                                      color: Colors.grey,
+                                    ),
+                                    CustomText(
+                                      text: '\$${productModel.price}',
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: primaryColor,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            onPressed: () {
-                              controller.addProduct(CartProductModel(
-                                name: productModel.name,
-                                image: productModel.image,
-                                price: productModel.price,
-                                productId: productModel.productId,
-                                // category: productModel.category,
-                                quantity: 1,
-                              ));
-                            },
-                          )),
-                    ),
-                  ),
                   Expanded(
                     child: SizedBox(
                       height: 50,
@@ -727,7 +701,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                             Get.to(CheckoutView());
                           },
                           child: Text(
-                            "Buy  Now".toUpperCase(),
+                            "Add to Cart",
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,

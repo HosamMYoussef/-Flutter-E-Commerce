@@ -28,7 +28,7 @@ class TimeLeft {
     } else if (_secUntil == 0) {
       retVal ='Finished';
     } else {
-      retVal = "error";
+      retVal = "Finished";
     }
 
     return retVal;

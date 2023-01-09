@@ -126,6 +126,61 @@ class _HomeViewState extends State<HomeView> {
                                           onPressed: toggleRecording,
                                         ),
                                       ),
+                                      IconButton(
+                                        icon: Icon(Icons.camera_alt_outlined,
+                                            size: 27),
+                                        onPressed: () {
+                                          Get.dialog(AlertDialog(
+                                            title: CustomText(
+                                              text: 'Choose option',
+                                              fontSize: 20,
+                                              color: Colors.blue,
+                                            ),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                const Divider(
+                                                  height: 1,
+                                                ),
+                                                ListTile(
+                                                  onTap: () async {
+                                                    Get.back();
+                                                  },
+                                                  title: CustomText(
+                                                    text: 'Camera',
+                                                  ),
+                                                  leading: const Icon(
+                                                    Icons.camera_alt_outlined,
+                                                    color: Colors.blue,
+                                                  ),
+                                                ),
+                                                const Divider(
+                                                  height: 1,
+                                                ),
+                                                ListTile(
+                                                  onTap: () async {
+                                                    try {
+                                                      Get.back();
+
+                                                      // Get.back();
+                                                    } catch (error) {
+                                                      Get.back();
+                                                    }
+                                                  },
+                                                  title: CustomText(
+                                                    text: 'Gallery',
+                                                  ),
+                                                  leading: const Icon(
+                                                    Icons
+                                                        .photo_library_outlined,
+                                                    color: Colors.blue,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ));
+                                        },
+                                      ),
                                     ]),
                                   ),
                                   SizedBox(
@@ -198,7 +253,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _searchTextFormField() {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.772,
+      width: MediaQuery.of(context).size.width * 0.66,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(45),
         // color: Colors.grey.shade200,

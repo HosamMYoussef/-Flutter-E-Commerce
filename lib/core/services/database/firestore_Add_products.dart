@@ -10,7 +10,6 @@ class FirestoreSell {
   late final CollectionReference _ordersCollection =
       FirebaseFirestore.instance.collection('Products');
 
-      
   late final CollectionReference _auctionCollection =
       FirebaseFirestore.instance.collection('auctions');
 
@@ -33,7 +32,7 @@ class FirestoreSell {
     var documentId = docRef.id; //? <-- Document ID
     print(documentId);
 
-    _auctionCollection.doc(documentId).update({'productId': documentId});
+    _auctionCollection.doc(documentId).update({'auctionId': documentId});
   }
   // <-- Document ID
 
@@ -52,6 +51,24 @@ class FirestoreSell {
       value.docs.forEach((element) {
         FirebaseFirestore.instance
             .collection("Products")
+            .doc(element.id)
+            .delete()
+            .then((value) {
+          print("Success!");
+        });
+      });
+    });
+  }
+
+  deleteAuction(String iD) async {
+    await FirebaseFirestore.instance
+        .collection("auctions")
+        .where("auctionId", isEqualTo: iD)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        FirebaseFirestore.instance
+            .collection("auctions")
             .doc(element.id)
             .delete()
             .then((value) {

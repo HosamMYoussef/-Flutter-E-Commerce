@@ -213,6 +213,11 @@ class HomeViewModel extends GetxController {
 
     products.removeWhere((prod) => prod.productId == id);
     update();
+  }  deleteAuctionsFromFireStore(String id) async {
+    FirestoreSell().deleteAuction(id);
+
+    products.removeWhere((prod) => prod.productId == id);
+    update();
   }
 
   updateReview(String id, String rating, String reviews) async {

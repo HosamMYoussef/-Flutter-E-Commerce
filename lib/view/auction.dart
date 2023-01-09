@@ -15,6 +15,7 @@ import '../core/viewmodel/home_view_model.dart';
 import '../model/product_model.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/timer.dart';
+import 'auction_sell.dart';
 
 class AuctionView extends StatefulWidget {
   const AuctionView({Key? key}) : super(key: key);
@@ -130,7 +131,9 @@ class _AuctionViewState extends State<AuctionView> {
                       Padding(
                         padding: const EdgeInsets.only(left: 15.0),
                         child: ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(AuctionSell());
+                          },
                           leading: Image.asset(
                             'assets/images/sell2.png',
                             height: 40,
@@ -220,8 +223,11 @@ class _AuctionViewState extends State<AuctionView> {
                                         // print(timeee);
                                       }),
                                       child: CustomText(
-                                        text:
-                                            'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
+                                        text: TimeLeft.timeLeft(DateTime.parse(
+                                                    auctions[index].end)) ==
+                                                "Finished"
+                                            ? "Finished"
+                                            : 'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
                                         fontSize: 12,
                                         color: Colors.black,
                                       ),
@@ -281,8 +287,11 @@ class _AuctionViewState extends State<AuctionView> {
                                 color: primaryColor,
                               ),
                               CustomText(
-                                text:
-                                    'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
+                                text: TimeLeft.timeLeft(DateTime.parse(
+                                            auctions[index].end)) ==
+                                        "Finished"
+                                    ? "Finished"
+                                    : 'Ends in ${TimeLeft.timeLeft(DateTime.parse(auctions[index].end))}',
                                 fontSize: 12,
                                 color: Colors.black,
                                 maxLines: 1,

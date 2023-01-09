@@ -294,7 +294,7 @@ class _AuctionProductDetailsState extends State<AuctionProductDetails> {
                               SizedBox(
                                 width: 80,
                                 child: CustomText(
-                                  text: 'Type',
+                                  text: 'Category',
                                   color: Colors.grey,
                                 ),
                               ),
@@ -304,7 +304,7 @@ class _AuctionProductDetailsState extends State<AuctionProductDetails> {
                               SizedBox(
                                 width: 100,
                                 child: CustomText(
-                                  text: auction.type,
+                                  text: auction.category,
                                   color: Colors.black,
                                 ),
                               ),
@@ -319,7 +319,7 @@ class _AuctionProductDetailsState extends State<AuctionProductDetails> {
                               SizedBox(
                                 width: 80,
                                 child: CustomText(
-                                  text: 'Category',
+                                  text: 'Type',
                                   color: Colors.grey,
                                 ),
                               ),
@@ -329,7 +329,7 @@ class _AuctionProductDetailsState extends State<AuctionProductDetails> {
                               SizedBox(
                                 width: 100,
                                 child: CustomText(
-                                  text: auction.category,
+                                  text: auction.type,
                                   color: Colors.black,
                                 ),
                               ),

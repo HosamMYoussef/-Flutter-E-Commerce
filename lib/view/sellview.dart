@@ -40,41 +40,38 @@ class _SellViewState extends State<SellView> {
     return GetBuilder<SelectImageViewModel>(
       init: SelectImageViewModel(),
       builder: (controller) => Scaffold(
-        body: Column(
-          children: [
-            Container(
-              height: 100,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 24, left: 16, right: 16, top: 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black,
-                      ),
-                    ),
-                    CustomText(
-                      text: 'Sell Prodcuts',
-                      fontFamily: 'Baumans',
-                      fontSize: 22,
-                      alignment: Alignment.center,
-                    ),
-                    Container(
-                      width: 24,
-                    ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60.0),
+          child: AppBar(
+            elevation: 0,
+            flexibleSpace: Container(
+              height: 400,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    // Color.fromRGBO(131, 217, 226, 1),
+                    // Color.fromRGBO(162, 230, 209, 1),
+                    Color.fromRGBO(12, 116, 117, 1),
+                    Color.fromRGBO(14, 174, 87, 1),
                   ],
                 ),
               ),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Center(
+                    child: Text(
+                  'Sell Prodcuts',
+                  style: TextStyle(
+                      fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
+                )),
+              ),
             ),
+          ),
+        ),
+        body: Column(
+          children: [
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -242,7 +239,8 @@ class _SellViewState extends State<SellView> {
                                                               ),
                                                               leading:
                                                                   const Icon(
-                                                                Icons.camera,
+                                                                Icons
+                                                                    .camera_alt_outlined,
                                                                 color:
                                                                     Colors.blue,
                                                               ),
@@ -280,7 +278,7 @@ class _SellViewState extends State<SellView> {
                                                               leading:
                                                                   const Icon(
                                                                 Icons
-                                                                    .photo_library,
+                                                                    .photo_library_outlined,
                                                                 color:
                                                                     Colors.blue,
                                                               ),
@@ -324,7 +322,7 @@ class _SellViewState extends State<SellView> {
                                       //           .currentUser!
                                       //           .pic;
                                       // }
-                                      
+
                                       _formKey.currentState!.save();
                                       await Get.find<SellModel>()
                                           .addProductsToFireStore();

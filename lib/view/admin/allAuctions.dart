@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:myshopp/model/auction_model.dart';
+import 'package:myshopp/view/auction_sell.dart';
 import 'package:myshopp/view/sellview.dart';
 
 import '../../constants.dart';
@@ -12,20 +14,20 @@ import '../../core/viewmodel/home_view_model.dart';
 import '../../model/product_model.dart';
 import '../../widgets/custom_text.dart';
 
-class AdminProducts extends StatefulWidget {
-  const AdminProducts({Key? key}) : super(key: key);
+class AdminAuctions extends StatefulWidget {
+  const AdminAuctions({Key? key}) : super(key: key);
 
   @override
-  State<AdminProducts> createState() => _AdminProductsState();
+  State<AdminAuctions> createState() => _AdminAuctionsState();
 }
 // one dev to role the all
 
-class _AdminProductsState extends State<AdminProducts> {
+class _AdminAuctionsState extends State<AdminAuctions> {
   @override
   Widget build(BuildContext context) {
     // Get.put(ProfileViewModel());
-    List<ProductModel> productsdata =
-        Get.find<HomeViewModel>().products.toList();
+    List<AuctionModel> productsdata =
+        Get.find<HomeViewModel>().auctions.toList();
     return Scaffold(
         appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
@@ -49,7 +51,7 @@ class _AdminProductsState extends State<AdminProducts> {
               padding: EdgeInsets.only(top: 20.0),
               child: Center(
                   child: Text(
-                'all Products',
+                'all auctions',
                 style: TextStyle(
                     fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
               )),
@@ -132,11 +134,11 @@ class _AdminProductsState extends State<AdminProducts> {
                                         ElevatedButton(
                                           onPressed: () {
                                             print(
-                                                productsdata[index].productId);
+                                                productsdata[index].auctionId);
                                             Get.find<HomeViewModel>()
-                                                .deleteProductsFromFireStore(
+                                                .deleteAuctionsFromFireStore(
                                                     productsdata[index]
-                                                        .productId);
+                                                        .auctionId);
                                             setState(() {});
                                             Get.back();
                                           },
@@ -166,7 +168,7 @@ class _AdminProductsState extends State<AdminProducts> {
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(SellView());
+          Get.to(AuctionSell());
         },
         backgroundColor: primaryColor,
         child: const Icon(Icons.add),

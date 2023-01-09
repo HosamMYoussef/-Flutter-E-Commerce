@@ -34,7 +34,7 @@ class _SearchViewState extends State<SearchView> {
         : Get.find<HomeViewModel>()
             .products
             .where(
-                (product) => product.name.toLowerCase().contains(_searchValue!))
+                (product) => product.det.toLowerCase().contains(_searchValue!))
             .toList();
 
     return Scaffold(

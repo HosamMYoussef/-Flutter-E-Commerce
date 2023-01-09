@@ -33,6 +33,7 @@ class SellModel extends GetxController {
       atype,
       asellerid,
       acondition,
+      asellerId,
       bids,
       start,
       end;
@@ -104,7 +105,7 @@ class SellModel extends GetxController {
     Get.back();
   }
 
-  addauctionToFireStore() async {
+  addAuctionsToFireStore() async {
     Get.put(HomeViewModel());
 
     Get.find<HomeViewModel>().auctions.add(AuctionModel(
@@ -117,8 +118,8 @@ class SellModel extends GetxController {
           price: aprice!,
           name: aname!,
           type: atype!,
-          start: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-          end:  DateFormat('yyyy-MM-dd').format(DateTime.now()),
+          start: DateTime.now().toString(),
+          end:  DateTime.now().add(Duration(days: 10)).toString(),
         ));
     await FirestoreSell().addAuctionToFirestore(AuctionModel(
           category: acategory!,
@@ -130,8 +131,8 @@ class SellModel extends GetxController {
           price: aprice!,
           name: aname!,
           type: atype!,
-          start: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-          end:  DateFormat('yyyy-MM-dd').format(DateTime.now()),
+          start:  DateTime.now().toString(),
+          end:  DateTime.now().add(Duration(days: 10)).toString(),
         ));
     Get.back();
   }
