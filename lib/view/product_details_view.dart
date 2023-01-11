@@ -16,6 +16,7 @@ import 'package:myshopp/model/cart_product_model.dart';
 import 'package:myshopp/model/comment_model.dart';
 import 'package:myshopp/model/product_model.dart';
 import 'package:myshopp/view/Favorites_view.dart';
+import 'package:myshopp/view/cart_view.dart';
 import 'package:myshopp/view/checkout_view.dart';
 import 'package:myshopp/view/profile_view.dart';
 import 'package:myshopp/view/seller_info.dart';
@@ -698,7 +699,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                               // category: productModel.category,
                               quantity: 1,
                             ));
-                            Get.to(CheckoutView());
+                            // Get.to(CartView());
                           },
                           child: Text(
                             "Add to Cart",

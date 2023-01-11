@@ -46,6 +46,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   bool isListening = false;
+  String x = '';
   @override
   Widget build(BuildContext context) {
     Get.put(HomeViewModel());
@@ -177,9 +178,9 @@ class _HomeViewState extends State<HomeView> {
                                                       Get.to(SearchView(
                                                           _outputs![0]
                                                               ["label"]));
-                                                      setState(() {
-                                                        _outputs!.clear();
-                                                      });
+                                                      // setState(() {
+                                                      //   _outputs!.clear();
+                                                      // });
                                                       // Get.back();
                                                     } catch (error) {
                                                       customErrorScreen();
@@ -204,9 +205,6 @@ class _HomeViewState extends State<HomeView> {
                                                           ["label"]);
                                                       print(
                                                           "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                                                      Get.to(SearchView(
-                                                          _outputs![0]
-                                                              ["label"]));
 
                                                       // Get.back();
                                                     } catch (error) {
@@ -234,7 +232,7 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                   GestureDetector(
                                     onTap: (() {
-                                      Get.to(Test());
+                                      // Get.to(Test());
                                     }),
                                     child: CustomText(
                                       text: 'Categories',
@@ -510,7 +508,7 @@ class _HomeViewState extends State<HomeView> {
       });
       classifyImage(image);
     } catch (Exception) {
-      print("hbjhbkjnkjnjknk");
+      print("error");
     }
   }
 
@@ -525,6 +523,18 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       _loading = false;
       _outputs = output;
+      if (_outputs!.length == 0) {
+        Get.to(Errorr());
+      } else {
+        if (_outputs![0]["label"] == null ||
+            _outputs![0]["label"] == '' ||
+            _outputs![0]["label"] == 0) {
+          Get.to(Errorr());
+        } else if (_outputs![0]["label"] != null) {
+          x = _outputs![0]["label"];
+          Get.to(SearchView(x));
+        }
+      }
     });
   }
 
