@@ -1,0 +1,10 @@
+shoes
+bags
+camera
+headset
+jeans
+mobiles
+sofa
+t-shirts
+tv
+watch

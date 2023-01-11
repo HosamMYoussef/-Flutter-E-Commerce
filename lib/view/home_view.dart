@@ -1,21 +1,26 @@
 // import 'dart:html';
+import 'dart:io';
 
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:myshopp/view/product_details_view.dart';
 import 'package:myshopp/view/review_view.dart';
 import 'package:myshopp/view/search_view.dart';
 import 'package:myshopp/view/testtt.dart';
+import 'package:tflite/tflite.dart';
 
 import '../constants.dart';
 import '../core/viewmodel/cart_view_model.dart';
 import '../core/viewmodel/home_view_model.dart';
 import '../widgets/custom_text.dart';
+import '../widgets/error.dart';
+import '../widgets/error.dart';
 import '../widgets/speach.dart';
 import 'category_products_view.dart';
-import 'product_details_view.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -23,8 +28,22 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  List? _outputs;
+  XFile? _image;
+
+  bool _loading = false;
   String text = 'Press the button and start speaking';
   // one dev to role the all
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadModel().then((value) {
+      setState(() {
+        _loading = false;
+      });
+    });
+  }
 
   bool isListening = false;
   @override
@@ -144,7 +163,27 @@ class _HomeViewState extends State<HomeView> {
                                                 ),
                                                 ListTile(
                                                   onTap: () async {
-                                                    Get.back();
+                                                    try {
+                                                      await pickImage('cam');
+                                                      if (_outputs![0]
+                                                              ["label"] ==
+                                                          'null') {
+                                                        Get.to(Errorr());
+                                                      }
+                                                      print(_outputs![0]
+                                                          ["label"]);
+                                                      print(
+                                                          "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                                                      Get.to(SearchView(
+                                                          _outputs![0]
+                                                              ["label"]));
+                                                      setState(() {
+                                                        _outputs!.clear();
+                                                      });
+                                                      // Get.back();
+                                                    } catch (error) {
+                                                      customErrorScreen();
+                                                    }
                                                   },
                                                   title: CustomText(
                                                     text: 'Camera',
@@ -160,11 +199,18 @@ class _HomeViewState extends State<HomeView> {
                                                 ListTile(
                                                   onTap: () async {
                                                     try {
-                                                      Get.back();
+                                                      await pickImage('c');
+                                                      print(_outputs![0]
+                                                          ["label"]);
+                                                      print(
+                                                          "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                                                      Get.to(SearchView(
+                                                          _outputs![0]
+                                                              ["label"]));
 
                                                       // Get.back();
                                                     } catch (error) {
-                                                      Get.back();
+                                                      customErrorScreen();
                                                     }
                                                   },
                                                   title: CustomText(
@@ -253,7 +299,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _searchTextFormField() {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.66,
+      width: MediaQuery.of(context).size.width * 0.63,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(45),
         // color: Colors.grey.shade200,
@@ -439,6 +485,49 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  pickImage(String x) async {
+    if (x == 'cam') {
+      try {
+        final ImagePicker _picker = ImagePicker(); // <--- here
+        XFile? image = await _picker.pickImage(source: ImageSource.camera);
+        if (image == null) return null;
+        setState(() {
+          _loading = true;
+          _image = image;
+        });
+        classifyImage(image);
+      } catch (Exception) {
+        print("hbjhbkjnkjnjknk");
+      }
+    }
+    try {
+      final ImagePicker _picker = ImagePicker(); // <--- here
+      XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      if (image == null) return null;
+      setState(() {
+        _loading = true;
+        _image = image;
+      });
+      classifyImage(image);
+    } catch (Exception) {
+      print("hbjhbkjnkjnjknk");
+    }
+  }
+
+  classifyImage(XFile image) async {
+    var output = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 10,
+      threshold: 0.9,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    setState(() {
+      _loading = false;
+      _outputs = output;
+    });
+  }
+
   Future toggleRecording() => SpeechApi.toggleRecording(
         onResult: (text) => setState(() {
           this.text = text;
@@ -454,4 +543,22 @@ class _HomeViewState extends State<HomeView> {
           }
         },
       );
+  loadModel() async {
+    await Tflite.loadModel(
+      model: "assets/model_unquant.tflite",
+      labels: "assets/labels.txt",
+    );
+  }
+
+  @override
+  void dispose() {
+    Tflite.close();
+    super.dispose();
+  }
+}
+
+customErrorScreen() {
+  ErrorWidget.builder = (errorDetails) {
+    return (Errorr());
+  };
 }

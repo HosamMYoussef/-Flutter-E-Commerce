@@ -289,22 +289,22 @@ class _LoginViewState extends State<LoginView> {
                                           'assets/images/google.png'),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 35,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      height: 52,
-                                      width: 92,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(13)),
-                                      child: Image.asset(
-                                          'assets/images/facebook.png'),
-                                    ),
-                                  ),
+                                  // const SizedBox(
+                                  //   width: 35,
+                                  // ),
+                                  // GestureDetector(
+                                  //   onTap: () {},
+                                  //   child: Container(
+                                  //     height: 52,
+                                  //     width: 92,
+                                  //     decoration: BoxDecoration(
+                                  //         color: Colors.white,
+                                  //         borderRadius:
+                                  //             BorderRadius.circular(13)),
+                                  //     child: Image.asset(
+                                  //         'assets/images/facebook.png'),
+                                  //   ),
+                                  // ),
                                 ],
                               )
                             ]),
