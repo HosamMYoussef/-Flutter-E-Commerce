@@ -3,7 +3,7 @@
 
 Shopify is an E commerce app using flutter and firebase where u can buy or sell or enter auction 
 ###### in this app we use 
-###### tflite for applyin our machine learning model that we use in  image search 
+###### tflite for applying our machine learning model that we use in  image search 
 ###### speach to text for voice search 
 ###### Getx state management 
 ###### firebase authentication 
