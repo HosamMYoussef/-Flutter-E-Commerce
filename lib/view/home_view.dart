@@ -175,9 +175,7 @@ class _HomeViewState extends State<HomeView> {
                                                           ["label"]);
                                                       print(
                                                           "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                                                      Get.to(SearchView(
-                                                          _outputs![0]
-                                                              ["label"]));
+
                                                       // setState(() {
                                                       //   _outputs!.clear();
                                                       // });
@@ -205,6 +203,7 @@ class _HomeViewState extends State<HomeView> {
                                                           ["label"]);
                                                       print(
                                                           "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                                                      Get.back();
 
                                                       // Get.back();
                                                     } catch (error) {
@@ -313,7 +312,9 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         onFieldSubmitted: (value) {
-          Get.to(SearchView(value));
+          if (value.length >= 1) {
+            Get.to(SearchView(value));
+          }
         },
       ),
     );
@@ -495,7 +496,7 @@ class _HomeViewState extends State<HomeView> {
         });
         classifyImage(image);
       } catch (Exception) {
-        print("hbjhbkjnkjnjknk");
+        print("error with images ");
       }
     }
     try {
