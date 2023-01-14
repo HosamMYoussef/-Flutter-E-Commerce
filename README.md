@@ -1,9 +1,28 @@
-# My Shopp   
+# Shopify 
 
 
-E commerce app using flutter and fire base
-using Getx state management 
-using shared preference 
+Shopify is an E commerce app using flutter and firebase where u can buy or sell or enter auction 
+in this app we use 
+Getx state management 
+firebase authentication 
+firestore database 
+shared preference 
+tflite for image search 
+speach to text for voice search 
+my fatoorah payment gateway 
+sqflite for local database 
+
+# here is a demo for the app 
+https://www.youtube.com/watch?v=1b6uInR4-qc
+
+
+
+
+<img width="1444" alt="low" src="https://user-images.githubusercontent.com/57178026/212500198-bc5ccdda-8e6a-4443-9b6d-39d0e74d90a1.png">
+
+
+
+
 
 ## Getting Started
 
@@ -17,8 +36,3 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-![My project-1](https://user-images.githubusercontent.com/57178026/194574765-9e14d34c-c6c5-4bde-ae2a-b7517bbe142a.png)
-
-
-
-
