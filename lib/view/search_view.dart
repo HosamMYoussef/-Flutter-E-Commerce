@@ -39,7 +39,7 @@ class _SearchViewState extends State<SearchView> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60.0), // here the desired height
+        preferredSize: const Size.fromHeight(55.0), // here the desired height
         child: AppBar(
           elevation: 0,
           // leading: Padding(
@@ -71,7 +71,7 @@ class _SearchViewState extends State<SearchView> {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  top: 26, left: 50, right: 16, bottom: 3),
+                  top: 40, left: 50, right: 16, bottom: 2),
               child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -304,7 +304,7 @@ class _SearchViewState extends State<SearchView> {
 
   Widget _searchTextFormField() {
     return Container(
-      height: 49,
+      height: 20,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),

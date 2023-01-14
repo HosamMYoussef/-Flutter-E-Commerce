@@ -1,9 +1,9 @@
-shoes
-bags
+shoe
+bag
 camera
 headset
 jeans
-mobiles
+mobile
 sofa
 t-shirts
 tv

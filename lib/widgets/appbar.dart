@@ -31,6 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       //   ),
       // ),
       flexibleSpace: Container(
+        height: 110,
         // height: 400,
         decoration: const BoxDecoration(
           // borderRadius: BorderRadius.only(
@@ -57,7 +58,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         child: Padding(
           padding:
-              const EdgeInsets.only(top: 26, left: 50, right: 16, bottom: 3),
+              const EdgeInsets.only(top: 40, left: 50, right: 16, bottom: 3),
           child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),

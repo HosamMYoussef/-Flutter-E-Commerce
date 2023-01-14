@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:myshopp/constants.dart';
+import 'package:myshopp/view/control_view.dart';
 
 import '../view/home_view.dart';
 
@@ -58,7 +59,7 @@ class Errorr extends StatelessWidget {
               height: 60,
               child: ElevatedButton(
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => HomeView(),
+                  builder: (context) => ControlView(),
                 )),
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,

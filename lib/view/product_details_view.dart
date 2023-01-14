@@ -122,7 +122,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                               topRight: Radius.circular(50),
                             ),
                           ),
-                          height: 196,
+                          height: 200,
                           width: double.infinity,
                           child: ClipRRect(
                             borderRadius: const BorderRadius.only(
