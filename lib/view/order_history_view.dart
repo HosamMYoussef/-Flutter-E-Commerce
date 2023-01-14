@@ -34,7 +34,7 @@ class OrderHistoryView extends StatelessWidget {
               padding: EdgeInsets.only(top: 20.0),
               child: Center(
                   child: Text(
-                'Order History ',
+                'Order History',
                 style: TextStyle(
                     fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
               )),
