@@ -138,15 +138,15 @@ class _UserProductState extends State<UserProduct> {
                                         trailing: Container(
                                           width: 100,
                                           child: Row(children: [
-                                            // IconButton(
-                                            //   onPressed: () {},
-                                            //   icon: const Icon(
-                                            //     Icons.edit,
-                                            //     color: primaryColor,
-                                            //   ),
-                                            // ),
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: const Icon(
+                                                Icons.edit,
+                                                color: primaryColor,
+                                              ),
+                                            ),
                                             SizedBox(
-                                              width: 40,
+                                              width: 0,
                                             ),
                                             IconButton(
                                               onPressed: () {

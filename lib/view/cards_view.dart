@@ -9,62 +9,88 @@ class CardsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
+        appBar: AppBar(
+          elevation: 0,
+          flexibleSpace: Container(
+            height: 400,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  // Color.fromRGBO(131, 217, 226, 1),
+                  // Color.fromRGBO(162, 230, 209, 1),
+                  Color.fromRGBO(12, 116, 117, 1),
+                  Color.fromRGBO(14, 174, 87, 1),
+                ],
+              ),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.only(top: 20.0),
+              child: Center(
+                  child: Text(
+                'Card',
+                style: TextStyle(
+                    fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
+              )),
+            ),
+          ),
+        ),
+        body: Stack(children: [
           Container(
-            height: 130,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                  CustomText(
-                    text: 'Cards',
-                    fontFamily: 'Baumans',
-                    fontSize: 26,
-                    alignment: Alignment.bottomCenter,
-                  ),
-                  Container(
-                    width: 24,
-                  ),
+            height: MediaQuery.of(context).size.height * .06,
+            // one dev to role the all
+
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  // Color.fromRGBO(131, 217, 226, 1),
+                  // Color.fromRGBO(162, 230, 209, 1),
+                  Color.fromRGBO(12, 116, 117, 1),
+                  Color.fromRGBO(14, 174, 87, 1),
                 ],
               ),
             ),
           ),
-          Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Lottie.asset(
-                'assets/images/card.json',
-                width: 400,
-                height: 400,
+          Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
               ),
-             const  SizedBox(
-                height: 10,
-              ),
-              CustomText(
-                text: "You didn't add any card yet... ",
-                fontFamily: 'Baumans',
-                fontSize: 26,
-                alignment: Alignment.topCenter,
-              )
-            ],
-          )),
-        ],
-      ),
-    );
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              child: Container(
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Lottie.asset(
+                          'assets/images/card.json',
+                          width: 400,
+                          height: 400,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomText(
+                          text: "You didn't add any card yet... ",
+                          fontFamily: 'Baumans',
+                          fontSize: 26,
+                          alignment: Alignment.topCenter,
+                        )
+                      ],
+                    )),
+                  ],
+                ),
+              ))
+        ]));
   }
 }

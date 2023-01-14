@@ -14,41 +14,71 @@ class OrderHistoryView extends StatelessWidget {
     Get.put(CheckoutViewModel);
 
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: 130,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
-                    onPressed: () {
-                      Get.back();
-                      // Get.put(CheckoutViewModel);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                  CustomText(
-                    text: 'Order History',
-                    fontFamily: 'Baumans',
-                    fontSize: 24,
-                    alignment: Alignment.bottomCenter,
-                  ),
-                  Container(
-                    width: 24,
-                  ),
+     appBar: AppBar(
+          elevation: 0,
+          flexibleSpace: Container(
+            height: 400,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  // Color.fromRGBO(131, 217, 226, 1),
+                  // Color.fromRGBO(162, 230, 209, 1),
+                  Color.fromRGBO(12, 116, 117, 1),
+                  Color.fromRGBO(14, 174, 87, 1),
                 ],
               ),
             ),
+            child: const Padding(
+              padding: EdgeInsets.only(top: 20.0),
+              child: Center(
+                  child: Text(
+                'Order History ',
+                style: TextStyle(
+                    fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
+              )),
+            ),
           ),
+        ),
+      
+      body: Column(
+        children: [
+          Stack(children: [
+            Container(
+              height: MediaQuery.of(context).size.height * .06,
+              // one dev to role the all
+
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    // Color.fromRGBO(131, 217, 226, 1),
+                    // Color.fromRGBO(162, 230, 209, 1),
+                    Color.fromRGBO(12, 116, 117, 1),
+                    Color.fromRGBO(14, 174, 87, 1),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(35),
+                    topRight: Radius.circular(35),
+                  ),
+                ),
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SizedBox(
+                      height: 35,
+                    )))
+          ]),
           Expanded(
             child: GetBuilder<CheckoutViewModel>(
               init: Get.find<CheckoutViewModel>(),

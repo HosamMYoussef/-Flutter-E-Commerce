@@ -9,61 +9,86 @@ class NotificationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
+      appBar: AppBar(
+        elevation: 0,
+        flexibleSpace: Container(
+          height: 400,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                // Color.fromRGBO(131, 217, 226, 1),
+                // Color.fromRGBO(162, 230, 209, 1),
+                Color.fromRGBO(12, 116, 117, 1),
+                Color.fromRGBO(14, 174, 87, 1),
+              ],
+            ),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.only(top: 20.0),
+            child: Center(
+                child: Text(
+              'notifications',
+              style: TextStyle(
+                  fontSize: 26, color: Colors.white, fontFamily: 'Baumans'),
+            )),
+          ),
+        ),
+      ),
+      body: Column(children: [
+        Stack(children: [
           Container(
-            height: 130,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(),
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                  CustomText(
-                    text: 'Notifications',
-                    fontFamily: 'cairo',
-                    fontSize: 26,
-                    alignment: Alignment.bottomCenter,
-                  ),
-                  Container(
-                    width: 24,
-                  ),
+            height: MediaQuery.of(context).size.height * .06,
+            // one dev to role the all
+
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  // Color.fromRGBO(131, 217, 226, 1),
+                  // Color.fromRGBO(162, 230, 209, 1),
+                  Color.fromRGBO(12, 116, 117, 1),
+                  Color.fromRGBO(14, 174, 87, 1),
                 ],
               ),
             ),
           ),
-          const SizedBox(
-            height: 50,
-          ),
-          Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset('assets/images/cat.gif'),
-              const SizedBox(
-                height: 40,
+          Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
               ),
-              CustomText(
-                text: "No new notifications... ",
-                fontFamily: 'Baumans',
-                fontSize: 25,
-                alignment: Alignment.topCenter,
-              )
-            ],
-          )),
-        ],
-      ),
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    height: 35,
+                  )))
+        ]),
+        Expanded(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset('assets/images/cat.gif'),
+            const SizedBox(
+              height: 40,
+            ),
+            CustomText(
+              text: "No new notifications... ",
+              fontFamily: 'Baumans',
+              fontSize: 25,
+              alignment: Alignment.topCenter,
+            )
+          ],
+        )),
+      ]),
     );
   }
 }

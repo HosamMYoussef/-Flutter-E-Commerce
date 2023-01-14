@@ -166,13 +166,13 @@ class ProfileView extends StatelessWidget {
                             Get.to(OrderHistoryView());
                           },
                         ),
-                        // CustomListTile(
-                        //   iconName: '4',
-                        //   title: 'Cards',
-                        //   onTapFn: () {
-                        //     Get.to(CardsView());
-                        //   },
-                        // ),
+                        CustomListTile(
+                          iconName: '4',
+                          title: 'Cards',
+                          onTapFn: () {
+                            Get.to(CardsView());
+                          },
+                        ),
                         CustomListTile(
                           iconName: '5',
                           title: 'Notifications',
