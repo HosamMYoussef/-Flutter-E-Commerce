@@ -2,15 +2,15 @@
 
 
 Shopify is an E commerce app using flutter and firebase where u can buy or sell or enter auction 
-## in this app we use 
-### Getx state management 
-### firebase authentication 
-# firestore database 
-# shared preference 
-# tflite for image search 
-# speach to text for voice search 
-# my fatoorah payment gateway 
-# sqflite for local database 
+###### in this app we use 
+###### Getx state management 
+###### firebase authentication 
+####### firestore database 
+###### shared preference 
+###### tflite for image search 
+###### speach to text for voice search 
+###### my fatoorah payment gateway 
+###### sqflite for local database 
 
 # here is a demo for the app 
 https://www.youtube.com/watch?v=1b6uInR4-qc
