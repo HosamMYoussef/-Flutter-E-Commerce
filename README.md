@@ -15,10 +15,15 @@ Shopify is an E commerce app using flutter and firebase where u can buy or sell 
 # here is a demo for the app 
 https://www.youtube.com/watch?v=1b6uInR4-qc
 
-#note 
+# note 
 ###### this code works on flutter version 3.0.5 and and  Requires android sdk version 31 for tflite to work,
 ###### otherwise u will need some optimization
  
+#
+
+
+
+
 
 
 
